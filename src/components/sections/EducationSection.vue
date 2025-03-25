@@ -33,13 +33,24 @@
                 transition: `opacity 0.6s ease-out ${index * 150 + 100}ms, transform 0.6s ease-out ${index * 150 + 100}ms`,
               }"
             >
-              <h3 class="text-lg md:text-xl text-blue-100 mb-2">{{ item.degree }}</h3>
-              <div class="flex flex-col md:flex-row md:items-center space-y-1 md:space-y-0 md:space-x-2 text-gray-300 mb-2">
-                <span class="text-sm md:text-base">{{ item.institution }}</span>
-                <span class="hidden md:block text-gray-500">•</span>
-                <span class="text-xs md:text-sm text-gray-400">{{ item.period }}</span>
+              <div class="flex items-start space-x-4">
+                <div class="logo-container">
+                  <img 
+                    :src="item.logo" 
+                    :alt="item.institution"
+                    class="institution-logo"
+                  />
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-lg md:text-xl text-blue-100 mb-2">{{ item.degree }}</h3>
+                  <div class="flex flex-col md:flex-row md:items-center space-y-1 md:space-y-0 md:space-x-2 text-gray-300 mb-2">
+                    <span class="text-sm md:text-base">{{ item.institution }}</span>
+                    <span class="hidden md:block text-gray-500">•</span>
+                    <span class="text-xs md:text-sm text-gray-400">{{ item.period }}</span>
+                  </div>
+                  <p v-if="item.description" class="text-gray-300/90 text-xs md:text-sm mt-2">{{ item.description }}</p>
+                </div>
               </div>
-              <p v-if="item.description" class="text-gray-300/90 text-xs md:text-sm mt-2">{{ item.description }}</p>
             </div>
           </div>
         </div>
@@ -56,6 +67,7 @@ interface EducationItem {
   institution: string;
   period: string;
   description?: string;
+  logo: string;
 }
 
 const educationItems: EducationItem[] = [
@@ -63,21 +75,25 @@ const educationItems: EducationItem[] = [
     degree: 'MSc - Business Analytics in Finance',
     institution: 'University of Southampton',
     period: '2022-2023',
+    logo: 'https://media.licdn.com/dms/image/v2/C4E0BAQEOlU_74GJ2lA/company-logo_200_200/company-logo_200_200/0/1663657402449?e=1748476800&v=beta&t=hJzwK7Yfa8vYflUijOvUtge30b2D_Vnsqn9ITIqGP00'
   },
   {
     degree: 'BCom(Hons.) Finance',
     institution: 'Banaras Hindu University',
     period: '2015-2018',
+    logo: 'https://media.licdn.com/dms/image/v2/D4D0BAQHBI-8DAUffpg/company-logo_200_200/company-logo_200_200/0/1689927104926/sos_banaras_logo?e=1748476800&v=beta&t=dui1qVyDZpI8_hNOAReHyfo03XaUJvvjGQ1xT_k_QY4'
   },
   {
     degree: 'UG Diploma in Computer Applications',
     institution: 'Banaras Hindu University',
     period: '2015-2018',
+    logo: 'https://media.licdn.com/dms/image/v2/D4D0BAQHBI-8DAUffpg/company-logo_200_200/company-logo_200_200/0/1689927104926/sos_banaras_logo?e=1748476800&v=beta&t=dui1qVyDZpI8_hNOAReHyfo03XaUJvvjGQ1xT_k_QY4'
   },
   {
     degree: 'Class 12th',
     institution: 'DAV Public School (CBSE)',
     period: '2014',
+    logo: 'https://media.licdn.com/dms/image/v2/C560BAQEIhQoVEY4lIA/company-logo_200_200/company-logo_200_200/0/1630603646622?e=1748476800&v=beta&t=u3lgyqhq75i0d3OjQv3bD-_p90uQjiBXb5O2LvJcLf0'
   }
 ];
 
@@ -115,5 +131,14 @@ onMounted(() => {
 .education-card {
   @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-4 md:p-6 shadow-lg;
   height: 100%;
+}
+
+.logo-container {
+  @apply flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-lg overflow-hidden bg-white/10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.institution-logo {
+  @apply w-full h-full object-contain p-1;
 }
 </style>
