@@ -60,6 +60,11 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import ExperienceCard from '../ExperienceCard.vue';
 import JobModal from '../JobModal.vue';
+import innovaccerImage from '../../assets/innovaccer.jpg';
+import appknoxImage from '../../assets/appknox.jpg';
+import thoughts2binaryImage from '../../assets/thoughts2binary.jpg';
+import barytechImage from '../../assets/barytech.jpg';
+import yoyobooksImage from '../../assets/yo yo books.jpg';
 
 interface Job {
   company: string;
@@ -80,7 +85,7 @@ const jobs: Job[] = [
     period: "February 2025 - Present",
     shortPeriod: "Feb '25 - Present",
     year: "2025",
-    logo: "/src/assets/appknox.jpg",
+    logo: appknoxImage,
     responsibilities: [
       "Developing and maintaining secure software applications",
       "Implementing robust security features and protocols",
@@ -96,7 +101,7 @@ const jobs: Job[] = [
     period: "November 2019 - December 2021",
     shortPeriod: "Nov '19 - Dec '21",
     year: "2019",
-    logo: "/src/assets/thoughts2binary.jpg",
+    logo: thoughts2binaryImage,
     responsibilities: [
       "Developed web applications using React and Node.js",
       "Created and maintained RESTful APIs",
@@ -112,7 +117,7 @@ const jobs: Job[] = [
     period: "May 2024 - January 2025",
     shortPeriod: "May '24 - Jan '25",
     year: "2024",
-    logo: "/src/assets/barytech.jpg",
+    logo: barytechImage,
     responsibilities: [
       "Led development of microservices-based applications",
       "Designed and implemented scalable system architecture",
@@ -128,7 +133,7 @@ const jobs: Job[] = [
     period: "November 2016 - September 2018",
     shortPeriod: "Nov '16 - Sep '18",
     year: "2016",
-    logo: "/src/assets/yo yo books.jpg",
+    logo: yoyobooksImage,
     responsibilities: [
       "Led technical strategy and development for digital publishing platform",
       "Architected and developed full-stack web applications",
@@ -144,7 +149,7 @@ const jobs: Job[] = [
     period: "December 2021 - September 2022",
     shortPeriod: "Dec '21 - Sep '22",
     year: "2021",
-    logo: "/src/assets/innovaccer.jpg",
+    logo: innovaccerImage,
     responsibilities: [
       "Developed healthcare data analytics solutions",
       "Implemented ETL pipelines for processing large datasets",
