@@ -1,0 +1,19 @@
+[build]
+  command = "bun run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+  BUN_VERSION = "1.2.0"
+
+[images]
+  remote_images = [
+    "https://ext.same-assets.com/1652507072/2112600268.woff2",
+    "https://ext.same-assets.com/2963381641/297015857.svg+xml",
+    "https://ext.same-assets.com/3071763956/1845700409.svg+xml"
+  ]
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
