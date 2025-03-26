@@ -1,4 +1,5 @@
 <template>
+  <Analytics />
   <main class="relative min-h-screen">
     <Navigation />
 
@@ -36,6 +37,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { Analytics } from '@vercel/analytics/vue';
 import Navigation from './components/Navigation.vue';
 import HeroSection from './components/sections/HeroSection.vue';
 import SkillsSection from './components/sections/SkillsSection.vue';
