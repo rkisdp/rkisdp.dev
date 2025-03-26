@@ -2,14 +2,14 @@
   <section
     ref="sectionRef"
     id="education"
-    class="section relative overflow-hidden"
+    class="section relative overflow-hidden pt-20 md:pt-0"
   >
     <!-- Decorative background element -->
     <div
       class="absolute top-[-100px] right-[10%] w-[90%] h-[600px] rounded-full opacity-5 bg-[rgba(100,200,255,0.1)] blur-3xl z-0"
     />
 
-    <div class="h-full w-full flex flex-col items-center justify-center pt-16 pb-8 md:py-0">
+    <div class="h-full w-full flex flex-col items-center justify-center py-4 md:py-0">
       <div class="w-[95%] md:w-[90%] max-w-[1200px] z-10 px-4 md:px-0">
         <div
           :style="{
@@ -18,11 +18,11 @@
             transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
           }"
         >
-          <h2 class="text-2xl md:text-4xl mb-6 md:mb-8 text-gray-200 text-center">
+          <h2 class="text-xl md:text-4xl mb-2 md:mb-8 text-gray-200 text-center">
             Education
           </h2>
 
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-10">
             <div
               v-for="(item, index) in educationItems"
               :key="index"
@@ -33,7 +33,7 @@
                 transition: `opacity 0.6s ease-out ${index * 150 + 100}ms, transform 0.6s ease-out ${index * 150 + 100}ms`,
               }"
             >
-              <div class="flex items-start space-x-4">
+              <div class="flex items-start space-x-3 md:space-x-4">
                 <div class="logo-container">
                   <img 
                     :src="item.logo" 
@@ -42,13 +42,13 @@
                   />
                 </div>
                 <div class="flex-1">
-                  <h3 class="text-lg md:text-xl text-blue-100 mb-2">{{ item.degree }}</h3>
-                  <div class="flex flex-col md:flex-row md:items-center space-y-1 md:space-y-0 md:space-x-2 text-gray-300 mb-2">
-                    <span class="text-sm md:text-base">{{ item.institution }}</span>
+                  <h3 class="text-base md:text-xl text-blue-100 mb-1 md:mb-2">{{ item.degree }}</h3>
+                  <div class="flex flex-col md:flex-row md:items-center space-y-0.5 md:space-y-0 md:space-x-2 text-gray-300 mb-1 md:mb-2">
+                    <span class="text-xs md:text-base">{{ item.institution }}</span>
                     <span class="hidden md:block text-gray-500">•</span>
-                    <span class="text-xs md:text-sm text-gray-400">{{ item.period }}</span>
+                    <span class="text-xs text-gray-400">{{ item.period }}</span>
                   </div>
-                  <p v-if="item.description" class="text-gray-300/90 text-xs md:text-sm mt-2">{{ item.description }}</p>
+                  <p v-if="item.description" class="text-gray-300/90 text-xs md:text-sm mt-1 md:mt-2">{{ item.description }}</p>
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@ const educationItems: EducationItem[] = [
     logo: 'https://media.licdn.com/dms/image/v2/D4D0BAQHBI-8DAUffpg/company-logo_200_200/company-logo_200_200/0/1689927104926/sos_banaras_logo?e=1748476800&v=beta&t=dui1qVyDZpI8_hNOAReHyfo03XaUJvvjGQ1xT_k_QY4'
   },
   {
-    degree: 'Class 12th',
+    degree: '10+2',
     institution: 'DAV Public School (CBSE)',
     period: '2014',
     logo: 'https://media.licdn.com/dms/image/v2/C560BAQEIhQoVEY4lIA/company-logo_200_200/company-logo_200_200/0/1630603646622?e=1748476800&v=beta&t=u3lgyqhq75i0d3OjQv3bD-_p90uQjiBXb5O2LvJcLf0'
@@ -129,12 +129,12 @@ onMounted(() => {
 
 <style scoped>
 .education-card {
-  @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-4 md:p-6 shadow-lg;
+  @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-3 md:p-6 shadow-lg;
   height: 100%;
 }
 
 .logo-container {
-  @apply flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-lg overflow-hidden bg-white/10;
+  @apply flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg overflow-hidden bg-white/10;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 

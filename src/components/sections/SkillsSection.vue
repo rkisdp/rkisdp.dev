@@ -2,15 +2,15 @@
   <section
     ref="sectionRef"
     id="skills"
-    class="section relative overflow-hidden"
+    class="section relative overflow-hidden pt-20 md:pt-0"
   >
     <!-- Decorative background element. -->
     <div
       class="absolute top-[-100px] left-[10%] w-[90%] h-[600px] rounded-full opacity-5 bg-[rgba(100,200,255,0.1)] blur-3xl z-0"
     />
 
-    <div class="h-full w-full flex flex-col items-center justify-center pt-16 pb-8 md:py-0">
-      <div class="w-[95%] md:w-[80%] max-w-[900px] z-10 px-4 md:px-0">
+    <div class="h-full w-full flex flex-col items-center justify-center py-4 md:py-0">
+      <div class="w-full md:w-[80%] max-w-[900px] z-10 px-2 md:px-0">
         <div
           :style="{
             opacity: isVisible ? 1 : 0,
@@ -18,11 +18,11 @@
             transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
           }"
         >
-          <h2 class="text-2xl md:text-4xl mb-6 md:mb-8 text-gray-200 text-center">
+          <h2 class="text-xl md:text-4xl mb-3 md:mb-8 text-gray-200 text-center">
             Skills
           </h2>
 
-          <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-5">
+          <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-5 mx-auto w-full max-w-[340px] sm:max-w-none">
             <div
               v-for="(skill, index) in skills"
               :key="index"
@@ -33,7 +33,7 @@
                 transition: `opacity 0.6s ease-out ${index * 100 + 100}ms, transform 0.6s ease-out ${index * 100 + 100}ms`,
               }"
             >
-              <div class="flex justify-center items-center mb-2 h-12">
+              <div class="flex justify-center items-center mb-1 md:mb-2 h-12 md:h-12">
                 <img
                   :src="skill.image"
                   :alt="skill.name"
@@ -42,7 +42,7 @@
                   loading="lazy"
                 />
               </div>
-              <h3 class="text-xs md:text-sm text-blue-100 text-center">{{ skill.name }}</h3>
+              <h3 class="text-xs md:text-sm text-blue-100">{{ skill.name }}</h3>
             </div>
           </div>
         </div>
@@ -151,5 +151,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 110px;
 }
 </style>

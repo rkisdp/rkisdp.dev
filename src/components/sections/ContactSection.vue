@@ -2,7 +2,7 @@
   <section
     ref="sectionRef"
     id="contact"
-    class="section relative overflow-hidden flex flex-col"
+    class="section relative overflow-hidden flex flex-col pt-20 md:pt-0"
   >
     <!-- Background particles -->
     <div class="absolute inset-0 overflow-hidden">
@@ -16,25 +16,25 @@
       ></div>
     </div>
 
-    <div class="flex-grow flex items-center justify-center">
-      <div class="container-custom max-w-4xl">
+    <div class="flex-grow flex items-center justify-center py-4 md:py-0">
+      <div class="container-custom max-w-4xl px-4 md:px-0">
         <div
-          class="text-center mb-10"
+          class="text-center mb-2 md:mb-10"
           :style="{
             opacity: isVisible ? 1 : 0,
             transform: `translateY(${isVisible ? 0 : 30}px)`,
             transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
           }"
         >
-          <h2 class="text-3xl md:text-4xl mb-4 text-gray-200">
+          <h2 class="text-xl md:text-4xl mb-1 md:mb-4 text-gray-200">
             Get In Touch
           </h2>
-          <p class="text-lg text-gray-300/90 mb-10">
+          <p class="text-sm md:text-lg text-gray-300/90 mb-2 md:mb-10">
             I'm always open to discussing new projects, opportunities, and collaborations.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8 mb-2 md:mb-0">
           <div
             class="contact-card"
             :style="{
@@ -44,16 +44,14 @@
               transitionDelay: '0.1s'
             }"
           >
-            <h3 class="text-xl mb-2 text-gray-200">LinkedIn</h3>
-            <p class="text-gray-400 mb-4">Connect with me professionally</p>
+            <h3 class="text-lg md:text-xl mb-1 md:mb-2 text-gray-200">Email</h3>
+            <p class="text-sm md:text-base text-gray-400 mb-3 md:mb-4">Drop me an email</p>
             <a
-              href="https://www.linkedin.com/in/rkisdp/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors"
+              href="mailto:connect@rkisdp.dev"
+              class="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors text-sm md:text-base"
             >
-              <font-awesome-icon :icon="['fab', 'linkedin']" />
-              <span> rkisdp</span>
+              <font-awesome-icon :icon="['fas', 'envelope']" />
+              <span>connect@rkisdp.dev</span>
             </a>
           </div>
 
@@ -66,16 +64,38 @@
               transitionDelay: '0.2s'
             }"
           >
-            <h3 class="text-xl mb-2 text-gray-200">GitHub</h3>
-            <p class="text-gray-400 mb-4">Check out my code and projects</p>
+            <h3 class="text-lg md:text-xl mb-1 md:mb-2 text-gray-200">LinkedIn</h3>
+            <p class="text-sm md:text-base text-gray-400 mb-3 md:mb-4">Connect with me professionally</p>
+            <a
+              href="https://www.linkedin.com/in/rkisdp/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors text-sm md:text-base"
+            >
+              <font-awesome-icon :icon="['fab', 'linkedin']" />
+              <span>rkisdp</span>
+            </a>
+          </div>
+
+          <div
+            class="contact-card"
+            :style="{
+              opacity: isVisible ? 1 : 0,
+              transform: `translateY(${isVisible ? 0 : 30}px)`,
+              transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
+              transitionDelay: '0.3s'
+            }"
+          >
+            <h3 class="text-lg md:text-xl mb-1 md:mb-2 text-gray-200">GitHub</h3>
+            <p class="text-sm md:text-base text-gray-400 mb-3 md:mb-4">Check out my code and projects</p>
             <a
               href="https://github.com/rkisdp"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors"
+              class="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors text-sm md:text-base"
             >
               <font-awesome-icon :icon="['fab', 'github']" />
-              <span> rkisdp</span>
+              <span>rkisdp</span>
             </a>
           </div>
         </div>
@@ -84,7 +104,7 @@
 
     <!-- Footer -->
     <footer
-      class="mt-auto pb-6 pt-10 w-full text-center"
+      class="mt-auto pb-2 md:pb-6 pt-2 md:pt-10 w-full text-center"
       :style="{
         opacity: isVisible ? 1 : 0,
         transform: `translateY(${isVisible ? 0 : 20}px)`,
@@ -92,7 +112,14 @@
         transitionDelay: '0.3s'
       }"
     >
-      <div class="flex justify-center space-x-6 mb-4">
+      <div class="flex justify-center space-x-3 md:space-x-6 mb-2 md:mb-4">
+        <a
+          href="mailto:connect@rkisdp.dev"
+          class="text-gray-400 hover:text-blue-400 transition-colors"
+          aria-label="Email"
+        >
+          <font-awesome-icon :icon="['fas', 'envelope']" size="lg" />
+        </a>
         <a
           href="https://github.com/rkisdp"
           target="_blank"
@@ -169,3 +196,10 @@ onMounted(() => {
   });
 });
 </script>
+
+<style scoped>
+.contact-card {
+  @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-2 md:p-6 shadow-lg;
+  height: 100%;
+}
+</style>

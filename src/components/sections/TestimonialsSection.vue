@@ -2,7 +2,7 @@
   <section
     ref="sectionRef"
     id="testimonials"
-    class="section relative overflow-hidden flex items-center min-h-screen"
+    class="section relative overflow-hidden flex items-center min-h-screen pt-20 md:pt-0"
   >
     <!-- Background particles -->
     <div class="absolute inset-0 overflow-hidden">
@@ -16,23 +16,23 @@
       ></div>
     </div>
 
-    <div class="container-custom max-w-6xl mx-auto pt-16 md:pt-20 px-4 w-full">
+    <div class="container-custom max-w-6xl mx-auto px-4 w-full pb-4 md:pb-0">
       <div
-        class="text-center mb-6 md:mb-12"
+        class="text-center mb-4 md:mb-12"
         :style="{
           opacity: isVisible ? 1 : 0,
           transform: `translateY(${isVisible ? 0 : 30}px)`,
           transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
         }"
       >
-        <h2 class="text-2xl md:text-4xl mb-3 md:mb-4 text-gray-200">Testimonials</h2>
-        <p class="text-base md:text-lg text-gray-300/90 max-w-xl mx-auto">
+        <h2 class="text-xl md:text-4xl mb-2 md:mb-4 text-gray-200">Testimonials</h2>
+        <p class="text-sm md:text-lg text-gray-300/90 max-w-xl mx-auto">
           What others say about working with me
         </p>
       </div>
 
       <div
-        class="relative mt-6 md:mt-12 md:pb-12"
+        class="relative mt-4 md:mt-12"
         :style="{
           opacity: isVisible ? 1 : 0,
           transform: `translateY(${isVisible ? 0 : 40}px)`,
@@ -51,29 +51,29 @@
               :key="index"
               class="w-full flex-shrink-0 px-1 sm:px-2 md:px-4"
             >
-              <div class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-4 md:p-8 shadow-xl">
-                <div class="flex flex-col sm:flex-row sm:items-center mb-4 md:mb-6">
-                  <div class="h-16 w-16 rounded-full overflow-hidden mb-3 sm:mb-0 sm:mr-4 border-2 border-blue-500/50 mx-auto sm:mx-0">
+              <div class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-3 md:p-8 shadow-xl">
+                <div class="flex flex-col sm:flex-row sm:items-center mb-3 md:mb-6">
+                  <div class="h-12 w-12 sm:h-16 sm:w-16 rounded-full overflow-hidden mb-2 sm:mb-0 sm:mr-4 border-2 border-blue-500/50 mx-auto sm:mx-0">
                     <img :src="testimonial.image" :alt="testimonial.name" class="h-full w-full object-cover" />
                   </div>
                   <div class="text-center sm:text-left">
-                    <h4 class="text-lg md:text-xl font-medium text-gray-200">{{ testimonial.name }}</h4>
-                    <p class="text-sm md:text-base text-gray-400">{{ testimonial.designation }}</p>
+                    <h4 class="text-base md:text-xl font-medium text-gray-200">{{ testimonial.name }}</h4>
+                    <p class="text-xs md:text-base text-gray-400">{{ testimonial.designation }}</p>
                     <a 
                       :href="testimonial.linkedin" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       class="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors mt-1"
                     >
-                      <font-awesome-icon :icon="['fab', 'linkedin']" class="text-lg mr-1" />
-                      <span class="text-sm">View Profile</span>
+                      <font-awesome-icon :icon="['fab', 'linkedin']" class="text-base md:text-lg mr-1" />
+                      <span class="text-xs md:text-sm">View Profile</span>
                     </a>
                   </div>
                 </div>
-                <div class="mb-3 md:mb-4 text-center sm:text-left">
-                  <font-awesome-icon :icon="['fas', 'quote-left']" class="text-blue-500/50 text-xl md:text-3xl mr-2 opacity-50" />
+                <div class="mb-2 md:mb-4 text-center sm:text-left">
+                  <font-awesome-icon :icon="['fas', 'quote-left']" class="text-blue-500/50 text-lg md:text-3xl mr-2 opacity-50" />
                 </div>
-                <p class="text-gray-300 text-sm sm:text-base md:text-lg italic leading-relaxed line-clamp-6 sm:line-clamp-none">
+                <p class="text-gray-300 text-xs sm:text-base md:text-lg italic leading-relaxed line-clamp-4 sm:line-clamp-none">
                   {{ testimonial.text }}
                 </p>
               </div>
@@ -82,7 +82,7 @@
         </div>
 
         <!-- Navigation buttons - outside card on mobile -->
-        <div class="flex justify-between mt-4 mx-auto max-w-xs sm:hidden">
+        <div class="flex justify-between mt-3 mx-auto max-w-xs sm:hidden">
           <button
             @click="prevSlide"
             class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-10 h-10 flex items-center justify-center focus:outline-none transition-all hover:scale-110 z-10"
@@ -124,7 +124,7 @@
         <!-- Dots navigation -->
         <div class="flex justify-center mt-4 md:mt-8 space-x-2">
           <button
-            v-for="(_, index) in testimonials"
+            v-for="( _, index ) in testimonials"
             :key="index"
             @click="goToSlide(index)"
             class="w-2 h-2 md:w-3 md:h-3 rounded-full transition-all focus:outline-none"
@@ -259,9 +259,9 @@ onMounted(() => {
 
 <style scoped>
 /* Add line clamping for mobile */
-.line-clamp-6 {
+.line-clamp-4 {
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
