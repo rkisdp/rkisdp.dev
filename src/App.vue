@@ -15,19 +15,20 @@
 
     <!-- Floating Resume Button -->
     <div
-      class="fixed bottom-6 right-6 z-50"
+      class="fixed bottom-6 right-3 sm:right-6 z-50"
       :class="{ 'animated': buttonAnimated }"
     >
       <a
-        href="https://ext.same-assets.com/sample-resume.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-blue-500/30 hover:translate-y-[-2px]"
-        @mouseover="buttonAnimated = true"
-        @mouseleave="buttonAnimated = false"
+          href="https://ext.same-assets.com/sample-resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-blue-500/30 hover:translate-y-[-2px]"
+          @mouseover="buttonAnimated = true"
+          @mouseleave="buttonAnimated = false"
       >
         <font-awesome-icon :icon="['fas', 'download']" size="sm" />
-        <span class="font-medium text-sm">Download My Resume</span>
+        <span class="hidden sm:inline text-sm sm:text-base">Download My Resume</span>
+        <span class="sm:hidden text-sm">Resume</span>
       </a>
     </div>
   </main>
