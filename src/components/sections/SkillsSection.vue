@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import awsImage from '../../assets/aws.png';
+import awsImage from '../../assets/images/skills/aws.png';
 
 interface Skill {
   name: string;

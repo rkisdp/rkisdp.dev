@@ -60,11 +60,11 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import ExperienceCard from '../ExperienceCard.vue';
 import JobModal from '../JobModal.vue';
-import innovaccerImage from '../../assets/innovaccer.jpg';
-import appknoxImage from '../../assets/appknox.jpg';
-import thoughts2binaryImage from '../../assets/thoughts2binary.jpg';
-import barytechImage from '../../assets/barytech.jpg';
-import yoyobooksImage from '../../assets/yo yo books.jpg';
+import innovaccerImage from '../../assets/images/companies/innovaccer.jpg';
+import appknoxImage from '../../assets/images/companies/appknox.jpg';
+import thoughts2binaryImage from '../../assets/images/companies/thoughts2binary.jpg';
+import barytechImage from '../../assets/images/companies/barytech.jpg';
+import yoyobooksImage from '../../assets/images/companies/yoyobooks.jpg';
 
 interface Job {
   company: string;
