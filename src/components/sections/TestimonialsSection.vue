@@ -233,7 +233,7 @@ const testimonials: Testimonial[] = [
   },
   {
     name: "Abhishek Mishra",
-    designation: "Assistant Manager & Deloitte, UK",
+    designation: "Assistant Manager at Deloitte, UK",
     image:
       "https://media.licdn.com/dms/image/v2/D4E03AQGs2twgyKvFbQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1721423171761?e=1748476800&v=beta&t=wMcuH3BZAPL7DYYdVVME13Nu9ZqMzUbIzC0ttL6YDJQ",
     text: "I have known Divya Prakash as my course mate at the University of Southampton. He is exceptionally talented and has good proficiency in python programming language. Throughout the program, he has successfully developed quality codes and solutions. I highly recommend him for his technical expertise and business knowledge and I am sure he will be a great asset to any company.",
