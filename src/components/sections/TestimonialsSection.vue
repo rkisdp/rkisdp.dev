@@ -8,11 +8,23 @@
     <div class="absolute inset-0 overflow-hidden">
       <div
         class="absolute w-32 h-32 rounded-full blur-3xl animate-float-down"
-        style="top: 65%; left: 15%; background-color: rgba(0, 100, 200, 0.02); opacity: 0.2; animation-duration: 25s;"
+        style="
+          top: 65%;
+          left: 15%;
+          background-color: rgba(0, 100, 200, 0.02);
+          opacity: 0.2;
+          animation-duration: 25s;
+        "
       ></div>
       <div
         class="absolute w-32 h-32 rounded-full blur-3xl animate-float-right"
-        style="top: 25%; left: 70%; background-color: rgba(0, 80, 180, 0.03); opacity: 0.3; animation-duration: 28s;"
+        style="
+          top: 25%;
+          left: 70%;
+          background-color: rgba(0, 80, 180, 0.03);
+          opacity: 0.3;
+          animation-duration: 28s;
+        "
       ></div>
     </div>
 
@@ -25,7 +37,9 @@
           transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
         }"
       >
-        <h2 class="text-xl md:text-4xl mb-2 md:mb-4 text-gray-200">Testimonials</h2>
+        <h2 class="text-xl md:text-4xl mb-2 md:mb-4 text-gray-200">
+          Testimonials
+        </h2>
         <p class="text-sm md:text-lg text-gray-300/90 max-w-xl mx-auto">
           What others say about working with me
         </p>
@@ -37,7 +51,7 @@
           opacity: isVisible ? 1 : 0,
           transform: `translateY(${isVisible ? 0 : 40}px)`,
           transition: 'opacity 1s ease-out, transform 1s ease-out',
-          transitionDelay: '0.2s'
+          transitionDelay: '0.2s',
         }"
       >
         <!-- Testimonial slider -->
@@ -51,29 +65,51 @@
               :key="index"
               class="w-full flex-shrink-0 px-1 sm:px-2 md:px-4"
             >
-              <div class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-3 md:p-8 shadow-xl">
-                <div class="flex flex-col sm:flex-row sm:items-center mb-3 md:mb-6">
-                  <div class="h-12 w-12 sm:h-16 sm:w-16 rounded-full overflow-hidden mb-2 sm:mb-0 sm:mr-4 border-2 border-blue-500/50 mx-auto sm:mx-0">
-                    <img :src="testimonial.image" :alt="testimonial.name" class="h-full w-full object-cover" />
+              <div
+                class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-3 md:p-8 shadow-xl"
+              >
+                <div
+                  class="flex flex-col sm:flex-row sm:items-center mb-3 md:mb-6"
+                >
+                  <div
+                    class="h-12 w-12 sm:h-16 sm:w-16 rounded-full overflow-hidden mb-2 sm:mb-0 sm:mr-4 border-2 border-blue-500/50 mx-auto sm:mx-0"
+                  >
+                    <img
+                      :src="testimonial.image"
+                      :alt="testimonial.name"
+                      class="h-full w-full object-cover"
+                    />
                   </div>
                   <div class="text-center sm:text-left">
-                    <h4 class="text-base md:text-xl font-medium text-gray-200">{{ testimonial.name }}</h4>
-                    <p class="text-xs md:text-base text-gray-400">{{ testimonial.designation }}</p>
-                    <a 
-                      :href="testimonial.linkedin" 
-                      target="_blank" 
+                    <h4 class="text-base md:text-xl font-medium text-gray-200">
+                      {{ testimonial.name }}
+                    </h4>
+                    <p class="text-xs md:text-base text-gray-400">
+                      {{ testimonial.designation }}
+                    </p>
+                    <a
+                      :href="testimonial.linkedin"
+                      target="_blank"
                       rel="noopener noreferrer"
                       class="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors mt-1"
                     >
-                      <font-awesome-icon :icon="['fab', 'linkedin']" class="text-base md:text-lg mr-1" />
+                      <font-awesome-icon
+                        :icon="['fab', 'linkedin']"
+                        class="text-base md:text-lg mr-1"
+                      />
                       <span class="text-xs md:text-sm">View Profile</span>
                     </a>
                   </div>
                 </div>
                 <div class="mb-2 md:mb-4 text-center sm:text-left">
-                  <font-awesome-icon :icon="['fas', 'quote-left']" class="text-blue-500/50 text-lg md:text-3xl mr-2 opacity-50" />
+                  <font-awesome-icon
+                    :icon="['fas', 'quote-left']"
+                    class="text-blue-500/50 text-lg md:text-3xl mr-2 opacity-50"
+                  />
                 </div>
-                <p class="text-gray-300 text-xs sm:text-base md:text-lg italic leading-relaxed line-clamp-4 sm:line-clamp-none">
+                <p
+                  class="text-gray-300 text-xs sm:text-base md:text-lg italic leading-relaxed line-clamp-4 sm:line-clamp-none"
+                >
                   {{ testimonial.text }}
                 </p>
               </div>
@@ -95,7 +131,10 @@
           <button
             @click="nextSlide"
             class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-10 h-10 flex items-center justify-center focus:outline-none transition-all hover:scale-110 z-10"
-            :class="{ 'opacity-50 cursor-not-allowed': currentSlide === testimonials.length - 1 }"
+            :class="{
+              'opacity-50 cursor-not-allowed':
+                currentSlide === testimonials.length - 1,
+            }"
             :disabled="currentSlide === testimonials.length - 1"
           >
             <font-awesome-icon :icon="['fas', 'chevron-right']" />
@@ -115,7 +154,10 @@
         <button
           @click="nextSlide"
           class="hidden sm:flex absolute right-0 top-1/2 transform -translate-y-1/2 -translate-x-1 md:translate-x-5 bg-blue-600 hover:bg-blue-700 text-white rounded-full w-10 h-10 items-center justify-center focus:outline-none transition-all hover:scale-110 z-10"
-          :class="{ 'opacity-50 cursor-not-allowed': currentSlide === testimonials.length - 1 }"
+          :class="{
+            'opacity-50 cursor-not-allowed':
+              currentSlide === testimonials.length - 1,
+          }"
           :disabled="currentSlide === testimonials.length - 1"
         >
           <font-awesome-icon :icon="['fas', 'chevron-right']" />
@@ -124,11 +166,15 @@
         <!-- Dots navigation -->
         <div class="flex justify-center mt-4 md:mt-8 space-x-2">
           <button
-            v-for="( _, index ) in testimonials"
+            v-for="(_, index) in testimonials"
             :key="index"
             @click="goToSlide(index)"
             class="w-2 h-2 md:w-3 md:h-3 rounded-full transition-all focus:outline-none"
-            :class="currentSlide === index ? 'bg-blue-500 scale-125' : 'bg-gray-600 hover:bg-gray-500'"
+            :class="
+              currentSlide === index
+                ? 'bg-blue-500 scale-125'
+                : 'bg-gray-600 hover:bg-gray-500'
+            "
             :aria-label="`Go to testimonial ${index + 1}`"
           ></button>
         </div>
@@ -138,7 +184,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from "vue";
 
 const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
@@ -156,38 +202,43 @@ const testimonials: Testimonial[] = [
   {
     name: "Ravi Gupta",
     designation: "Region Head(EMEA) at Locobuzz",
-    image: "https://media.licdn.com/dms/image/v2/D5603AQH1MHqfYxFdZg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1725454599871?e=1748476800&v=beta&t=Kb5jwbk5YekGVP48oBaGHPhT9hHOGFzYxVl77fqxUsM",
+    image:
+      "https://media.licdn.com/dms/image/v2/D5603AQH1MHqfYxFdZg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1725454599871?e=1748476800&v=beta&t=Kb5jwbk5YekGVP48oBaGHPhT9hHOGFzYxVl77fqxUsM",
     text: "I have directly worked with Divya Prakash and found him to a fantastic and enthusiastic as person. I would really appreciate his skill set and source of information. He is a well connected person and would highly recommend him.",
-    linkedin: "https://www.linkedin.com/in/meetravigupta/"
+    linkedin: "https://www.linkedin.com/in/meetravigupta/",
   },
   {
     name: "Kavish Baghel",
     designation: "Senior Engineer at Dunnhumby",
-    image: "https://media.licdn.com/dms/image/v2/D5603AQGs5T9HbosoXg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1718801329737?e=1748476800&v=beta&t=GzIfiNnSqfYsJHaiuHpbzN8sGW35iYdzHU3qO0Zlqu4",
+    image:
+      "https://media.licdn.com/dms/image/v2/D5603AQGs5T9HbosoXg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1718801329737?e=1748476800&v=beta&t=GzIfiNnSqfYsJHaiuHpbzN8sGW35iYdzHU3qO0Zlqu4",
     text: "Divya has been a great team member. He has always taken full responsibility of the task assigned to him and has always kept the team energy high. He aims to achieve perfection and helps everyone along his work.",
-    linkedin: "https://www.linkedin.com/in/kavishbaghel/"
+    linkedin: "https://www.linkedin.com/in/kavishbaghel/",
   },
   {
     name: "Abhishek Gajraj",
     designation: "AVP(Product) at Naukri.com",
-    image: "https://media.licdn.com/dms/image/v2/C4E03AQEtSlooJ4c0TA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1633604367828?e=1748476800&v=beta&t=59eFZPIBdASVXJZlu6ovXj_XljHOiHn_5vMqZV_knsk",
+    image:
+      "https://media.licdn.com/dms/image/v2/C4E03AQEtSlooJ4c0TA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1633604367828?e=1748476800&v=beta&t=59eFZPIBdASVXJZlu6ovXj_XljHOiHn_5vMqZV_knsk",
     text: "Divya is a positive and multi-talented individual with great work skill sets. His in-depth knowledge on the Python has been impressive. He is a sincere and smart working professional with a great appetite to learn new things. His strong work ethics and focused approach are commendable. ",
-    linkedin: "https://www.linkedin.com/in/abhishekgajraj/"
+    linkedin: "https://www.linkedin.com/in/abhishekgajraj/",
   },
   {
     name: "Rohit Sharma",
     designation: "QA Manager at Squareboat",
-    image: "https://media.licdn.com/dms/image/v2/D4D03AQFxVKiqDkiGZw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1694670863607?e=1748476800&v=beta&t=dmUOm2Zv-Jv9OIOavcWp53DlfgZ001x9IFHYdlqWbLI",
+    image:
+      "https://media.licdn.com/dms/image/v2/D4D03AQFxVKiqDkiGZw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1694670863607?e=1748476800&v=beta&t=dmUOm2Zv-Jv9OIOavcWp53DlfgZ001x9IFHYdlqWbLI",
     text: "Divya Prakash has always been a great resource to work with. He is always willing to jump in as part of the team, whether it be to create a new functionality, to fix a problem or to determine the root cause of a bug. His problem-solving capabilities are very good. In the time that I have worked with Divya, I have been impressed by his thorough, creative approach to his work. He has been an indispensable part of our projects, and I look forward to working with him in the future too.",
-    linkedin: "https://www.linkedin.com/in/rohitsharma2206/"
+    linkedin: "https://www.linkedin.com/in/rohitsharma2206/",
   },
   {
     name: "Abhishek Mishra",
     designation: "Assistant Manager & Deloitte, UK",
-    image: "https://media.licdn.com/dms/image/v2/D4E03AQGs2twgyKvFbQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1721423171761?e=1748476800&v=beta&t=wMcuH3BZAPL7DYYdVVME13Nu9ZqMzUbIzC0ttL6YDJQ",
+    image:
+      "https://media.licdn.com/dms/image/v2/D4E03AQGs2twgyKvFbQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1721423171761?e=1748476800&v=beta&t=wMcuH3BZAPL7DYYdVVME13Nu9ZqMzUbIzC0ttL6YDJQ",
     text: "I have known Divya Prakash as my course mate at the University of Southampton. He is exceptionally talented and has good proficiency in python programming language. Throughout the program, he has successfully developed quality codes and solutions. I highly recommend him for his technical expertise and business knowledge and I am sure he will be a great asset to any company.",
-    linkedin: "https://www.linkedin.com/in/abhishekmishra1095/"
-  }
+    linkedin: "https://www.linkedin.com/in/abhishekmishra1095/",
+  },
 ];
 
 const nextSlide = () => {

@@ -8,11 +8,23 @@
     <div class="absolute inset-0 overflow-hidden">
       <div
         class="absolute w-32 h-32 rounded-full blur-3xl animate-float-down"
-        style="top: 80%; left: 80%; background-color: rgba(0, 100, 200, 0.02); opacity: 0.2; animation-duration: 22s;"
+        style="
+          top: 80%;
+          left: 80%;
+          background-color: rgba(0, 100, 200, 0.02);
+          opacity: 0.2;
+          animation-duration: 22s;
+        "
       ></div>
       <div
         class="absolute w-32 h-32 rounded-full blur-3xl animate-float-right"
-        style="top: 60%; left: 15%; background-color: rgba(0, 80, 180, 0.03); opacity: 0.3; animation-duration: 24s;"
+        style="
+          top: 60%;
+          left: 15%;
+          background-color: rgba(0, 80, 180, 0.03);
+          opacity: 0.3;
+          animation-duration: 24s;
+        "
       ></div>
     </div>
 
@@ -30,22 +42,27 @@
             Get In Touch
           </h2>
           <p class="text-sm md:text-lg text-gray-300/90 mb-2 md:mb-10">
-            I'm always open to discussing new projects, opportunities, and collaborations.
+            I'm always open to discussing new projects, opportunities, and
+            collaborations.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8 mb-2 md:mb-0">
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8 mb-2 md:mb-0"
+        >
           <div
             class="contact-card"
             :style="{
               opacity: isVisible ? 1 : 0,
               transform: `translateY(${isVisible ? 0 : 30}px)`,
               transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
-              transitionDelay: '0.1s'
+              transitionDelay: '0.1s',
             }"
           >
             <h3 class="text-lg md:text-xl mb-1 md:mb-2 text-gray-200">Email</h3>
-            <p class="text-sm md:text-base text-gray-400 mb-3 md:mb-4">Drop me an email</p>
+            <p class="text-sm md:text-base text-gray-400 mb-3 md:mb-4">
+              Drop me an email
+            </p>
             <a
               href="mailto:connect@rkisdp.dev"
               class="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors text-sm md:text-base"
@@ -61,11 +78,15 @@
               opacity: isVisible ? 1 : 0,
               transform: `translateY(${isVisible ? 0 : 30}px)`,
               transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
-              transitionDelay: '0.2s'
+              transitionDelay: '0.2s',
             }"
           >
-            <h3 class="text-lg md:text-xl mb-1 md:mb-2 text-gray-200">LinkedIn</h3>
-            <p class="text-sm md:text-base text-gray-400 mb-3 md:mb-4">Connect with me professionally</p>
+            <h3 class="text-lg md:text-xl mb-1 md:mb-2 text-gray-200">
+              LinkedIn
+            </h3>
+            <p class="text-sm md:text-base text-gray-400 mb-3 md:mb-4">
+              Connect with me professionally
+            </p>
             <a
               href="https://www.linkedin.com/in/rkisdp/"
               target="_blank"
@@ -83,11 +104,15 @@
               opacity: isVisible ? 1 : 0,
               transform: `translateY(${isVisible ? 0 : 30}px)`,
               transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
-              transitionDelay: '0.3s'
+              transitionDelay: '0.3s',
             }"
           >
-            <h3 class="text-lg md:text-xl mb-1 md:mb-2 text-gray-200">GitHub</h3>
-            <p class="text-sm md:text-base text-gray-400 mb-3 md:mb-4">Check out my code and projects</p>
+            <h3 class="text-lg md:text-xl mb-1 md:mb-2 text-gray-200">
+              GitHub
+            </h3>
+            <p class="text-sm md:text-base text-gray-400 mb-3 md:mb-4">
+              Check out my code and projects
+            </p>
             <a
               href="https://github.com/rkisdp"
               target="_blank"
@@ -109,7 +134,7 @@
         opacity: isVisible ? 1 : 0,
         transform: `translateY(${isVisible ? 0 : 20}px)`,
         transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
-        transitionDelay: '0.3s'
+        transitionDelay: '0.3s',
       }"
     >
       <div class="flex justify-center space-x-3 md:space-x-6 mb-2 md:mb-4">
@@ -157,15 +182,13 @@
           <font-awesome-icon :icon="['fab', 'stack-overflow']" size="lg" />
         </a>
       </div>
-      <p class="text-gray-500 text-sm">
-        2025 &copy; Divya Prakash
-      </p>
+      <p class="text-gray-500 text-sm">2025 &copy; Divya Prakash</p>
     </footer>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from "vue";
 
 const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
@@ -181,8 +204,8 @@ onMounted(() => {
     },
     {
       root: null,
-      rootMargin: '0px',
-      threshold: 0.2
+      rootMargin: "0px",
+      threshold: 0.2,
     }
   );
 

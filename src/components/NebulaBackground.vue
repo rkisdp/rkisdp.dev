@@ -4,7 +4,7 @@
     :style="{
       opacity,
       transform: `scale(${zoomLevel})`,
-      transition: 'opacity 0.5s ease-in-out, transform 0.5s ease-in-out'
+      transition: 'opacity 0.5s ease-in-out, transform 0.5s ease-in-out',
     }"
   >
     <svg width="1280" height="720" viewBox="0 0 1280 720" class="w-full h-full">
@@ -67,8 +67,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { PropType } from 'vue'; // Fixed PropType import
+import { ref, onMounted } from "vue";
+import type { PropType } from "vue";
 
 interface Nebula {
   cx: string;
@@ -82,12 +82,12 @@ interface Nebula {
 const props = defineProps({
   opacity: {
     type: Number as PropType<number>,
-    default: 1
+    default: 1,
   },
   zoomLevel: {
     type: Number as PropType<number>,
-    default: 1
-  }
+    default: 1,
+  },
 });
 
 const nebulaeRef = ref<SVGGElement | null>(null);
@@ -111,7 +111,7 @@ const generateNebulae = () => {
       rx: `${rx}%`,
       ry: `${ry}%`,
       fill: `url(#nebulaGradient${gradientIndex})`,
-      opacity
+      opacity,
     });
   }
 
@@ -132,8 +132,8 @@ onMounted(() => {
     const angle = Math.random() * Math.PI * 2;
     const speed = 0.00001 + Math.random() * 0.00002;
 
-    let currentX = parseFloat(nebula.getAttribute('cx') || '50');
-    let currentY = parseFloat(nebula.getAttribute('cy') || '50');
+    let currentX = parseFloat(nebula.getAttribute("cx") || "50");
+    let currentY = parseFloat(nebula.getAttribute("cy") || "50");
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
 
@@ -146,8 +146,8 @@ onMounted(() => {
       if (currentX < 10 || currentX > 90) dirX *= -1;
       if (currentY < 10 || currentY > 90) dirY *= -1;
 
-      nebula.setAttribute('cx', `${currentX}%`);
-      nebula.setAttribute('cy', `${currentY}%`);
+      nebula.setAttribute("cx", `${currentX}%`);
+      nebula.setAttribute("cy", `${currentY}%`);
 
       requestAnimationFrame(animate);
     };

@@ -1,5 +1,7 @@
 <template>
-  <nav class="fixed top-0 left-0 right-0 z-50 p-4 bg-background/20 backdrop-blur-sm border-b border-white/5">
+  <nav
+    class="fixed top-0 left-0 right-0 z-50 p-4 bg-background/20 backdrop-blur-sm border-b border-white/5"
+  >
     <div class="flex items-center justify-between mx-auto max-w-[90%]">
       <div class="flex-shrink-0">
         <a href="/" class="text-2xl font-bold text-primary">DP</a>
@@ -14,9 +16,11 @@
       </button>
 
       <ul class="hidden md:flex items-center space-x-10">
-        <li v-for="item in navItems"
-            :key="item.name"
-            :class="['relative', { 'active': activeSection === item.href }]">
+        <li
+          v-for="item in navItems"
+          :key="item.name"
+          :class="['relative', { active: activeSection === item.href }]"
+        >
           <a
             :href="item.href"
             class="text-primary/90 hover:text-primary transition-colors py-2"
@@ -51,11 +55,14 @@
       </ul>
 
       <!-- Mobile menu -->
-      <ul v-if="mobileMenuOpen" class="absolute top-full left-0 w-full bg-background/95 backdrop-blur-md p-4 flex flex-col space-y-4 border-b border-white/5 md:hidden">
+      <ul
+        v-if="mobileMenuOpen"
+        class="absolute top-full left-0 w-full bg-background/95 backdrop-blur-md p-4 flex flex-col space-y-4 border-b border-white/5 md:hidden"
+      >
         <li
           v-for="item in navItems"
           :key="item.name"
-          :class="{ 'active': activeSection === item.href }"
+          :class="{ active: activeSection === item.href }"
         >
           <a
             :href="item.href"
@@ -91,7 +98,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from "vue";
 
 interface NavItem {
   name: string;
@@ -99,28 +106,31 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: 'Highlights', href: '/#impact' },
-  { name: 'Skills', href: '/#skills' },
-  { name: 'Experience', href: '/#experience' },
-  { name: 'Education', href: '/#education' },
-  { name: 'Articles', href: '/#articles' },
-  { name: 'Testimonials', href: '/#testimonials' },
-  { name: 'Contact', href: '/#contact' },
+  { name: "Highlights", href: "/#impact" },
+  { name: "Skills", href: "/#skills" },
+  { name: "Experience", href: "/#experience" },
+  { name: "Education", href: "/#education" },
+  { name: "Articles", href: "/#articles" },
+  { name: "Testimonials", href: "/#testimonials" },
+  { name: "Contact", href: "/#contact" },
 ];
 
-const activeSection = ref('');
+const activeSection = ref("");
 const mobileMenuOpen = ref(false);
 
 const handleScroll = () => {
-  const sections = document.querySelectorAll('section[id]');
+  const sections = document.querySelectorAll("section[id]");
   const scrollPosition = window.scrollY + 100;
 
   sections.forEach((section) => {
     const sectionTop = (section as HTMLElement).offsetTop;
     const sectionHeight = (section as HTMLElement).offsetHeight;
-    const sectionId = section.getAttribute('id') || '';
+    const sectionId = section.getAttribute("id") || "";
 
-    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+    if (
+      scrollPosition >= sectionTop &&
+      scrollPosition < sectionTop + sectionHeight
+    ) {
       activeSection.value = `#${sectionId}`;
     }
   });
@@ -135,10 +145,10 @@ const closeMobileMenu = () => {
 };
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
+  window.addEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener("scroll", handleScroll);
 });
 </script>

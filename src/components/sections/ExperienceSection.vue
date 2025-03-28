@@ -7,9 +7,11 @@
     <!-- Decorative background element -->
     <div
       class="absolute top-[-100px] left-[10%] w-[90%] h-[600px] rounded-full opacity-5 bg-[rgba(100,200,255,0.1)] blur-3xl z-0"
-    />
+    ></div>
 
-    <div class="h-full w-full flex flex-col items-center justify-center pt-16 pb-8 md:py-0">
+    <div
+      class="h-full w-full flex flex-col items-center justify-center pt-16 pb-8 md:py-0"
+    >
       <div class="w-[95%] md:w-[90%] max-w-[1200px] z-10 px-4 md:px-0">
         <div
           :style="{
@@ -18,25 +20,29 @@
             transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
           }"
         >
-          <h2 class="text-2xl md:text-4xl font-bold text-center text-gray-100 mb-12">
+          <h2
+            class="text-2xl md:text-4xl font-bold text-center text-gray-100 mb-12"
+          >
             Professional Experience
           </h2>
 
           <div class="max-w-5xl mx-auto">
             <!-- Top row -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-8">
-              <ExperienceCard 
-                v-for="jobId in topRowJobIds" 
+              <ExperienceCard
+                v-for="jobId in topRowJobIds"
                 :key="jobId"
                 :job="jobs[jobId]"
                 @click="openModal(jobs[jobId])"
               />
             </div>
-            
+
             <!-- Bottom row -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 md:px-[20%]">
-              <ExperienceCard 
-                v-for="jobId in bottomRowJobIds" 
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 md:px-[20%]"
+            >
+              <ExperienceCard
+                v-for="jobId in bottomRowJobIds"
                 :key="jobId"
                 :job="jobs[jobId]"
                 @click="openModal(jobs[jobId])"
@@ -48,23 +54,19 @@
     </div>
 
     <!-- Modal -->
-    <JobModal 
-      v-if="selectedJob" 
-      :job="selectedJob" 
-      @close="closeModal"
-    />
+    <JobModal v-if="selectedJob" :job="selectedJob" @close="closeModal" />
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue';
-import ExperienceCard from '../ExperienceCard.vue';
-import JobModal from '../JobModal.vue';
-import innovaccerImage from '../../assets/images/companies/innovaccer.jpg';
-import appknoxImage from '../../assets/images/companies/appknox.jpg';
-import thoughts2binaryImage from '../../assets/images/companies/thoughts2binary.jpg';
-import barytechImage from '../../assets/images/companies/barytech.jpg';
-import yoyobooksImage from '../../assets/images/companies/yoyobooks.jpg';
+import { ref, onMounted, onUnmounted, computed } from "vue";
+import ExperienceCard from "../ExperienceCard.vue";
+import JobModal from "../JobModal.vue";
+import innovaccerImage from "../../assets/images/companies/innovaccer.jpg";
+import appknoxImage from "../../assets/images/companies/appknox.jpg";
+import thoughts2binaryImage from "../../assets/images/companies/thoughts2binary.jpg";
+import barytechImage from "../../assets/images/companies/barytech.jpg";
+import yoyobooksImage from "../../assets/images/companies/yoyobooks.jpg";
 
 interface Job {
   company: string;
@@ -91,9 +93,9 @@ const jobs: Job[] = [
       "Implementing robust security features and protocols",
       "Collaborating with security researchers and analysts",
       "Conducting code reviews and security audits",
-      "Optimizing application performance and security"
+      "Optimizing application performance and security",
     ],
-    url: "https://www.appknox.com"
+    url: "https://www.appknox.com",
   },
   {
     company: "Thoughts2Binary Consulting LLP",
@@ -107,9 +109,9 @@ const jobs: Job[] = [
       "Created and maintained RESTful APIs",
       "Designed and implemented database schemas",
       "Integrated payment gateways and third-party services",
-      "Deployed applications to cloud environments"
+      "Deployed applications to cloud environments",
     ],
-    url: "https://thoughts2binary.com"
+    url: "https://thoughts2binary.com",
   },
   {
     company: "Barycenter Technologies Private Limited",
@@ -123,9 +125,9 @@ const jobs: Job[] = [
       "Designed and implemented scalable system architecture",
       "Mentored junior developers and conducted code reviews",
       "Optimized database queries and application performance",
-      "Integrated third-party APIs and services"
+      "Integrated third-party APIs and services",
     ],
-    url: "https://eino.world/en_gb/"
+    url: "https://eino.world/en_gb/",
   },
   {
     company: "YoYo Books India LLP",
@@ -139,9 +141,9 @@ const jobs: Job[] = [
       "Architected and developed full-stack web applications",
       "Managed development team and provided technical leadership",
       "Implemented e-commerce and content management systems",
-      "Ensured scalability, security, and performance of platforms"
+      "Ensured scalability, security, and performance of platforms",
     ],
-    url: "https://yoyobooks.in"
+    url: "https://yoyobooks.in",
   },
   {
     company: "Innovaccer Analytics Private Limited",
@@ -155,9 +157,9 @@ const jobs: Job[] = [
       "Implemented ETL pipelines for processing large datasets",
       "Created RESTful APIs for data access and integration",
       "Collaborated with data scientists to implement ML models",
-      "Optimized database queries for improved performance"
+      "Optimized database queries for improved performance",
     ],
-    url: "https://innovaccer.com"
+    url: "https://innovaccer.com",
   },
 ];
 
@@ -173,17 +175,17 @@ const selectedJob = ref<Job | null>(null);
 // Methods
 const openModal = (job: Job) => {
   selectedJob.value = job;
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = "hidden";
 };
 
 const closeModal = () => {
   selectedJob.value = null;
-  document.body.style.overflow = '';
+  document.body.style.overflow = "";
 };
 
 // Event handlers
 const handleKeyDown = (event: KeyboardEvent) => {
-  if (event.key === 'Escape' && selectedJob.value) {
+  if (event.key === "Escape" && selectedJob.value) {
     closeModal();
   }
 };
@@ -203,12 +205,12 @@ onMounted(() => {
     observer.observe(sectionRef.value);
   }
 
-  window.addEventListener('keydown', handleKeyDown);
+  window.addEventListener("keydown", handleKeyDown);
 
   onUnmounted(() => {
     observer.disconnect();
-    window.removeEventListener('keydown', handleKeyDown);
-    document.body.style.overflow = '';
+    window.removeEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "";
   });
 });
 </script>
