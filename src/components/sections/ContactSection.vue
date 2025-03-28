@@ -182,7 +182,7 @@
           <font-awesome-icon :icon="['fab', 'stack-overflow']" size="lg" />
         </a>
       </div>
-      <p class="text-gray-500 text-sm">2025 &copy; Divya Prakash</p>
+      <p class="text-gray-500 text-sm">2025 @ NO Copy Rights Reserved; Divya Prakash</p>
     </footer>
   </section>
 </template>
