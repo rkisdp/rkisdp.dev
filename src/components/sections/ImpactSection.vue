@@ -23,7 +23,7 @@
     </div>
 
     <div
-      class="h-full w-full flex flex-col items-center justify-start pt-24 pb-4 md:py-0 md:justify-center"
+      class="h-full w-full flex flex-col items-center justify-start pt-48 pb-4 md:py-0 md:justify-center"
     >
       <div class="w-[95%] md:w-[90%] max-w-[1200px] z-10 px-4 md:px-0">
         <!-- Impact Areas Section -->
@@ -82,10 +82,10 @@
                   transition: `opacity 0.6s ease-out ${item.delay}, transform 0.6s ease-out ${item.delay}`,
                 }"
               >
-                <h3 class="text-lg md:text-xl mb-2 md:mb-3 text-blue-100">
+                <h3 class="text-xl md:text-2xl mb-4 md:mb-5 text-blue-100">
                   {{ item.title }}
                 </h3>
-                <p class="text-gray-300/90 text-xs md:text-sm">
+                <p class="text-gray-300/90 text-base md:text-lg">
                   {{ item.description }}
                 </p>
               </div>
@@ -176,7 +176,7 @@ onMounted(() => {
 
 <style scoped>
 .highlight-card {
-  @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-2 sm:p-4 md:p-6 shadow-lg;
+  @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-5 sm:p-6 md:p-8 shadow-lg;
   height: 100%;
 }
 

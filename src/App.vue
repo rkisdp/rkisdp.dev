@@ -21,7 +21,7 @@
       :class="{ 'animated': buttonAnimated }"
     >
       <a
-          href="https://ext.same-assets.com/sample-resume.pdf"
+          href="https://drive.google.com/file/d/1VA2cQqiADzYiroEGBpkMjGaiFkjzmQxP/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-blue-500/30 hover:translate-y-[-2px]"

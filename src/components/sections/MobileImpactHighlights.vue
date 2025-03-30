@@ -14,8 +14,8 @@
           class="w-full flex-shrink-0 px-4"
         >
           <div class="highlight-card">
-            <h3 class="text-lg mb-2 text-blue-100">{{ item.title }}</h3>
-            <p class="text-gray-300/90 text-sm">{{ item.description }}</p>
+            <h3 class="text-xl mb-4 text-blue-100">{{ item.title }}</h3>
+            <p class="text-gray-300/90 text-base">{{ item.description }}</p>
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@ setInterval(nextSlide, 5000);
 
 <style scoped>
 .highlight-card {
-  @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-3 shadow-lg;
+  @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-5 shadow-lg;
   height: 100%;
 }
 </style> 
