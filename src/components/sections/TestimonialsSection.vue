@@ -307,13 +307,3 @@ onMounted(() => {
   });
 });
 </script>
-
-<style scoped>
-/* Add line clamping for mobile */
-.line-clamp-4 {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>
