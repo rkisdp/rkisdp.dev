@@ -78,6 +78,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+import uosImage from "../../assets/images/education/uos.jpeg";
+import bhuImage from "../../assets/images/education/bhu.jpeg";
+import davImage from "../../assets/images/education/dav.jpeg";
 
 interface EducationItem {
   degree: string;
@@ -92,25 +95,25 @@ const educationItems: EducationItem[] = [
     degree: "MSc - Business Analytics in Finance",
     institution: "University of Southampton",
     period: "2022-2023",
-    logo: "https://media.licdn.com/dms/image/v2/C4E0BAQEOlU_74GJ2lA/company-logo_200_200/company-logo_200_200/0/1663657402449?e=1748476800&v=beta&t=hJzwK7Yfa8vYflUijOvUtge30b2D_Vnsqn9ITIqGP00",
+    logo: uosImage,
   },
   {
     degree: "BCom(Hons.) Finance",
     institution: "Banaras Hindu University",
     period: "2015-2018",
-    logo: "https://media.licdn.com/dms/image/v2/D4D0BAQHBI-8DAUffpg/company-logo_200_200/company-logo_200_200/0/1689927104926/sos_banaras_logo?e=1748476800&v=beta&t=dui1qVyDZpI8_hNOAReHyfo03XaUJvvjGQ1xT_k_QY4",
+    logo: bhuImage,
   },
   {
     degree: "UG Diploma in Computer Applications",
     institution: "Banaras Hindu University",
     period: "2015-2018",
-    logo: "https://media.licdn.com/dms/image/v2/D4D0BAQHBI-8DAUffpg/company-logo_200_200/company-logo_200_200/0/1689927104926/sos_banaras_logo?e=1748476800&v=beta&t=dui1qVyDZpI8_hNOAReHyfo03XaUJvvjGQ1xT_k_QY4",
+    logo: bhuImage,
   },
   {
     degree: "10+2",
     institution: "DAV Public School (CBSE)",
     period: "2014",
-    logo: "https://media.licdn.com/dms/image/v2/C560BAQEIhQoVEY4lIA/company-logo_200_200/company-logo_200_200/0/1630603646622?e=1748476800&v=beta&t=u3lgyqhq75i0d3OjQv3bD-_p90uQjiBXb5O2LvJcLf0",
+    logo: davImage,
   },
 ];
 

@@ -185,6 +185,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+import abhishekImage from "../../assets/images/testimonials/abhishek.jpeg";
+import raviImage from "../../assets/images/testimonials/ravi.jpeg";
+import rohitImage from "../../assets/images/testimonials/rohit.jpeg";
+import abhigajrajImage from "../../assets/images/testimonials/abhigajraj.jpeg";
+import kavishImage from "../../assets/images/testimonials/kavish.jpeg";
+
 
 const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
@@ -202,40 +208,35 @@ const testimonials: Testimonial[] = [
   {
     name: "Ravi Gupta",
     designation: "Region Head(EMEA) at Locobuzz",
-    image:
-      "https://media.licdn.com/dms/image/v2/D5603AQH1MHqfYxFdZg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1725454599871?e=1748476800&v=beta&t=Kb5jwbk5YekGVP48oBaGHPhT9hHOGFzYxVl77fqxUsM",
+    image: raviImage,
     text: "I have directly worked with Divya Prakash and found him to a fantastic and enthusiastic as person. I would really appreciate his skill set and source of information. He is a well connected person and would highly recommend him.",
     linkedin: "https://www.linkedin.com/in/meetravigupta/",
   },
   {
     name: "Kavish Baghel",
     designation: "Senior Engineer at Dunnhumby",
-    image:
-      "https://media.licdn.com/dms/image/v2/D5603AQGs5T9HbosoXg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1718801329737?e=1748476800&v=beta&t=GzIfiNnSqfYsJHaiuHpbzN8sGW35iYdzHU3qO0Zlqu4",
+    image: kavishImage,
     text: "Divya has been a great team member. He has always taken full responsibility of the task assigned to him and has always kept the team energy high. He aims to achieve perfection and helps everyone along his work.",
     linkedin: "https://www.linkedin.com/in/kavishbaghel/",
   },
   {
     name: "Abhishek Gajraj",
     designation: "AVP(Product) at Naukri.com",
-    image:
-      "https://media.licdn.com/dms/image/v2/C4E03AQEtSlooJ4c0TA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1633604367828?e=1748476800&v=beta&t=59eFZPIBdASVXJZlu6ovXj_XljHOiHn_5vMqZV_knsk",
+    image: abhigajrajImage,
     text: "Divya is a positive and multi-talented individual with great work skill sets. His in-depth knowledge on the Python has been impressive. He is a sincere and smart working professional with a great appetite to learn new things. His strong work ethics and focused approach are commendable. ",
     linkedin: "https://www.linkedin.com/in/abhishekgajraj/",
   },
   {
     name: "Rohit Sharma",
     designation: "QA Manager at Squareboat",
-    image:
-      "https://media.licdn.com/dms/image/v2/D4D03AQFxVKiqDkiGZw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1694670863607?e=1748476800&v=beta&t=dmUOm2Zv-Jv9OIOavcWp53DlfgZ001x9IFHYdlqWbLI",
+    image: rohitImage,
     text: "Divya Prakash has always been a great resource to work with. He is always willing to jump in as part of the team, whether it be to create a new functionality, to fix a problem or to determine the root cause of a bug. His problem-solving capabilities are very good. In the time that I have worked with Divya, I have been impressed by his thorough, creative approach to his work. He has been an indispensable part of our projects, and I look forward to working with him in the future too.",
     linkedin: "https://www.linkedin.com/in/rohitsharma2206/",
   },
   {
     name: "Abhishek Mishra",
     designation: "Assistant Manager at Deloitte, UK",
-    image:
-      "https://media.licdn.com/dms/image/v2/D4E03AQGs2twgyKvFbQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1721423171761?e=1748476800&v=beta&t=wMcuH3BZAPL7DYYdVVME13Nu9ZqMzUbIzC0ttL6YDJQ",
+    image: abhishekImage,
     text: "I have known Divya Prakash as my course mate at the University of Southampton. He is exceptionally talented and has good proficiency in python programming language. Throughout the program, he has successfully developed quality codes and solutions. I highly recommend him for his technical expertise and business knowledge and I am sure he will be a great asset to any company.",
     linkedin: "https://www.linkedin.com/in/abhishekmishra1095/",
   },
