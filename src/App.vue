@@ -21,7 +21,7 @@
       :class="{ 'animated': buttonAnimated }"
     >
       <a
-          href="https://drive.google.com/file/d/1VA2cQqiADzYiroEGBpkMjGaiFkjzmQxP/view?usp=sharing"
+          href="https://drive.google.com/file/d/1yihhxB9peXDNWzzC6uj0RaznEU76UV-9/view?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-blue-500/30 hover:translate-y-[-2px]"

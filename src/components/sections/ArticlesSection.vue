@@ -170,6 +170,13 @@ const articles: Article[] = [
     image:
         "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*70lDa3cF_vQDWuVY8eAZBQ.png",
   },
+  {
+    title: "A Guide To Understanding Django REST Framework Views",
+    url: "https://rkisdp.medium.com/async-programming-in-python-boost-performance-and-efficiency-of-your-code-98f1bd29c237",
+    date: "August 13, 2025",
+    image:
+        "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*wZijDlLHoigao77smKm9Hw.png",
+  },
 ];
 
 const isVisible = ref(false);
