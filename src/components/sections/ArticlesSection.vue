@@ -171,7 +171,7 @@ const articles: Article[] = [
         "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*70lDa3cF_vQDWuVY8eAZBQ.png",
   },
   {
-    title: "A Guide To Understanding Django REST Framework Views",
+    title: "Async Programming In Python: Boost Performance and Efficiency of Your Code",
     url: "https://rkisdp.medium.com/async-programming-in-python-boost-performance-and-efficiency-of-your-code-98f1bd29c237",
     date: "August 13, 2025",
     image:
