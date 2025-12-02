@@ -72,44 +72,6 @@ onMounted(() => {
 
   requestAnimationFrame(raf);
 
-  // Custom Snap Logic
-  let isScrolling = false;
-  let scrollTimeout: any = null;
-
-  lenis.on('scroll', () => {
-    isScrolling = true;
-    clearTimeout(scrollTimeout);
-    
-    // Debounce snap
-    scrollTimeout = setTimeout(() => {
-      isScrolling = false;
-      snapToNearestSection();
-    }, 150); // Wait for scroll to stop
-  });
-
-  function snapToNearestSection() {
-    const sections = document.querySelectorAll('section');
-    let closestSection: HTMLElement | null = null;
-    let minDistance = Infinity;
-
-    sections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      const distance = Math.abs(rect.top); // Distance from top of viewport
-      
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestSection = section as HTMLElement;
-      }
-    });
-
-    if (closestSection && minDistance > 5) { // Only snap if not already aligned
-      lenis?.scrollTo(closestSection, {
-        duration: 1.5,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth ease out
-      });
-    }
-  }
-
   // Handle anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
