@@ -1,169 +1,191 @@
 <template>
   <section
-      ref="sectionRef"
-      id="experience"
-      class="section relative overflow-hidden"
+    ref="sectionRef"
+    id="experience"
+    class="section relative overflow-hidden"
   >
-    <!-- Decorative background element -->
-    <div
-        class="absolute top-[-100px] left-[10%] w-[90%] h-[600px] rounded-full opacity-5 bg-[rgba(100,200,255,0.1)] blur-3xl z-0"
-    ></div>
+    <!-- Background Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+      <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+    </div>
 
-    <div
-        class="h-full w-full flex flex-col items-center justify-center pt-24 pb-12 md:pt-16 md:pb-8 lg:py-0"
-    >
-      <div class="w-[95%] md:w-[90%] max-w-[1200px] z-10 px-4 md:px-0">
-        <div
-            class="transition-all duration-800 ease-out"
-            :class="{'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
-        >
-          <h2
-              class="text-xl sm:text-2xl md:text-4xl font-bold text-center text-gray-100 mb-6 sm:mb-8 md:mb-12"
-          >
-            Professional Experience
-          </h2>
+    <div class="container-custom relative z-10">
+      <div
+        class="text-center mb-12"
+        :class="{'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
+        style="transition: all 0.8s ease-out;"
+      >
+        <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-4 tracking-tight">
+          Professional Odyssey
+        </h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
+          A dual-stream journey through my career milestones.
+        </p>
+      </div>
 
-          <!-- Mobile Slider Version -->
-          <div
-              class="md:hidden transition-all duration-800 ease-out delay-200"
+      <!-- Desktop View (Horizontal Scroll) -->
+      <div 
+        class="hidden md:block relative w-full overflow-x-auto pb-8 hide-scrollbar cursor-grab active:cursor-grabbing"
+        ref="scrollContainer"
+        @mousedown="startDrag"
+        @mouseleave="stopDrag"
+        @mouseup="stopDrag"
+        @mousemove="drag"
+      >
+        <div class="flex flex-col gap-12 min-w-max px-4 md:px-10 py-4">
+          
+          <!-- Upper Row -->
+          <div class="flex gap-6 md:gap-8">
+            <div
+              v-for="(job, index) in upperJobs"
+              :key="`upper-${index}`"
+              class="relative group w-[260px]"
               :class="{'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
-          >
-            <div class="relative">
-              <!-- Experience slider -->
-              <div class="overflow-hidden rounded-lg">
-                <div
-                    ref="sliderContainer"
-                    class="flex transition-transform duration-500 ease-in-out"
-                    :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
-                >
-                  <div
-                      v-for="(job, index) in jobs"
-                      :key="index"
-                      class="w-full flex-shrink-0 px-2"
-                  >
-                    <div
-                        class="bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg shadow-lg cursor-pointer overflow-hidden"
-                        @click="openModal(job)"
-                    >
-                      <!-- Image at the top - reduced size -->
-                      <div class="w-full h-24 overflow-hidden">
-                        <img
-                            :src="job.logo"
-                            :alt="job.company"
-                            class="w-full h-full object-contain p-2 bg-gray-800/50"
-                        />
-                      </div>
+              :style="{ transitionDelay: `${index * 100}ms`, transitionDuration: '0.8s' }"
+            >
 
-                      <!-- Content below image -->
-                      <div class="p-4">
-                        <!-- Position -->
-                        <h3 class="text-lg font-medium text-blue-100 mb-1 text-center">
-                          {{ job.position }}
-                        </h3>
+              <!-- Card -->
+              <div 
+                class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-5 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,212,255,0.1)] cursor-pointer relative overflow-hidden"
+                @click="openModal(job)"
+              >
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                        <!-- Period -->
-                        <p class="text-sm text-gray-400 mb-2 text-center">
-                          {{ job.period }}
-                        </p>
-
-                        <!-- Company -->
-                        <h4 class="text-base text-gray-300 mb-3 text-center">
-                          {{ job.company }}
-                        </h4>
-
-                        <!-- Responsibilities summary - text-justified -->
-                        <p class="text-sm text-gray-400 mb-3 text-justify">
-                          {{ job.responsibilities.slice(0, 2).join(" ") }}...
-                        </p>
-
-                        <!-- View details button -->
-                        <div class="text-center">
-                          <button class="inline-flex items-center text-sm text-blue-400 hover:text-blue-300">
-                            View details
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
+                <div class="relative z-10">
+                  <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-white/5 p-1.5 border border-white/10 flex items-center justify-center shrink-0">
+                      <img v-if="job.logo" :src="job.logo" :alt="job.company" class="w-full h-full object-contain rounded" />
+                      <font-awesome-icon v-else :icon="['fas', 'briefcase']" class="text-primary text-base" />
                     </div>
+                    <div class="min-w-0">
+                      <h3 class="text-base font-bold text-white group-hover:text-primary transition-colors truncate" :title="job.position">{{ job.position }}</h3>
+                      <h4 class="text-xs text-gray-400 truncate">{{ job.company }}</h4>
+                    </div>
+                  </div>
+
+                  <div class="inline-block px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-primary/80 mb-3">
+                    {{ job.shortPeriod }}
+                  </div>
+
+                  <p class="text-gray-400 text-xs leading-relaxed mb-3 line-clamp-3">
+                    {{ job.responsibilities[0] }}
+                  </p>
+
+                  <div class="flex items-center gap-1.5 text-[10px] text-accent font-bold uppercase tracking-wider group-hover:gap-2 transition-all">
+                    <span>Explore</span>
+                    <font-awesome-icon :icon="['fas', 'arrow-right']" />
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
 
-              <!-- Navigation buttons for mobile -->
-              <div class="flex justify-between mt-3 mx-auto max-w-xs">
-                <button
-                    @click="prevSlide"
-                    class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-10 h-10 flex items-center justify-center focus:outline-none transition-all hover:scale-110 z-10 disabled:opacity-50 disabled:cursor-not-allowed"
-                    :disabled="currentSlide === 0"
-                    aria-label="Previous experience"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
 
-                <button
-                    @click="nextSlide"
-                    class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-10 h-10 flex items-center justify-center focus:outline-none transition-all hover:scale-110 z-10 disabled:opacity-50 disabled:cursor-not-allowed"
-                    :disabled="currentSlide === jobs.length - 1"
-                    aria-label="Next experience"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
+          <!-- Lower Row -->
+          <div class="flex gap-6 md:gap-8">
+            <div
+              v-for="(job, index) in lowerJobs"
+              :key="`lower-${index}`"
+              class="relative group w-[260px]"
+              :class="{'opacity-0 -translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
+              :style="{ transitionDelay: `${(index + 3) * 100}ms`, transitionDuration: '0.8s' }"
+            >
 
-              <!-- Dots navigation -->
-              <div class="flex justify-center mt-4 space-x-2">
-                <button
-                    v-for="(_, index) in jobs"
-                    :key="index"
-                    @click="goToSlide(index)"
-                    class="w-2 h-2 rounded-full transition-all focus:outline-none"
-                    :class="
-                    currentSlide === index
-                      ? 'bg-blue-500 scale-125'
-                      : 'bg-gray-600 hover:bg-gray-500'
-                  "
-                    :aria-label="`Go to experience ${index + 1}`"
-                ></button>
+              <!-- Card -->
+              <div 
+                class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-5 hover:border-cyan-400/50 transition-all duration-300 hover:translate-y-1 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] cursor-pointer relative overflow-hidden"
+                @click="openModal(job)"
+              >
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                <div class="relative z-10">
+                  <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-white/5 p-1.5 border border-white/10 flex items-center justify-center shrink-0">
+                      <img v-if="job.logo" :src="job.logo" :alt="job.company" class="w-full h-full object-contain rounded" />
+                      <font-awesome-icon v-else :icon="['fas', 'briefcase']" class="text-cyan-400 text-base" />
+                    </div>
+                    <div class="min-w-0">
+                      <h3 class="text-base font-bold text-white group-hover:text-cyan-400 transition-colors truncate" :title="job.position">{{ job.position }}</h3>
+                      <h4 class="text-xs text-gray-400 truncate">{{ job.company }}</h4>
+                    </div>
+                  </div>
+
+                  <div class="inline-block px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-cyan-400/80 mb-3">
+                    {{ job.shortPeriod }}
+                  </div>
+
+                  <p class="text-gray-400 text-xs leading-relaxed mb-3 line-clamp-3">
+                    {{ job.responsibilities[0] }}
+                  </p>
+
+                  <div class="flex items-center gap-1.5 text-[10px] text-accent font-bold uppercase tracking-wider group-hover:gap-2 transition-all">
+                    <span>Explore</span>
+                    <font-awesome-icon :icon="['fas', 'arrow-right']" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Desktop Grid View -->
-          <div class="hidden md:block max-w-5xl mx-auto">
-            <!-- Top row -->
-            <div
-                class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-8"
-                :class="{'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
-                style="transition-delay: 200ms;"
-            >
-              <ExperienceCard
-                  v-for="jobId in topRowJobIds"
-                  :key="jobId"
-                  :job="jobs[jobId]"
-                  @click="openModal(jobs[jobId])"
-              />
-            </div>
+        </div>
+      </div>
+      
+      <!-- Mobile View (Vertical Timeline) -->
+      <div class="md:hidden relative px-4 pb-8">
+        <!-- Vertical Line -->
+        <div class="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-cyan-400/50 to-transparent"></div>
 
-            <!-- Bottom row -->
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 md:px-[20%]"
-                :class="{'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
-                style="transition-delay: 400ms;"
+        <div class="flex flex-col gap-8">
+          <div 
+            v-for="(job, index) in jobs" 
+            :key="`mobile-${index}`"
+            class="relative pl-12"
+            :class="{'opacity-0 translate-x-8': !isVisible, 'opacity-100 translate-x-0': isVisible}"
+            :style="{ transitionDelay: `${index * 100}ms`, transitionDuration: '0.6s' }"
+          >
+            <!-- Timeline Dot -->
+            <div class="absolute left-[11px] top-6 w-3 h-3 rounded-full bg-background border-2 border-primary z-10 shadow-[0_0_10px_rgba(0,212,255,0.5)]"></div>
+
+            <!-- Card -->
+            <div 
+              class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden"
+              @click="openModal(job)"
             >
-              <ExperienceCard
-                  v-for="jobId in bottomRowJobIds"
-                  :key="jobId"
-                  :job="jobs[jobId]"
-                  @click="openModal(jobs[jobId])"
-              />
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
+
+              <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-12 h-12 rounded-lg bg-white/5 p-1.5 border border-white/10 flex items-center justify-center shrink-0">
+                    <img v-if="job.logo" :src="job.logo" :alt="job.company" class="w-full h-full object-contain rounded" />
+                    <font-awesome-icon v-else :icon="['fas', 'briefcase']" class="text-primary text-lg" />
+                  </div>
+                  <div class="min-w-0">
+                    <h3 class="text-lg font-bold text-white mb-0.5">{{ job.position }}</h3>
+                    <h4 class="text-sm text-gray-400">{{ job.company }}</h4>
+                  </div>
+                </div>
+
+                <div class="inline-block px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-primary/80 mb-3">
+                  {{ job.shortPeriod }}
+                </div>
+
+                <div class="flex items-center gap-2 text-xs text-accent font-bold uppercase tracking-wider">
+                  <span>View Details</span>
+                  <font-awesome-icon :icon="['fas', 'arrow-right']" />
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Scroll Hint (Desktop Only) -->
+      <div class="hidden md:flex justify-center mt-4">
+        <div class="text-gray-500 text-xs animate-pulse flex items-center gap-2">
+          <font-awesome-icon :icon="['fas', 'arrow-left']" />
+          Swipe to explore
+          <font-awesome-icon :icon="['fas', 'arrow-right']" />
         </div>
       </div>
     </div>
@@ -175,7 +197,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from "vue";
-import ExperienceCard from "../ExperienceCard.vue";
 import JobModal from "../JobModal.vue";
 import innovaccerImage from "../../assets/images/companies/innovaccer.jpg";
 import appknoxImage from "../../assets/images/companies/appknox.jpg";
@@ -276,18 +297,59 @@ const jobs: Job[] = [
     ],
     url: "https://yoyobooks.in",
   },
+  {
+    company: "Freelance",
+    position: "Full Stack Developer",
+    period: "September 2018 - November 2019",
+    shortPeriod: "Sep '18 - Nov '19",
+    year: "2018",
+    logo: "", // Placeholder or generic icon
+    responsibilities: [
+      "Developed custom web solutions for various clients",
+      "Managed full project lifecycle from requirements to deployment",
+      "Specialized in Vue.js and Node.js development",
+    ],
+    url: "#",
+  }
 ];
 
-// Computed values for job indexes
-const topRowJobIds = computed(() => [0, 2, 4]); // X, I, Y
-const bottomRowJobIds = computed(() => [1, 3]); // B, T
+// Computed properties for layout
+const upperJobs = computed(() => jobs.slice(0, 3));
+const lowerJobs = computed(() => jobs.slice(3));
 
 // State
 const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
-const sliderContainer = ref<HTMLElement | null>(null);
 const selectedJob = ref<Job | null>(null);
-const currentSlide = ref(0);
+const scrollContainer = ref<HTMLElement | null>(null);
+
+// Drag to scroll logic
+let isDown = false;
+let startX: number;
+let scrollLeft: number;
+
+const startDrag = (e: MouseEvent) => {
+  if (!scrollContainer.value) return;
+  isDown = true;
+  scrollContainer.value.classList.add('active');
+  startX = e.pageX - scrollContainer.value.offsetLeft;
+  scrollLeft = scrollContainer.value.scrollLeft;
+};
+
+const stopDrag = () => {
+  isDown = false;
+  if (scrollContainer.value) {
+    scrollContainer.value.classList.remove('active');
+  }
+};
+
+const drag = (e: MouseEvent) => {
+  if (!isDown || !scrollContainer.value) return;
+  e.preventDefault();
+  const x = e.pageX - scrollContainer.value.offsetLeft;
+  const walk = (x - startX) * 2; // Scroll-fast
+  scrollContainer.value.scrollLeft = scrollLeft - walk;
+};
 
 // Methods
 const openModal = (job: Job) => {
@@ -300,119 +362,34 @@ const closeModal = () => {
   document.body.style.overflow = "";
 };
 
-// Slider navigation
-const nextSlide = () => {
-  if (currentSlide.value < jobs.length - 1) {
-    currentSlide.value++;
-  }
-};
-
-const prevSlide = () => {
-  if (currentSlide.value > 0) {
-    currentSlide.value--;
-  }
-};
-
-const goToSlide = (index: number) => {
-  currentSlide.value = index;
-  resetAutoplayTimer();
-};
-
-// Autoplay functionality
-let autoplayInterval: number | null = null;
-const autoplayDelay = 6000; // 6 seconds
-const isPaused = ref(false);
-
-const startAutoplay = () => {
-  if (autoplayInterval) return;
-
-  autoplayInterval = window.setInterval(() => {
-    if (!isPaused.value) {
-      if (currentSlide.value < jobs.length - 1) {
-        currentSlide.value++;
-      } else {
-        currentSlide.value = 0;
-      }
-    }
-  }, autoplayDelay);
-};
-
-const stopAutoplay = () => {
-  if (autoplayInterval) {
-    clearInterval(autoplayInterval);
-    autoplayInterval = null;
-  }
-};
-
-const resetAutoplayTimer = () => {
-  stopAutoplay();
-  startAutoplay();
-};
-
-// Pause autoplay when user interacts with the slider
-const pauseAutoplay = () => {
-  isPaused.value = true;
-};
-
-const resumeAutoplay = () => {
-  isPaused.value = false;
-};
-
-// Event handlers
-const handleKeyDown = (event: KeyboardEvent) => {
-  if (event.key === "Escape" && selectedJob.value) {
-    closeModal();
-  }
-};
-
 // Lifecycle
 onMounted(() => {
   const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          isVisible.value = true;
-          startAutoplay();
-        } else {
-          stopAutoplay();
-        }
-      },
-      { threshold: 0.1 }
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        isVisible.value = true;
+      }
+    },
+    { threshold: 0.1 }
   );
 
   if (sectionRef.value) {
     observer.observe(sectionRef.value);
   }
 
-  // Set up slider interaction events
-  if (sliderContainer.value) {
-    sliderContainer.value.addEventListener('mouseenter', pauseAutoplay);
-    sliderContainer.value.addEventListener('mouseleave', resumeAutoplay);
-    sliderContainer.value.addEventListener('touchstart', pauseAutoplay);
-    sliderContainer.value.addEventListener('touchend', resumeAutoplay);
-  }
-
-  window.addEventListener("keydown", handleKeyDown);
-
   onUnmounted(() => {
     observer.disconnect();
-    stopAutoplay();
-    window.removeEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "";
-
-    // Remove event listeners
-    if (sliderContainer.value) {
-      sliderContainer.value.removeEventListener('mouseenter', pauseAutoplay);
-      sliderContainer.value.removeEventListener('mouseleave', resumeAutoplay);
-      sliderContainer.value.removeEventListener('touchstart', pauseAutoplay);
-      sliderContainer.value.removeEventListener('touchend', resumeAutoplay);
-    }
   });
 });
 </script>
 
 <style scoped>
-/* Add these responsive styles */
-.section {
-  @apply min-h-[calc(100vh-4rem)] md:min-h-screen;
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>

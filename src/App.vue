@@ -4,7 +4,7 @@
   <main class="relative min-h-screen">
     <Navigation />
 
-    <div class="snap-y snap-mandatory h-screen overflow-y-scroll">
+    <div class="w-full">
       <HeroSection />
       <ImpactSection />
       <SkillsSection />
@@ -37,9 +37,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { Analytics } from '@vercel/analytics/vue';
 import { SpeedInsights } from '@vercel/speed-insights/vue';
+import Lenis from 'lenis';
 import Navigation from './components/Navigation.vue';
 import HeroSection from './components/sections/HeroSection.vue';
 import SkillsSection from './components/sections/SkillsSection.vue';
@@ -51,6 +52,81 @@ import TestimonialsSection from './components/sections/TestimonialsSection.vue';
 import ContactSection from './components/sections/ContactSection.vue';
 
 const buttonAnimated = ref(false);
+let lenis: Lenis | null = null;
+
+onMounted(() => {
+  lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 2,
+  });
+
+  function raf(time: number) {
+    lenis?.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
+  // Custom Snap Logic
+  let isScrolling = false;
+  let scrollTimeout: any = null;
+
+  lenis.on('scroll', () => {
+    isScrolling = true;
+    clearTimeout(scrollTimeout);
+    
+    // Debounce snap
+    scrollTimeout = setTimeout(() => {
+      isScrolling = false;
+      snapToNearestSection();
+    }, 150); // Wait for scroll to stop
+  });
+
+  function snapToNearestSection() {
+    const sections = document.querySelectorAll('section');
+    let closestSection: HTMLElement | null = null;
+    let minDistance = Infinity;
+
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const distance = Math.abs(rect.top); // Distance from top of viewport
+      
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestSection = section as HTMLElement;
+      }
+    });
+
+    if (closestSection && minDistance > 5) { // Only snap if not already aligned
+      lenis?.scrollTo(closestSection, {
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth ease out
+      });
+    }
+  }
+
+  // Handle anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        lenis?.scrollTo(targetId, {
+          duration: 1.5,
+        });
+      }
+    });
+  });
+});
+
+onUnmounted(() => {
+  lenis?.destroy();
+});
 </script>
 
 <style scoped>
