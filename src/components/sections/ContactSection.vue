@@ -102,17 +102,20 @@
         transition: 'opacity 0.8s ease-out 0.4s',
       }"
     >
-      <div class="flex justify-center space-x-8 mb-6">
+      <div class="wrapper flex justify-center gap-4 mb-6">
         <a
           v-for="(social, index) in socials"
           :key="index"
           :href="social.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-muted-foreground hover:text-primary transition-colors transform hover:scale-110 duration-300"
-          :aria-label="social.name"
+          class="button"
+          :style="{ '--hover-color': social.color, '--hover-icon-color': social.hoverIconColor || '#ffffff' }"
         >
-          <font-awesome-icon :icon="social.icon" size="lg" />
+          <div class="icon">
+            <font-awesome-icon :icon="social.icon" />
+          </div>
+          <span>{{ social.name }}</span>
         </a>
       </div>
       <p class="text-muted-foreground text-sm font-mono">
@@ -129,11 +132,11 @@ const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
 
 const socials = [
-  { name: "Email", url: "mailto:connect@rkisdp.dev", icon: ['fas', 'envelope'] },
-  { name: "GitHub", url: "https://github.com/rkisdp", icon: ['fab', 'github'] },
-  { name: "LinkedIn", url: "https://www.linkedin.com/in/rkisdp/", icon: ['fab', 'linkedin'] },
-  { name: "Medium", url: "https://medium.com/@rkisdp", icon: ['fab', 'medium'] },
-  { name: "Stack Overflow", url: "https://stackoverflow.com/users/11983208/divya-prakash", icon: ['fab', 'stack-overflow'] },
+  { name: "Email", url: "mailto:connect@rkisdp.dev", icon: ['fas', 'envelope'], color: "#EA4335" },
+  { name: "GitHub", url: "https://github.com/rkisdp", icon: ['fab', 'github'], color: "#ffffff", hoverIconColor: "#000000" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/rkisdp/", icon: ['fab', 'linkedin'], color: "#0077b5" },
+  { name: "Medium", url: "https://medium.com/@rkisdp", icon: ['fab', 'medium'], color: "#ffffff", hoverIconColor: "#000000" },
+  { name: "Stack Overflow", url: "https://stackoverflow.com/users/11983208/divya-prakash", icon: ['fab', 'stack-overflow'], color: "#f48024" },
 ];
 
 onMounted(() => {
@@ -161,3 +164,61 @@ onMounted(() => {
   });
 });
 </script>
+<style scoped>
+.wrapper .button {
+  display: inline-flex;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+}
+
+.wrapper .button:hover {
+  width: 180px;
+}
+
+.wrapper .button .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  transition: all 0.3s ease-out;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.wrapper .button:hover .icon {
+  background: var(--hover-color);
+  color: var(--hover-icon-color);
+}
+
+.wrapper .button .icon svg {
+  font-size: 20px;
+  line-height: 50px;
+  transition: all 0.3s ease-out;
+}
+
+.wrapper .button span {
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 10px;
+  transition: all 0.3s ease-out;
+  color: #fff;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.wrapper .button:hover span {
+  opacity: 1;
+  color: var(--hover-color);
+}
+</style>

@@ -44,7 +44,6 @@
               :class="{'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
               :style="{ transitionDelay: `${index * 100}ms`, transitionDuration: '0.8s' }"
             >
-              <!-- Connection Line to Center (Removed) -->
 
               <!-- Card -->
               <div 
@@ -82,7 +81,6 @@
             </div>
           </div>
 
-          <!-- Central Timeline Axis (Removed) -->
 
           <!-- Lower Row -->
           <div class="flex gap-6 md:gap-8">
@@ -93,7 +91,6 @@
               :class="{'opacity-0 -translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
               :style="{ transitionDelay: `${(index + 3) * 100}ms`, transitionDuration: '0.8s' }"
             >
-              <!-- Connection Line to Center (Removed) -->
 
               <!-- Card -->
               <div 

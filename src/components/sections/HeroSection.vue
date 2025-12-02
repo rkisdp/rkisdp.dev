@@ -34,7 +34,8 @@
             transition: 'opacity 1.5s ease-out 0.3s, transform 1.5s ease-out 0.3s',
           }"
         >
-          Engineering <span class="text-green-400 font-medium">secure</span>, <span class="text-accent font-medium">scalable</span>, and <span class="text-primary font-medium">intelligent</span> digital solutions.
+          Engineering reliable and scalable systems that handle real-world chaos.
+<!--          Engineering <span class="text-green-400 font-medium">secure</span>, <span class="text-accent font-medium">scalable</span>, and <span class="text-primary font-medium">intelligent</span> digital solutions.-->
         </p>
       </div>
     </div>
