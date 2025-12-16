@@ -14,7 +14,9 @@ import {
   faChevronLeft,
   faChevronRight,
   faTimes,
-  faArrowRight
+  faArrowRight,
+  faArrowLeft,
+  faBriefcase
 } from '@fortawesome/free-solid-svg-icons';
 
 // Add all icons to the library
@@ -30,7 +32,9 @@ library.add(
   faChevronLeft,
   faChevronRight,
   faTimes,
-  faArrowRight
+  faArrowRight,
+  faArrowLeft,
+  faBriefcase
 );
 
 export { FontAwesomeIcon };
