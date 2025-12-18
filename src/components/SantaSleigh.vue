@@ -121,15 +121,15 @@ function generateRandomPath(): Path {
   
   // Randomize direction: 50% chance Left->Right, 50% chance Right->Left
   const movingRight = Math.random() > 0.5;
-  const startX = movingRight ? -10 : 110; 
-  const endX = movingRight ? 110 : -10;
+  const startX = movingRight ? -30 : 130; 
+  const endX = movingRight ? 130 : -30;
   
   return {
     startX: startX,
     startY: startY,
     endX: endX,
     endY: endY,
-    duration: 12 + Math.random() * 13, // 12-25 seconds
+    duration: 5 + Math.random() * 5, // 5-10 seconds (even faster)
     verticalRange: 20 + Math.random() * 50, // 20-70px vertical bobbing
     movingRight: movingRight
   };
@@ -143,21 +143,20 @@ onMounted(() => {
   sleighPath.value = generateRandomPath();
   
   const regeneratePath = () => {
-    const currentPath = sleighPath.value;
-    const animationDuration = currentPath.duration * 1000;
+    // Immediately generate and start new path
+    sleighPath.value = generateRandomPath();
+    animationKey.value++;
     
-    setTimeout(() => {
-      sleighPath.value = generateRandomPath();
-      animationKey.value++;
-      regeneratePath();
-    }, animationDuration);
+    // Schedule next regeneration after current animation finishes
+    const nextDuration = sleighPath.value.duration * 1000;
+    setTimeout(regeneratePath, nextDuration);
   };
   
-  // Start regeneration after first animation
-  const currentPath = sleighPath.value;
+  // Schedule first regeneration
+  const firstDuration = sleighPath.value.duration * 1000;
   setTimeout(() => {
     regeneratePath();
-  }, currentPath.duration * 1000);
+  }, firstDuration);
 });
 </script>
 
@@ -166,7 +165,7 @@ onMounted(() => {
   position: fixed;
   overflow: visible;
   pointer-events: none;
-  z-index: 40;
+  z-index: 5;
   animation: santa-roam var(--duration) linear forwards;
   left: var(--start-x);
   top: var(--start-y);
@@ -179,16 +178,8 @@ onMounted(() => {
   left: 0;
   width: 295px;
   height: 155px;
-  /* Rotate -1deg is base tint.
-     Flip horizontally if NOT moving right (i.e. moving Left to Right = default face right? 
-     Wait, the drawing faces Right by default.
-     So if moving Right (Left->Right), we want scaleX(1).
-     If moving Left (Right->Left), we want scaleX(-1).
-     
-     Actually, let's pass the direction via variable or class.
-     Using a CSS variable `--direction-scale` is cleaner.
-  */
-  transform: rotate(-1deg) scaleX(var(--direction-scale));
+  /* Reduced size as requested */
+  transform: scale(0.6) rotate(-1deg) scaleX(var(--direction-scale));
 }
 
 .santa {
@@ -1123,7 +1114,7 @@ onMounted(() => {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .sleigh-santa {
-    transform: scale(0.7) rotate(-1deg) scaleX(var(--direction-scale));
+    transform: scale(0.4) rotate(-1deg) scaleX(var(--direction-scale));
   }
 }
 </style>
