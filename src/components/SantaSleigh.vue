@@ -90,32 +90,33 @@ interface Path {
 }
 
 function generateRandomPath(): Path {
-  // Always start from right (110vw) and move towards left (head side)
-  // Maintain 15% margin from top and bottom (15% to 85% of viewport)
-  const startY = Math.random() * 70 + 15; // Random vertical start (15-85vh)
+  // Always start from right (110vw) or Left (-10vw)
+  // Maintain 10% margin from top and bottom (10% to 90% of viewport)
+  // We use 10-80 range for anchor points to allow room for the vertical bobbing at the bottom
+  const startY = Math.random() * 70 + 10; // Random vertical start (10-80vh)
   
-  // Determine movement pattern - always moving left, can vary vertically
+  // Determine movement pattern
   const pattern = Math.random();
   let endY: number;
   
   if (pattern < 0.33) {
     // Pattern 1: Move upward (but stay within bounds)
-    endY = Math.min(85, startY + Math.random() * 30 + 5);
+    endY = Math.min(80, startY + Math.random() * 30 + 5);
   } else if (pattern < 0.66) {
     // Pattern 2: Move downward (but stay within bounds)
-    endY = Math.max(15, startY - Math.random() * 30 - 5);
+    endY = Math.max(10, startY - Math.random() * 30 - 5);
   } else {
     // Pattern 3: Relatively straight with slight variation
     endY = startY + (Math.random() * 20 - 10);
-    endY = Math.max(15, Math.min(85, endY));
+    endY = Math.max(10, Math.min(80, endY));
   }
   
-  // Sometimes make it go more diagonal (but always within 15-85% bounds)
+  // Sometimes make it go more diagonal
   const diagonalIntensity = Math.random();
   if (diagonalIntensity > 0.7) {
     const direction = Math.random() > 0.5 ? 1 : -1;
     endY = startY + (direction * (Math.random() * 40 + 10));
-    endY = Math.max(15, Math.min(85, endY));
+    endY = Math.max(10, Math.min(80, endY));
   }
   
   // Randomize direction: 50% chance Left->Right, 50% chance Right->Left
@@ -129,8 +130,8 @@ function generateRandomPath(): Path {
     endX: endX,
     endY: endY,
     duration: 12 + Math.random() * 13, // 12-25 seconds
-    verticalRange: 20 + Math.random() * 50, // 20-70px vertical bobbing (reduced to stay in bounds)
-    movingRight: movingRight // Add this property to track direction
+    verticalRange: 20 + Math.random() * 50, // 20-70px vertical bobbing
+    movingRight: movingRight
   };
 }
 
