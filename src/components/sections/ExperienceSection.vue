@@ -40,39 +40,39 @@
             <div
               v-for="(job, index) in upperJobs"
               :key="`upper-${index}`"
-              class="relative group w-[260px]"
+              class="relative group w-[340px]"
               :class="{'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
               :style="{ transitionDelay: `${index * 100}ms`, transitionDuration: '0.8s' }"
             >
 
               <!-- Card -->
               <div 
-                class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-5 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,212,255,0.1)] cursor-pointer relative overflow-hidden"
+                class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,212,255,0.1)] cursor-pointer relative overflow-hidden"
                 @click="openModal(job)"
               >
                 <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 <div class="relative z-10">
-                  <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 rounded-lg bg-white/5 p-1.5 border border-white/10 flex items-center justify-center shrink-0">
+                  <div class="flex items-center gap-4 mb-4">
+                    <div class="w-20 h-20 rounded-lg bg-white/5 p-2.5 border border-white/10 flex items-center justify-center shrink-0">
                       <img v-if="job.logo" :src="job.logo" :alt="job.company" class="w-full h-full object-contain rounded" />
-                      <font-awesome-icon v-else :icon="['fas', 'briefcase']" class="text-primary text-base" />
+                      <font-awesome-icon v-else :icon="['fas', 'briefcase']" class="text-primary text-2xl" />
                     </div>
                     <div class="min-w-0">
-                      <h3 class="text-base font-bold text-white group-hover:text-primary transition-colors truncate" :title="job.position">{{ job.position }}</h3>
-                      <h4 class="text-xs text-gray-400 truncate">{{ job.company }}</h4>
+                      <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors truncate" :title="job.position">{{ job.position }}</h3>
+                      <h4 class="text-sm text-gray-400 truncate">{{ job.company }}</h4>
                     </div>
                   </div>
 
-                  <div class="inline-block px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-primary/80 mb-3">
+                  <div class="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-primary/80 mb-4">
                     {{ job.shortPeriod }}
                   </div>
 
-                  <p class="text-gray-400 text-xs leading-relaxed mb-3 line-clamp-3">
+                  <p class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
                     {{ job.responsibilities[0] }}
                   </p>
 
-                  <div class="flex items-center gap-1.5 text-[10px] text-accent font-bold uppercase tracking-wider group-hover:gap-2 transition-all">
+                  <div class="flex items-center gap-1.5 text-xs text-accent font-bold uppercase tracking-wider group-hover:gap-2 transition-all">
                     <span>Explore</span>
                     <font-awesome-icon :icon="['fas', 'arrow-right']" />
                   </div>
@@ -87,39 +87,39 @@
             <div
               v-for="(job, index) in lowerJobs"
               :key="`lower-${index}`"
-              class="relative group w-[260px]"
+              class="relative group w-[340px]"
               :class="{'opacity-0 -translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
               :style="{ transitionDelay: `${(index + 3) * 100}ms`, transitionDuration: '0.8s' }"
             >
 
               <!-- Card -->
               <div 
-                class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-5 hover:border-cyan-400/50 transition-all duration-300 hover:translate-y-1 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] cursor-pointer relative overflow-hidden"
+                class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-6 hover:border-cyan-400/50 transition-all duration-300 hover:translate-y-1 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] cursor-pointer relative overflow-hidden"
                 @click="openModal(job)"
               >
                 <div class="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 <div class="relative z-10">
-                  <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 rounded-lg bg-white/5 p-1.5 border border-white/10 flex items-center justify-center shrink-0">
+                  <div class="flex items-center gap-4 mb-4">
+                    <div class="w-20 h-20 rounded-lg bg-white/5 p-2.5 border border-white/10 flex items-center justify-center shrink-0">
                       <img v-if="job.logo" :src="job.logo" :alt="job.company" class="w-full h-full object-contain rounded" />
-                      <font-awesome-icon v-else :icon="['fas', 'briefcase']" class="text-cyan-400 text-base" />
+                      <font-awesome-icon v-else :icon="['fas', 'briefcase']" class="text-cyan-400 text-2xl" />
                     </div>
                     <div class="min-w-0">
-                      <h3 class="text-base font-bold text-white group-hover:text-cyan-400 transition-colors truncate" :title="job.position">{{ job.position }}</h3>
-                      <h4 class="text-xs text-gray-400 truncate">{{ job.company }}</h4>
+                      <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors truncate" :title="job.position">{{ job.position }}</h3>
+                      <h4 class="text-sm text-gray-400 truncate">{{ job.company }}</h4>
                     </div>
                   </div>
 
-                  <div class="inline-block px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-cyan-400/80 mb-3">
+                  <div class="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-cyan-400/80 mb-4">
                     {{ job.shortPeriod }}
                   </div>
 
-                  <p class="text-gray-400 text-xs leading-relaxed mb-3 line-clamp-3">
+                  <p class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
                     {{ job.responsibilities[0] }}
                   </p>
 
-                  <div class="flex items-center gap-1.5 text-[10px] text-accent font-bold uppercase tracking-wider group-hover:gap-2 transition-all">
+                  <div class="flex items-center gap-1.5 text-xs text-accent font-bold uppercase tracking-wider group-hover:gap-2 transition-all">
                     <span>Explore</span>
                     <font-awesome-icon :icon="['fas', 'arrow-right']" />
                   </div>
@@ -149,28 +149,28 @@
 
             <!-- Card -->
             <div 
-              class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden"
+              class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-6 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden"
               @click="openModal(job)"
             >
               <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
 
               <div class="relative z-10">
-                <div class="flex items-center gap-3 mb-3">
-                  <div class="w-12 h-12 rounded-lg bg-white/5 p-1.5 border border-white/10 flex items-center justify-center shrink-0">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="w-20 h-20 rounded-lg bg-white/5 p-2.5 border border-white/10 flex items-center justify-center shrink-0">
                     <img v-if="job.logo" :src="job.logo" :alt="job.company" class="w-full h-full object-contain rounded" />
-                    <font-awesome-icon v-else :icon="['fas', 'briefcase']" class="text-primary text-lg" />
+                    <font-awesome-icon v-else :icon="['fas', 'briefcase']" class="text-primary text-2xl" />
                   </div>
                   <div class="min-w-0">
-                    <h3 class="text-lg font-bold text-white mb-0.5">{{ job.position }}</h3>
-                    <h4 class="text-sm text-gray-400">{{ job.company }}</h4>
+                    <h3 class="text-xl font-bold text-white mb-1">{{ job.position }}</h3>
+                    <h4 class="text-base text-gray-400">{{ job.company }}</h4>
                   </div>
                 </div>
 
-                <div class="inline-block px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-primary/80 mb-3">
+                <div class="inline-block px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-mono text-primary/80 mb-4">
                   {{ job.shortPeriod }}
                 </div>
 
-                <div class="flex items-center gap-2 text-xs text-accent font-bold uppercase tracking-wider">
+                <div class="flex items-center gap-2 text-sm text-accent font-bold uppercase tracking-wider">
                   <span>View Details</span>
                   <font-awesome-icon :icon="['fas', 'arrow-right']" />
                 </div>
