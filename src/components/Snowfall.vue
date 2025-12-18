@@ -38,7 +38,7 @@ function createSnowflake(id: number): Snowflake {
     left: Math.random() * 100,
     duration: 3 + Math.random() * 7, // 3-10 seconds
     delay: Math.random() * 5,
-    opacity: 0.3 + Math.random() * 0.7, // 0.3-1.0
+    opacity: (0.3 + Math.random() * 0.7) * 0.6, // Reduced opacity by 40%
     size: 0.5 + Math.random() * 1.5, // 0.5-2.0
   };
 }

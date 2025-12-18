@@ -91,32 +91,35 @@ interface Path {
 
 function generateRandomPath(): Path {
   // Always start from right (110vw) or Left (-10vw)
-  // Maintain 10% margin from top and bottom (10% to 90% of viewport)
-  // We use 10-80 range for anchor points to allow room for the vertical bobbing at the bottom
-  const startY = Math.random() * 70 + 10; // Random vertical start (10-80vh)
+  // Strict Vertical Bounds: 10% to 90%
+  // Element height (scaled 0.6) is ~10-15vh. Bobbing is ~7vh.
+  // Effective max Y should be around 65-70vh to keep the bottom edge above 90vh.
+  const minY = 10;
+  const maxY = 65;
+  const startY = Math.random() * (maxY - minY) + minY; // Random vertical start (10-65vh)
   
   // Determine movement pattern
   const pattern = Math.random();
   let endY: number;
   
   if (pattern < 0.33) {
-    // Pattern 1: Move upward (but stay within bounds)
-    endY = Math.min(80, startY + Math.random() * 30 + 5);
+    // Pattern 1: Move upward
+    endY = Math.min(maxY, startY + Math.random() * 20 + 5);
   } else if (pattern < 0.66) {
-    // Pattern 2: Move downward (but stay within bounds)
-    endY = Math.max(10, startY - Math.random() * 30 - 5);
+    // Pattern 2: Move downward
+    endY = Math.max(minY, startY - Math.random() * 20 - 5);
   } else {
-    // Pattern 3: Relatively straight with slight variation
-    endY = startY + (Math.random() * 20 - 10);
-    endY = Math.max(10, Math.min(80, endY));
+    // Pattern 3: Relatively straight
+    endY = startY + (Math.random() * 15 - 7.5);
+    endY = Math.max(minY, Math.min(maxY, endY));
   }
   
   // Sometimes make it go more diagonal
   const diagonalIntensity = Math.random();
   if (diagonalIntensity > 0.7) {
     const direction = Math.random() > 0.5 ? 1 : -1;
-    endY = startY + (direction * (Math.random() * 40 + 10));
-    endY = Math.max(10, Math.min(80, endY));
+    endY = startY + (direction * (Math.random() * 30 + 10));
+    endY = Math.max(minY, Math.min(maxY, endY));
   }
   
   // Randomize direction: 50% chance Left->Right, 50% chance Right->Left
