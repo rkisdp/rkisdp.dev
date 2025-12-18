@@ -27,7 +27,7 @@
         </h1>
 
         <p
-          class="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl font-light tracking-wide mb-10"
+          class="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl font-light tracking-wide mb-10 relative"
           :style="{
             opacity: Math.max(0, opacity - 0.2),
             transform: `translateY(${(1 - opacity) * 40}px)`,
@@ -39,13 +39,14 @@
         </p>
       </div>
     </div>
+    
+
   </section>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
 import NebulaBackground from "../NebulaBackground.vue";
-
 const opacity = ref(0);
 const zoomLevel = ref(1.2);
 const scrollY = ref(0);
@@ -94,4 +95,5 @@ onMounted(() => {
     transform: translateY(0);
   }
 }
+
 </style>
