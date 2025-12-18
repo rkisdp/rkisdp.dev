@@ -4,6 +4,11 @@
     id="contact"
     class="section relative overflow-hidden flex flex-col !pb-0"
   >
+    <!-- Background hills -->
+    <div class="absolute bottom-0 left-0 w-full z-0 opacity-50 pointer-events-none">
+      <SnowHills />
+    </div>
+
     <!-- Background particles -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div
@@ -127,6 +132,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+import SnowHills from "../SnowHills.vue"; // Adjusted path since we are in sections/
 
 const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);

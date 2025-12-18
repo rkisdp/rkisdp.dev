@@ -1,5 +1,5 @@
 <template>
-  <div class="snowfall-container fixed inset-0 pointer-events-none z-50 overflow-hidden">
+  <div class="snowfall-container fixed inset-0 pointer-events-none z-30 overflow-hidden">
     <div
       v-for="flake in flakes"
       :key="flake.id"
@@ -63,11 +63,12 @@ onUnmounted(() => {
 
 .snowflake {
   position: absolute;
-  top: -10px;
+  top: -20px;
   color: white;
   font-size: 1.5em;
   line-height: 1;
   animation: snowfall linear infinite;
+  animation-fill-mode: both; /* Ensures it stays at 0% keyframe state during delay */
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
 

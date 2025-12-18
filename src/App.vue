@@ -15,7 +15,6 @@
       <EducationSection />
       <TestimonialsSection />
       <ContactSection />
-      <SnowHills />
     </div>
 
     <!-- Floating Resume Button -->
@@ -47,7 +46,6 @@ import Lenis from 'lenis';
 import Navigation from './components/Navigation.vue';
 import Snowfall from './components/Snowfall.vue';
 import SantaSleigh from './components/SantaSleigh.vue';
-import SnowHills from './components/SnowHills.vue';
 import HeroSection from './components/sections/HeroSection.vue';
 import SkillsSection from './components/sections/SkillsSection.vue';
 import ExperienceSection from './components/sections/ExperienceSection.vue';
