@@ -4,10 +4,7 @@
     id="contact"
     class="section relative overflow-hidden flex flex-col !pb-0"
   >
-    <!-- Background hills -->
-    <div class="absolute bottom-0 left-0 w-full z-0 opacity-50 pointer-events-none">
-      <SnowHills />
-    </div>
+    <!-- Background hills and winter scene removed from here -->
 
     <!-- Background particles -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -101,7 +98,7 @@
 
     <!-- Footer -->
     <footer
-      class="w-full text-center pt-8 pb-4 border-t border-white/5 bg-background/50 backdrop-blur-sm"
+      class="w-full text-center pt-8 border-t border-white/5 bg-background/50 backdrop-blur-sm"
       :style="{
         opacity: isVisible ? 1 : 0,
         transition: 'opacity 0.8s ease-out 0.4s',
@@ -123,16 +120,20 @@
           <span>{{ social.name }}</span>
         </a>
       </div>
-      <p class="text-muted-foreground text-sm font-mono">
+      <p class="text-muted-foreground text-sm font-mono mt-10 mb-1">
         &copy; {{ new Date().getFullYear() }} Divya Prakash. All rights reserved.
       </p>
+      
+      <div class="w-full overflow-hidden pointer-events-none">
+        <WinterScene />
+      </div>
     </footer>
   </section>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import SnowHills from "../SnowHills.vue"; // Adjusted path since we are in sections/
+import WinterScene from "../WinterScene.vue";
 
 const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
