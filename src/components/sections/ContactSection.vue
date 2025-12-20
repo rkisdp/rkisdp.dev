@@ -121,7 +121,7 @@
         </a>
       </div>
       <p class="text-muted-foreground text-sm font-mono mt-10 mb-1">
-        &copy; {{ new Date().getFullYear() }} Divya Prakash. All rights reserved.
+        {{ new Date().getFullYear() }} Divya Prakash. No rights reserved. Feel free to copy.
       </p>
       
       <div class="w-full overflow-hidden pointer-events-none">

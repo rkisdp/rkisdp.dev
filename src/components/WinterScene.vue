@@ -746,19 +746,19 @@
 }
 
 .snowman .hat {
-  top: -253px;
-  left: 76px;
+  top: -260px;
+  left: 95px;
   -webkit-transform: rotate(10deg);
   -moz-transform: rotate(10deg);
   transform: rotate(10deg);
   position: absolute;
   border-radius: 0;
-  z-index: 20;
+  z-index: 30;
   border-top: 56px solid rgb(37, 37, 37);
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   height: 0;
-  width: 60px;
+  width: 90px;
   border-bottom: 27px solid rgb(246, 62, 62);
 }
 
