@@ -221,12 +221,12 @@ onMounted(() => {
 .santa--sleigh:after {
   border: 2px solid #DAA520;
   left: 70px;
-  bottom: 0px;
+  bottom: 0;
   width: 50px;
   height: 57px;
   border-radius: 50% 10px 16px 10px;
   transform: rotate(1deg);
-  box-shadow: -98px -2px 0px -18px #8B0000;
+  box-shadow: -98px -2px 0 -18px #8B0000;
 }
 
 .santa__hand--left .santa__hand-inner {
@@ -465,7 +465,7 @@ onMounted(() => {
   border-radius: 42% 50%;
   background-color: #362312;
   z-index: -1;
-  box-shadow: 10px -21px 0px -20px #e1b12c, 15px -30px 0px -18px #362312;
+  box-shadow: 10px -21px 0 -20px #e1b12c, 15px -30px 0 -18px #362312;
   animation: santa-sac 0.6s linear alternate infinite;
 }
 
@@ -483,7 +483,7 @@ onMounted(() => {
 .santa__body-top:before {
   content: "";
   top: 28px;
-  left: 0px;
+  left: 0;
   position: absolute;
   width: 45px;
   height: 5px;
@@ -585,7 +585,7 @@ onMounted(() => {
 .sleigh-feet {
   position: absolute;
   bottom: -10px;
-  left: 0px;
+  left: 0;
   width: 145px;
   height: 11px;
   transform: rotate(-5deg);
@@ -673,7 +673,7 @@ onMounted(() => {
   width: 29px;
   height: 16px;
   border-radius: 50%;
-  top: 0px;
+  top: 0;
   left: 11px;
   transform: rotate(-49deg);
 }
@@ -840,7 +840,7 @@ onMounted(() => {
 .reindeer__foot--front .reindeer__foot-inner:before {
   width: 28px;
   height: 8px;
-  top: 0px;
+  top: 0;
   left: 37px;
   border-radius: 2px 50%;
   transform: rotate(131deg);
@@ -943,23 +943,23 @@ onMounted(() => {
 }
 
 .particles:after {
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   width: 4px;
   height: 4px;
   transform: rotate(-5deg);
   animation: particles 4s linear infinite;
-  box-shadow: -20px 15px 0px 0px #FFF, -40px -5px 0px 0px #FFF, -20px 45px 0px 0px #FFF, -50px 30px 0px 0px #FFF, 30px -20px 0px 0px #FFF, 50px -60px 0px 0px #FFF, 100px -110px 0px 0px #FFF, 140px -160px 0px 0px #FFF, 50px -90px 0px 0px #FFF, 100px -140px 0px 0px #FFF, 140px -190px 0px 0px #FFF, -40px 15px 0px -1px #FFF, -60px -5px 0px -1px #FFF, -40px 45px 0px -1px #FFF, -70px 30px 0px -1px #FFF, 50px -20px 0px -1px #FFF, 70px -60px 0px -1px #FFF, 120px -110px 0px -1px #FFF, 160px -160px 0px -1px #FFF, 70px -90px 0px -1px #FFF, 120px -140px 0px -1px #FFF, 160px -190px 0px -1px #FFF, 0px 15px 0px -2px #FFF, -20px -5px 0px -2px #FFF, 0px 45px 0px -2px #FFF, -30px 30px 0px -2px #FFF, 10px -20px 0px -2px #FFF, 30px -60px 0px -2px #FFF, 80px -110px 0px -2px #FFF, 120px -160px 0px -2px #FFF, 30px -90px 0px -2px #FFF, 80px -140px 0px -2px #FFF, 120px -190px 0px -2px #FFF;
+  box-shadow: -20px 15px 0 0 #FFF, -40px -5px 0 0 #FFF, -20px 45px 0 0 #FFF, -50px 30px 0 0 #FFF, 30px -20px 0 0 #FFF, 50px -60px 0 0 #FFF, 100px -110px 0 0 #FFF, 140px -160px 0 0 #FFF, 50px -90px 0 0 #FFF, 100px -140px 0 0 #FFF, 140px -190px 0 0 #FFF, -40px 15px 0 -1px #FFF, -60px -5px 0 -1px #FFF, -40px 45px 0 -1px #FFF, -70px 30px 0 -1px #FFF, 50px -20px 0 -1px #FFF, 70px -60px 0 -1px #FFF, 120px -110px 0 -1px #FFF, 160px -160px 0 -1px #FFF, 70px -90px 0 -1px #FFF, 120px -140px 0 -1px #FFF, 160px -190px 0 -1px #FFF, 0 15px 0 -2px #FFF, -20px -5px 0 -2px #FFF, 0 45px 0 -2px #FFF, -30px 30px 0 -2px #FFF, 10px -20px 0 -2px #FFF, 30px -60px 0 -2px #FFF, 80px -110px 0 -2px #FFF, 120px -160px 0 -2px #FFF, 30px -90px 0 -2px #FFF, 80px -140px 0 -2px #FFF, 120px -190px 0 -2px #FFF;
 }
 
 .particles:before {
   left: 10px;
-  top: 0px;
+  top: 0;
   width: 2px;
   height: 2px;
   transform: rotate(-10deg);
   animation: particles 5s linear infinite;
-  box-shadow: -20px 15px 0px 0px #FFF, -40px -5px 0px 0px #FFF, -20px 45px 0px 0px #FFF, -50px 30px 0px 0px #FFF, 30px -20px 0px 0px #FFF, 50px -60px 0px 0px #FFF, 100px -110px 0px 0px #FFF, 140px -160px 0px 0px #FFF, 50px -90px 0px 0px #FFF, 100px -140px 0px 0px #FFF, 140px -190px 0px 0px #FFF, -40px 15px 0px -1px #FFF, -60px -5px 0px -1px #FFF, -40px 45px 0px -1px #FFF, -70px 30px 0px -1px #FFF, 50px -20px 0px -1px #FFF, 70px -60px 0px -1px #FFF, 120px -110px 0px -1px #FFF, 160px -160px 0px -1px #FFF, 70px -90px 0px -1px #FFF, 120px -140px 0px -1px #FFF, 160px -190px 0px -1px #FFF, 0px 15px 0px -2px #FFF, -20px -5px 0px -2px #FFF, 0px 45px 0px -2px #FFF, -30px 30px 0px -2px #FFF, 10px -20px 0px -2px #FFF, 30px -60px 0px -2px #FFF, 80px -110px 0px -2px #FFF, 120px -160px 0px -2px #FFF, 30px -90px 0px -2px #FFF, 80px -140px 0px -2px #FFF, 120px -190px 0px -2px #FFF;
+  box-shadow: -20px 15px 0 0 #FFF, -40px -5px 0 0 #FFF, -20px 45px 0 0 #FFF, -50px 30px 0 0 #FFF, 30px -20px 0 0 #FFF, 50px -60px 0 0 #FFF, 100px -110px 0 0 #FFF, 140px -160px 0 0 #FFF, 50px -90px 0 0 #FFF, 100px -140px 0 0 #FFF, 140px -190px 0 0 #FFF, -40px 15px 0 -1px #FFF, -60px -5px 0 -1px #FFF, -40px 45px 0 -1px #FFF, -70px 30px 0 -1px #FFF, 50px -20px 0 -1px #FFF, 70px -60px 0 -1px #FFF, 120px -110px 0 -1px #FFF, 160px -160px 0 -1px #FFF, 70px -90px 0 -1px #FFF, 120px -140px 0 -1px #FFF, 160px -190px 0 -1px #FFF, 0 15px 0 -2px #FFF, -20px -5px 0 -2px #FFF, 0 45px 0 -2px #FFF, -30px 30px 0 -2px #FFF, 10px -20px 0 -2px #FFF, 30px -60px 0 -2px #FFF, 80px -110px 0 -2px #FFF, 120px -160px 0 -2px #FFF, 30px -90px 0 -2px #FFF, 80px -140px 0 -2px #FFF, 120px -190px 0 -2px #FFF;
 }
 
 @keyframes santa-roam {
