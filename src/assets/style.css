@@ -1,46 +1,95 @@
+/* Import Outfit and JetBrains Mono */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  src: url('https://ext.same-assets.com/1652507072/2112600268.woff2') format('woff2');
-}
-
 @layer base {
+
   html {
-    @apply scroll-smooth;
+    /* @apply scroll-smooth; */
+    /* Disable native smooth scroll to let Lenis handle it */
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
   }
 
   body {
-    @apply font-sans text-foreground bg-background;
+    @apply font-sans text-foreground bg-background antialiased selection:bg-primary/30 selection:text-primary;
+    overflow-x: hidden;
     overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    height: 100vh;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'JetBrains Mono', monospace;
-    @apply font-bold;
+  section {
+    /* scroll-snap-align: start; */
+    /* scroll-snap-stop: always; */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold tracking-tight;
   }
 }
 
 @layer components {
   .section {
-    @apply h-screen w-full snap-start snap-always;
+    @apply w-full relative flex flex-col items-center justify-center py-12 px-4;
   }
 
   .container-custom {
-    @apply max-w-6xl mx-auto px-6 md:px-10;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  .highlight-card {
-    @apply bg-background/30 backdrop-blur-sm border border-white/10 rounded-lg p-6 transition-all duration-500 hover:border-blue-500/40 hover:shadow-[0_0_15px_rgba(0,153,255,0.3)];
+  /* Glassmorphism Card */
+  .glass-card {
+    @apply bg-glass backdrop-blur-md border border-white/10 rounded-2xl p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-glow-lg;
   }
 
-  .contact-card {
-    @apply bg-background/30 backdrop-blur-sm border border-white/10 rounded-lg p-6 transition-all duration-300 hover:border-blue-500/40 hover:shadow-[0_0_15px_rgba(0,153,255,0.3)];
+  .btn-primary {
+    @apply px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:scale-105 hover:shadow-glow;
   }
+
+  .btn-outline {
+    @apply px-6 py-3 rounded-full border border-primary text-primary font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted rounded-full hover:bg-primary/50 transition-colors;
 }

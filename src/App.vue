@@ -1,10 +1,12 @@
 <template>
   <Analytics />
   <SpeedInsights />
+  <Snowfall />
+  <SantaSleigh />
   <main class="relative min-h-screen">
     <Navigation />
 
-    <div class="snap-y snap-mandatory h-screen overflow-y-scroll">
+    <div class="w-full">
       <HeroSection />
       <ImpactSection />
       <SkillsSection />
@@ -37,10 +39,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { Analytics } from '@vercel/analytics/vue';
 import { SpeedInsights } from '@vercel/speed-insights/vue';
+import Lenis from 'lenis';
 import Navigation from './components/Navigation.vue';
+import Snowfall from './components/Snowfall.vue';
+import SantaSleigh from './components/SantaSleigh.vue';
 import HeroSection from './components/sections/HeroSection.vue';
 import SkillsSection from './components/sections/SkillsSection.vue';
 import ExperienceSection from './components/sections/ExperienceSection.vue';
@@ -51,6 +56,43 @@ import TestimonialsSection from './components/sections/TestimonialsSection.vue';
 import ContactSection from './components/sections/ContactSection.vue';
 
 const buttonAnimated = ref(false);
+let lenis: Lenis | null = null;
+
+onMounted(() => {
+  lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 2,
+  });
+
+  function raf(time: number) {
+    lenis?.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
+  // Handle anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        lenis?.scrollTo(targetId, {
+          duration: 1.5,
+        });
+      }
+    });
+  });
+});
+
+onUnmounted(() => {
+  lenis?.destroy();
+});
 </script>
 
 <style scoped>

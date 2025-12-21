@@ -24,7 +24,7 @@
     </div>
 
     <div
-        class="h-full w-full flex flex-col items-center justify-start pt-48 pb-4 md:py-0 md:justify-center"
+        class="h-full w-full flex flex-col items-center justify-start pt-24 pb-4 md:py-0 md:justify-center"
     >
       <div class="w-[95%] md:w-[90%] max-w-[1200px] z-10 px-4 md:px-0">
         <!-- Impact Areas Section -->
@@ -32,7 +32,7 @@
             class="max-w-3xl mx-auto text-center mt-8 mb-2 md:mb-16 transition-all duration-800 ease-out"
             :class="{'opacity-0 translate-y-5': !isVisible, 'opacity-100 translate-y-0': isVisible}"
         >
-          <h2 class="text-xl sm:text-3xl md:text-4xl mb-4 md:mb-8 text-gray-200">
+          <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-8">
             Creating Meaningful Impact
           </h2>
           <p class="text-base sm:text-lg mb-4 md:mb-6 text-gray-300/90">

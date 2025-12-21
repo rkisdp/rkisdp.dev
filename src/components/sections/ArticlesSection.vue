@@ -10,7 +10,7 @@
     ></div>
 
     <div
-      class="h-full w-full flex flex-col items-center justify-center pt-16 pb-8 md:py-0"
+      class="h-full w-full flex flex-col items-center justify-center pt-8 pb-8 md:py-0"
     >
       <div class="w-[95%] md:w-[90%] max-w-[1200px] z-10 px-4 md:px-0">
         <div
@@ -21,7 +21,7 @@
           }"
         >
           <h2
-            class="text-2xl md:text-4xl mb-6 md:mb-8 text-gray-200 text-center"
+            class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-8 text-center"
           >
             My Articles
           </h2>

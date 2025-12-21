@@ -2,7 +2,7 @@
   <section
     ref="sectionRef"
     id="testimonials"
-    class="section relative overflow-hidden flex items-center min-h-screen pt-20 md:pt-0"
+    class="section relative overflow-hidden flex items-center md:pt-0"
   >
     <!-- Background particles -->
     <div class="absolute inset-0 overflow-hidden">
@@ -37,7 +37,7 @@
           transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
         }"
       >
-        <h2 class="text-xl md:text-4xl mb-2 md:mb-4 text-gray-200">
+        <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-4">
           Testimonials
         </h2>
         <p class="text-sm md:text-lg text-gray-300/90 max-w-xl mx-auto">

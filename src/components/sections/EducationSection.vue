@@ -2,7 +2,7 @@
   <section
     ref="sectionRef"
     id="education"
-    class="section relative overflow-hidden pt-20 md:pt-0"
+    class="section relative overflow-hidden md:pt-0"
   >
     <!-- Decorative background element -->
     <div
@@ -21,7 +21,7 @@
           }"
         >
           <h2
-            class="text-xl md:text-4xl mb-2 md:mb-8 text-gray-200 text-center"
+            class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-8 text-center"
           >
             Education
           </h2>
