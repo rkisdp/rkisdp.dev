@@ -17,7 +17,7 @@
         style="transition: all 0.8s ease-out;"
       >
         <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-4 tracking-tight">
-          Professional Odyssey
+          Experience
         </h2>
         <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
           A dual-stream journey through my career milestones.
@@ -177,15 +177,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Scroll Hint (Desktop Only) -->
-      <div class="hidden md:flex justify-center mt-4">
-        <div class="text-gray-500 text-xs animate-pulse flex items-center gap-2">
-          <font-awesome-icon :icon="['fas', 'arrow-left']" />
-          Swipe to explore
-          <font-awesome-icon :icon="['fas', 'arrow-right']" />
         </div>
       </div>
     </div>

@@ -120,12 +120,12 @@
           <span>{{ social.name }}</span>
         </a>
       </div>
-      <p class="text-muted-foreground text-sm font-mono mt-10 mb-1">
+      <p class="text-muted-foreground text-sm font-mono mt-10 mb-8">
         {{ new Date().getFullYear() }} Divya Prakash. No rights reserved. Feel free to copy.
       </p>
       
-      <div class="w-full overflow-hidden pointer-events-none">
-        <WinterScene />
+      <div v-if="getThemeComponent(THEME_COMPONENTS.WINTER_SCENE)" class="w-full overflow-hidden pointer-events-none">
+        <component :is="getThemeComponent(THEME_COMPONENTS.WINTER_SCENE)?.component" />
       </div>
     </footer>
   </section>
@@ -133,7 +133,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import WinterScene from "../WinterScene.vue";
+import { useTheme } from "../../composables/useTheme";
+import { THEME_COMPONENTS } from "../../types/theme";
+
+const { getThemeComponent } = useTheme();
 
 const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);

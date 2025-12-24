@@ -1,8 +1,7 @@
 <template>
   <Analytics />
   <SpeedInsights />
-  <Snowfall />
-  <SantaSleigh />
+  <ThemeGlobalComponents />
   <main class="relative min-h-screen">
     <Navigation />
 
@@ -44,8 +43,6 @@ import { Analytics } from '@vercel/analytics/vue';
 import { SpeedInsights } from '@vercel/speed-insights/vue';
 import Lenis from 'lenis';
 import Navigation from './components/Navigation.vue';
-import Snowfall from './components/Snowfall.vue';
-import SantaSleigh from './components/SantaSleigh.vue';
 import HeroSection from './components/sections/HeroSection.vue';
 import SkillsSection from './components/sections/SkillsSection.vue';
 import ExperienceSection from './components/sections/ExperienceSection.vue';
@@ -54,6 +51,10 @@ import EducationSection from './components/sections/EducationSection.vue';
 import ArticlesSection from './components/sections/ArticlesSection.vue';
 import TestimonialsSection from './components/sections/TestimonialsSection.vue';
 import ContactSection from './components/sections/ContactSection.vue';
+import ThemeGlobalComponents from './components/ThemeGlobalComponents.vue';
+import { useTheme } from './composables/useTheme';
+
+useTheme(); // Initialize theme
 
 const buttonAnimated = ref(false);
 let lenis: Lenis | null = null;
@@ -78,9 +79,9 @@ onMounted(() => {
 
   // Handle anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', (e) => {
       e.preventDefault();
-      const targetId = this.getAttribute('href');
+      const targetId = (e.currentTarget as HTMLElement).getAttribute('href');
       if (targetId && targetId !== '#') {
         lenis?.scrollTo(targetId, {
           duration: 1.5,

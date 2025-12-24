@@ -16,7 +16,7 @@
         style="transition: all 0.8s ease-out;"
       >
         <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-4">
-          Technical Arsenal
+          Skills
         </h2>
         <p class="text-muted-foreground max-w-2xl mx-auto">
           Technologies and tools I use to bring ideas to life.
