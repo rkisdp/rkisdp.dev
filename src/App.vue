@@ -2,7 +2,7 @@
   <Analytics />
   <SpeedInsights />
   <ThemeGlobalComponents />
-  <main class="relative min-h-screen">
+  <main class="relative min-h-screen z-10">
     <Navigation />
 
     <div class="w-full">

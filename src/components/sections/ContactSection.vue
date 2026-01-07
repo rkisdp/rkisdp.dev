@@ -98,7 +98,7 @@
 
     <!-- Footer -->
     <footer
-      class="w-full text-center pt-8 border-t border-white/5 bg-background/50 backdrop-blur-sm"
+      class="w-full text-center pt-8 border-t border-white/5 bg-background/50 backdrop-blur-sm relative z-20"
       :style="{
         opacity: isVisible ? 1 : 0,
         transition: 'opacity 0.8s ease-out 0.4s',

@@ -16,6 +16,14 @@ class ThemeFactory {
                 createThemeComponent('christmas', THEME_COMPONENTS.WINTER_SCENE, false), // Not global, used in ContactSection
             ],
         },
+        [ThemeId.HAPPY_NEW_YEAR]: {
+            id: ThemeId.HAPPY_NEW_YEAR,
+            name: 'Happy New Year',
+            components: [
+                createThemeComponent('happy-new-year', THEME_COMPONENTS.CONFETTI),
+                createThemeComponent('happy-new-year', THEME_COMPONENTS.FIREWORKS),
+            ],
+        },
     };
 
     public static getTheme(id: ThemeId): Theme {

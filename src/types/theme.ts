@@ -3,6 +3,7 @@ import { defineAsyncComponent, type Component } from 'vue';
 export enum ThemeId {
     DEFAULT = 'default',
     CHRISTMAS = 'christmas',
+    HAPPY_NEW_YEAR = 'happy-new-year',
 }
 
 export const THEME_COMPONENTS = {
@@ -10,7 +11,11 @@ export const THEME_COMPONENTS = {
     SNOWFALL: 'Snowfall',
     SANTA_SLEIGH: 'SantaSleigh',
     WINTER_SCENE: 'WinterScene',
+    CONFETTI: 'Confetti',
+    FIREWORKS: 'Fireworks',
 } as const;
+
+export type ThemePhase = 'initial' | 'confetti-spawning' | 'confetti-clearing' | 'fireworks-active' | 'completed';
 
 export interface ThemeComponent {
     name: string;
