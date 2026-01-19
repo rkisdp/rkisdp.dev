@@ -2,7 +2,7 @@ import { ref, computed, watch } from 'vue';
 import { ThemeId, type Theme, type ThemeComponent, type ThemePhase } from '../types/theme';
 import ThemeFactory from '../utils/themeFactory';
 
-const currentThemeId = ref<ThemeId>(ThemeId.HAPPY_NEW_YEAR);
+const currentThemeId = ref<ThemeId>(ThemeId.DEFAULT);
 const currentTheme = computed<Theme>(() => ThemeFactory.getTheme(currentThemeId.value));
 const currentThemePhase = ref<ThemePhase>('initial');
 
