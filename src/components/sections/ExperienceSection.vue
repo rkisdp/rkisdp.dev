@@ -248,7 +248,7 @@ const jobs: Job[] = [
     year: "2021",
     logo: innovaccerImage,
     responsibilities: [
-      "Developed healthcare data analytics solutions",
+      "Developed higly scalable healthcare data analytics solutions",
       "Implemented ETL pipelines for processing large datasets",
       "Created RESTful APIs for data access and integration",
       "Collaborated with data scientists to implement ML models",
