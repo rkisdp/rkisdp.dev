@@ -4,9 +4,6 @@
     id="contact"
     class="section relative overflow-hidden flex flex-col !pb-0"
   >
-    <!-- Background hills and winter scene removed from here -->
-
-    <!-- Background particles -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div
         class="absolute w-96 h-96 rounded-full blur-[120px] animate-pulse-glow"
@@ -120,9 +117,11 @@
           <span>{{ social.name }}</span>
         </a>
       </div>
-      <p class="text-muted-foreground text-sm font-mono mt-10 mb-8">
-        {{ new Date().getFullYear() }} Divya Prakash. No rights reserved. Feel free to copy.
-      </p>
+      <div class="emoji-footer text-muted-foreground text-sm font-mono mt-10 mb-8">
+        <span>Made with</span>
+        <span class="emoji" :class="{ 'fade': isEmojiFading }">{{ currentEmoji }}</span>
+        <span>facial expressions. 2026 Divya Prakash.</span>
+      </div>
       
       <div v-if="getThemeComponent(THEME_COMPONENTS.WINTER_SCENE)" class="w-full overflow-hidden pointer-events-none">
         <component :is="getThemeComponent(THEME_COMPONENTS.WINTER_SCENE)?.component" />
@@ -140,6 +139,12 @@ const { getThemeComponent } = useTheme();
 
 const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
+
+const emojis = ["😍", "🤯", "😳", "😎", "🤔", "😩", "🥹", "😭", "😱"];
+const currentEmojiIndex = ref(0);
+const currentEmoji = ref(emojis[0]);
+const isEmojiFading = ref(false);
+let emojiInterval: ReturnType<typeof setInterval> | null = null;
 
 const socials = [
   { name: "Email", url: "mailto:connect@rkisdp.dev", icon: ['fas', 'envelope'], color: "#EA4335" },
@@ -169,8 +174,18 @@ onMounted(() => {
     observer.observe(sectionRef.value);
   }
 
+  emojiInterval = setInterval(() => {
+    isEmojiFading.value = true;
+    setTimeout(() => {
+      currentEmojiIndex.value = (currentEmojiIndex.value + 1) % emojis.length;
+      currentEmoji.value = emojis[currentEmojiIndex.value];
+      isEmojiFading.value = false;
+    }, 250);
+  }, 1600);
+
   onUnmounted(() => {
     observer.disconnect();
+    if (emojiInterval) clearInterval(emojiInterval);
   });
 });
 </script>
@@ -230,5 +245,26 @@ onMounted(() => {
 .wrapper .button:hover span {
   opacity: 1;
   color: var(--hover-color);
+}
+
+.emoji-footer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 16px;
+}
+
+.emoji {
+  font-size: 1.25em;
+  width: 1.1em;
+  text-align: center;
+  display: inline-block;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.fade {
+  opacity: 0;
+  transform: translateY(-2px);
 }
 </style>
