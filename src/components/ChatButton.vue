@@ -16,7 +16,7 @@
       >
         <!-- Header -->
         <div class="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-glass">
-          <h3 class="font-semibold text-foreground">Chat</h3>
+          <h3 class="font-semibold text-foreground">Chat with my AI Persona</h3>
           <button
             type="button"
             aria-label="Close chat"
@@ -63,7 +63,10 @@
     <button
       type="button"
       :aria-label="isOpen ? 'Close chat' : 'Open chat'"
-      class="chat-button group flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-glow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+      :class="[
+        'chat-button group flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-glow focus:outline-none',
+        isOpen && 'focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background'
+      ]"
       @click="toggleChat"
     >
       <span class="relative inline-flex items-center justify-center w-6 h-6">

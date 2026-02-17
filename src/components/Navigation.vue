@@ -5,7 +5,7 @@
   >
     <div class="flex items-center justify-between px-6">
       <div class="flex-shrink-0">
-        <a href="/" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-mono tracking-tighter hover:opacity-80 transition-opacity">
+        <a href="/" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary font-mono hover:opacity-80 transition-opacity">
           DP
         </a>
       </div>

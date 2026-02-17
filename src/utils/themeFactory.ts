@@ -24,6 +24,16 @@ class ThemeFactory {
                 createThemeComponent('happy-new-year', THEME_COMPONENTS.FIREWORKS),
             ],
         },
+        [ThemeId.HOLI]: {
+            id: ThemeId.HOLI,
+            name: 'Holi',
+            components: [
+                createThemeComponent('holi', THEME_COMPONENTS.PAINT_SPLASH_TEXT, false),
+            ],
+            config: {
+                colors: ['#5bc8af', '#F05A54', '#54F09B', '#F59616', '#F0E456', '#ACA1F5']
+            },
+        },
     };
 
     public static getTheme(id: ThemeId): Theme {

@@ -16,6 +16,22 @@
         </h2>
         
         <h1
+          v-if="currentThemeId === ThemeId.HOLI"
+          :style="{
+            opacity,
+            transform: `scale(${0.9 + opacity * 0.1})`,
+            transition: 'opacity 1.5s ease-out, transform 1.5s ease-out',
+          }"
+          class="text-5xl sm:text-7xl md:text-9xl mb-6"
+        >
+          <PaintSplashText 
+            text="DIVYA PRAKASH"
+            :colors="currentTheme.config?.colors"
+          />
+        </h1>
+
+        <h1
+          v-else
           class="text-5xl sm:text-7xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-white tracking-tighter uppercase mb-6 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"
           :style="{
             opacity,
@@ -23,7 +39,7 @@
             transition: 'opacity 1.5s ease-out, transform 1.5s ease-out',
           }"
         >
-          divya prakash
+          DIVYA PRAKASH
         </h1>
 
         <p
@@ -47,6 +63,11 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
 import NebulaBackground from "../NebulaBackground.vue";
+import PaintSplashText from "../themes/holi/PaintSplashText.vue";
+import { useTheme } from "../../composables/useTheme";
+import { ThemeId } from "../../types/theme";
+
+const { currentTheme, currentThemeId } = useTheme();
 const opacity = ref(0);
 const zoomLevel = ref(1.2);
 const scrollY = ref(0);
