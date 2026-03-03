@@ -42,17 +42,21 @@
           DIVYA PRAKASH
         </h1>
 
-        <p
-          class="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl font-light tracking-wide mb-10 relative"
+        <div
+          class="terminal-container"
           :style="{
             opacity: Math.max(0, opacity - 0.2),
             transform: `translateY(${(1 - opacity) * 40}px)`,
             transition: 'opacity 1.5s ease-out 0.3s, transform 1.5s ease-out 0.3s',
           }"
         >
-          Engineering reliable and scalable systems that handle real-world chaos.
-<!--          Engineering <span class="text-green-400 font-medium">secure</span>, <span class="text-accent font-medium">scalable</span>, and <span class="text-primary font-medium">intelligent</span> digital solutions.-->
-        </p>
+          <h2 class="terminal-title">I build scalable backends.</h2>
+          <div class="terminal-line">
+            <span class="prompt">></span>
+            <span class="typed-text">{{ currentTypedText }}</span>
+            <span class="cursor"></span>
+          </div>
+        </div>
       </div>
     </div>
     
@@ -72,7 +76,40 @@ const opacity = ref(0);
 const zoomLevel = ref(1.2);
 const scrollY = ref(0);
 
+const texts = [
+  "Building secure APIs...",
+  "Designing scalable systems...",
+  "Optimizing databases...",
+  "Automating workflows..."
+];
+
+const currentTypedText = ref("");
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function typeEffect() {
+  const currentText = texts[textIndex];
+  if (!isDeleting) {
+    currentTypedText.value = currentText.slice(0, charIndex++);
+    if (charIndex > currentText.length) {
+      setTimeout(() => isDeleting = true, 1200);
+    }
+  } else {
+    currentTypedText.value = currentText.slice(0, charIndex--);
+    if (charIndex < 0) {
+      isDeleting = false;
+      charIndex = 0;
+      textIndex = (textIndex + 1) % texts.length;
+    }
+  }
+  setTimeout(typeEffect, isDeleting ? 40 : 80);
+}
+
 onMounted(() => {
+  // Start typing effect
+  typeEffect();
+
   // Animate in
   setTimeout(() => {
     opacity.value = 1;
@@ -115,6 +152,58 @@ onMounted(() => {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.terminal-container {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.terminal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .terminal-title {
+    font-size: 2rem;
+  }
+}
+
+.terminal-line {
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  color: #00ff88;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .terminal-line {
+    font-size: 1.25rem;
+  }
+}
+
+.prompt {
+  margin-right: 8px;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  background-color: #00ff88;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+  height: 1.2em;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
 }
 
 </style>
