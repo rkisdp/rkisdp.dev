@@ -50,7 +50,7 @@
             transition: 'opacity 1.5s ease-out 0.3s, transform 1.5s ease-out 0.3s',
           }"
         >
-          <h2 class="terminal-title">I build scalable backends.</h2>
+          <h2 class="terminal-title">I build scalable backends systems.</h2>
           <div class="terminal-line">
             <span class="prompt">></span>
             <span class="typed-text">{{ currentTypedText }}</span>
@@ -78,7 +78,7 @@ const scrollY = ref(0);
 
 const texts = [
   "Building secure APIs...",
-  "Designing scalable systems...",
+  "Developing AI/ML models...",
   "Optimizing databases...",
   "Automating workflows..."
 ];
