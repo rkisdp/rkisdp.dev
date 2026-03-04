@@ -28,7 +28,7 @@
         </div>
 
         <!-- Messages area -->
-        <div ref="messagesContainer" class="flex-1 overflow-y-auto overscroll-contain p-4 space-y-3">
+        <div ref="messagesContainer" data-lenis-prevent class="flex-1 overflow-y-auto overscroll-contain p-4 space-y-3">
           <!-- Loading history spinner -->
           <div v-if="isLoadingHistory" class="flex justify-center items-center h-full">
             <div class="flex flex-col items-center gap-2">
