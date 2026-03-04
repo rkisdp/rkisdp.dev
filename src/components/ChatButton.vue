@@ -11,7 +11,7 @@
     >
       <div
         v-show="isOpen"
-        class="fixed bottom-24 right-3 sm:right-6 z-[60] max-w-[calc(100vw-2rem)] flex flex-col rounded-2xl border border-white/10 bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out"
+        class="fixed bottom-24 right-3 sm:right-6 z-[60] max-w-[calc(100vw-2rem)] flex flex-col rounded-2xl border border-white/10 bg-background/95 backdrop-blur-xl shadow-2xl transition-all duration-500 ease-in-out"
         :class="isExpanded ? 'w-[380px] h-[480px]' : 'w-[320px] h-[350px]'"
       >
         <!-- Header -->
@@ -28,7 +28,7 @@
         </div>
 
         <!-- Messages area -->
-        <div ref="messagesContainer" class="flex-1 overflow-y-auto p-4 space-y-3">
+        <div ref="messagesContainer" class="flex-1 overflow-y-auto overscroll-contain p-4 space-y-3">
           <!-- Loading history spinner -->
           <div v-if="isLoadingHistory" class="flex justify-center items-center h-full">
             <div class="flex flex-col items-center gap-2">
@@ -64,9 +64,8 @@
                 :class="msg.role === 'human'
                   ? 'bg-primary text-primary-foreground rounded-br-sm'
                   : 'bg-muted/60 text-foreground rounded-bl-sm border border-white/10'"
-              >
-                {{ msg.content }}
-              </div>
+                v-html="msg.content"
+              />
             </div>
           </template>
 
