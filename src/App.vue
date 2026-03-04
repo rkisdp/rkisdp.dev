@@ -19,7 +19,7 @@
     <!-- Floating Action Buttons -->
     <div class="fixed bottom-6 right-3 sm:right-6 z-50 flex flex-row items-center gap-[10px]">
       <a
-        href="https://drive.google.com/file/d/1yihhxB9peXDNWzzC6uj0RaznEU76UV-9/view?usp=drive_link"
+        href="https://drive.google.com/file/d/1GAQD4yhAcxU8KQ29KPYeG_b-4C9zFYhR/view?usp=sharing"
         target="_blank"
         rel="noopener noreferrer"
         class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 h-12 rounded-full shadow-lg transition-all duration-300 hover:shadow-blue-500/30 hover:translate-y-[-1px]"
