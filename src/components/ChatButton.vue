@@ -166,14 +166,11 @@ const scrollToBottom = async () => {
 
 // ── Visitor History API ─────────────────────────────────────────────────────
 const fetchHistory = async () => {
-  if (historyFetched.value) return;
-  historyFetched.value = true;
+  if (isLoadingHistory.value) return;
   isLoadingHistory.value = true;
 
   try {
-    // credentials: 'include' sends the session_id cookie.
-    // Browser automatically adds the correct Origin header for cross-origin requests.
-    const res = await fetch('https://api.rkisdp.dev/api/visitor-history/', {
+    const res = await fetch('http://127.0.0.1:8000/api/visitor-history/', {
       method: 'GET',
       credentials: 'include',
     });
@@ -181,6 +178,7 @@ const fetchHistory = async () => {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
+    historyFetched.value = true;
 
     if (!data.is_new && data.history?.length) {
       const allMessages: ChatMessage[] = [];
@@ -190,10 +188,27 @@ const fetchHistory = async () => {
       messages.value = allMessages;
       await scrollToBottom();
     }
-    // is_new === true → messages stays empty → welcome screen shows
+
+    // If still no messages, show the 3-part greeting
+    if (messages.value.length === 0) {
+      
+      for (let i = 0; i < greetingParts.length; i++) {
+        setTimeout(async () => {
+          // Double check if any messages were added in the meantime (user typing)
+          const hasUserMessaged = messages.value.some(m => m.role === 'human');
+          if (!hasUserMessaged) {
+             messages.value.push({
+              role: 'ai',
+              content: greetingParts[i],
+              timestamp: new Date().toISOString()
+            });
+            await scrollToBottom();
+          }
+        }, i * 1000);
+      }
+    }
   } catch (err) {
     console.error('[ChatButton] Failed to fetch visitor history:', err);
-    // Graceful fallback — welcome screen
   } finally {
     isLoadingHistory.value = false;
   }
@@ -211,10 +226,9 @@ const sendMessage = async () => {
   await scrollToBottom();
 
   try {
-    // Browser automatically adds Origin header for cross-origin requests.
-    const res = await fetch('https://api.rkisdp.dev/api/chat/', {
+    const res = await fetch('http://127.0.0.1:8000/api/chat/', {
       method: 'POST',
-      credentials: 'include', // sends session_id cookie & receives updated cookie
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query }),
     });
@@ -222,10 +236,27 @@ const sendMessage = async () => {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
-    const aiText = data.response ?? 'Sorry, I could not process that.';
+    const rawResponse = data.response ?? 'Sorry, I could not process that.';
+    
+    // Handle both single string and array of strings
+    const responseArray = Array.isArray(rawResponse) ? rawResponse : [rawResponse];
 
-    messages.value.push({ role: 'ai', content: aiText, timestamp: new Date().toISOString() });
-    await scrollToBottom();
+    for (let i = 0; i < responseArray.length; i++) {
+      // Add a slight delay between multiple messages for a more natural feel
+      setTimeout(async () => {
+        messages.value.push({ 
+          role: 'ai', 
+          content: responseArray[i], 
+          timestamp: new Date().toISOString() 
+        });
+        await scrollToBottom();
+        
+        // Only set isSending to false after the last message
+        if (i === responseArray.length - 1) {
+          isSending.value = false;
+        }
+      }, i * 800);
+    }
   } catch (err) {
     console.error('[ChatButton] Failed to send message:', err);
     messages.value.push({
@@ -234,10 +265,9 @@ const sendMessage = async () => {
       timestamp: new Date().toISOString(),
     });
     await scrollToBottom();
-  } finally {
     isSending.value = false;
   }
-};
+}
 
 // ── Lifecycle ───────────────────────────────────────────────────────────────
 watch(isOpen, (opened) => {
@@ -245,9 +275,12 @@ watch(isOpen, (opened) => {
 });
 
 onMounted(() => {
-  setTimeout(() => {
-    isOpen.value = true;
-  }, 1000);
+  // Only auto-open if NOT on mobile (width >= 640px)
+  if (window.innerWidth >= 640) {
+    setTimeout(() => {
+      isOpen.value = true;
+    }, 1000);
+  }
 });
 
 const toggleChat = () => {
