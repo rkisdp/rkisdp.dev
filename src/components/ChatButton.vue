@@ -170,7 +170,7 @@ const fetchHistory = async () => {
   isLoadingHistory.value = true;
 
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/visitor-history/', {
+    const res = await fetch('https://api.rkisdp.dev/api/visitor-history/', {
       method: 'GET',
       credentials: 'include',
     });
@@ -226,7 +226,7 @@ const sendMessage = async () => {
   await scrollToBottom();
 
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/chat/', {
+    const res = await fetch('https://api.rkisdp.dev/api/chat/', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
