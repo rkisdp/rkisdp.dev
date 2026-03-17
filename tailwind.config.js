@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#0B0D17', // Deep Navy
+        background: '#020b18', // Cyber Navy
         foreground: '#E0E6ED', // Soft White
         primary: {
           DEFAULT: '#00D4FF', // Electric Blue

@@ -2,6 +2,7 @@
   <Analytics />
   <SpeedInsights />
   <ThemeGlobalComponents />
+  <Background />
   <main class="relative min-h-screen z-10">
     <Navigation />
 
@@ -42,6 +43,7 @@ import { Analytics } from '@vercel/analytics/vue';
 import { SpeedInsights } from '@vercel/speed-insights/vue';
 import Lenis from 'lenis';
 import Navigation from './components/Navigation.vue';
+import Background from './components/Background.vue';
 import HeroSection from './components/sections/HeroSection.vue';
 import SkillsSection from './components/sections/SkillsSection.vue';
 import ExperienceSection from './components/sections/ExperienceSection.vue';

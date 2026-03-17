@@ -35,6 +35,7 @@
 
   body {
     @apply font-sans text-foreground bg-background antialiased selection:bg-primary/30 selection:text-primary;
+    background-color: #020b18;
     overflow-x: hidden;
     overflow-y: auto;
   }

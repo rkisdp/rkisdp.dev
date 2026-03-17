@@ -2,7 +2,7 @@
   <section
     class="section relative flex flex-col items-center justify-center overflow-hidden min-h-screen"
   >
-    <NebulaBackground :opacity="opacity" :zoomLevel="zoomLevel" />
+
 
     <div class="h-full w-full flex flex-col items-center justify-center z-10">
       <div
@@ -66,7 +66,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import NebulaBackground from "../NebulaBackground.vue";
+
 import PaintSplashText from "../themes/holi/PaintSplashText.vue";
 import { useTheme } from "../../composables/useTheme";
 import { ThemeId } from "../../types/theme";
