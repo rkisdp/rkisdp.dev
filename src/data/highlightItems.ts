@@ -6,27 +6,27 @@ export interface HighlightItem {
 
 export const highlightItems: HighlightItem[] = [
   {
-    title: "Building Highly Scalable Systems",
+    title: "Architecture Patterns",
     description:
-      "Creating highly scalable and rock solid system which can handle huge trafic and data with high availability and reliability.",
+      "Event-driven systems, microservices, workflow orchestration, sagas, eventual consistency patterns, multi-tenant isolation, and data partitioning strategies.",
     delay: "100ms",
   },
   {
-    title: "Optimized and Maintainable Code",
+    title: "Reliability Engineering",
     description:
-      "Designing code architecture which is easily maintainable, optimized and naturally understandable.",
+      "Idempotency, deduplication, ordering controls, DLQ/replay, backpressure handling, rate limiting, circuit breakers, timeout strategies, and graceful degradation.",
     delay: "250ms",
   },
   {
-    title: "Data Processing at Scale",
+    title: "Data Engineering",
     description:
-      "Building systems that can process and streams in huge data in real-time, enabling immediate insights and actions.",
+      "Database optimization, schema migrations, bulk load strategies, reconciliation patterns, caching layers, materialized views, and data consistency verification.",
     delay: "400ms",
   },
   {
-    title: "Data Monitoring Insight",
+    title: "Cloud & Operations",
     description:
-      "Developing applications that create accurate and thoughtful visualizations of data which helps to identify and solve problems quickly.",
+      "Observability (metrics, logs, traces), cost optimization, infrastructure as code, scheduled scaling, AWS serverless patterns, container orchestration, and incident response.",
     delay: "550ms",
   },
 ]; 

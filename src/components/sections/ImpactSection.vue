@@ -55,6 +55,7 @@
           <!-- Mobile Version -->
           <div class="md:hidden">
             <h2 class="text-xl mb-4 text-gray-200 text-center">Impact Highlights</h2>
+            <p class="text-sm text-gray-400/90 mb-4">These are the patterns, technologies, and practices I use to build reliable systems that scale. Each capability is tied to production outcomes, not just familiarity, but demonstrated impact.</p>
 
             <!-- Mobile Carousel -->
             <div class="relative overflow-hidden">
@@ -113,9 +114,10 @@
 
           <!-- Desktop Version -->
           <div class="hidden md:block">
-            <h2 class="text-xl md:text-3xl mb-8 text-gray-200">
+            <h2 class="text-xl md:text-3xl mb-4 text-gray-200">
               Impact Highlights
             </h2>
+            <p class="text-sm md:text-base text-gray-400/90 mb-8">These are the patterns, technologies, and practices I use to build reliable systems that scale. Each capability is tied to production outcomes, not just familiarity, but demonstrated impact.</p>
             <!-- Grid container -->
             <div
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
