@@ -29,7 +29,7 @@ class Particle {
     this.vx = (Math.random() - 0.5) * 0.4;
     this.vy = (Math.random() - 0.5) * 0.4;
     this.r = Math.random() * 1.5 + 0.5;
-    this.alpha = Math.random() * 0.5 + 0.1;
+    this.alpha = Math.random() * 0.3 + 0.7;
     this.color = Math.random() > 0.7 ? 'green' : 'cyan';
   }
 
@@ -63,7 +63,7 @@ function draw() {
       const dist = Math.sqrt(dx * dx + dy * dy);
       if (dist < 140) {
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(0,245,255,${(1 - dist / 140) * 0.12})`;
+        ctx.strokeStyle = `rgba(0,245,255,${(1 - dist / 140) * 0.55})`;
         ctx.lineWidth = 0.5;
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
@@ -78,8 +78,8 @@ function draw() {
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
     ctx.fillStyle = p.color === 'cyan'
-      ? `rgba(0,245,255,${p.alpha})`
-      : `rgba(0,255,157,${p.alpha})`;
+      ? `rgba(0,220,255,${p.alpha})`
+      : `rgba(0,255,140,${p.alpha})`;
     ctx.fill();
   });
 
@@ -114,7 +114,7 @@ onUnmounted(() => {
   width: 100vw;
   height: 100vh;
   z-index: 0;
-  background: #020b18;
+  background: #0a1e35;
   overflow: hidden;
   pointer-events: none;
 }
