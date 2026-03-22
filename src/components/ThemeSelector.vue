@@ -39,6 +39,7 @@ const availableThemes = [
   { id: ThemeId.HOLI, name: 'Holi' },
   { id: ThemeId.CHRISTMAS, name: 'Christmas' },
   { id: ThemeId.HAPPY_NEW_YEAR, name: 'Happy New Year' },
+  { id: ThemeId.DIWALI, name: 'Diwali' },
 ];
 
 const toggleDropdown = () => {

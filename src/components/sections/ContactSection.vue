@@ -2,7 +2,7 @@
   <section
     ref="sectionRef"
     id="contact"
-    class="section relative overflow-hidden flex flex-col !pb-0"
+    class="section relative overflow-hidden flex flex-col !pb-0 !px-0"
   >
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div
@@ -125,6 +125,9 @@
       
       <div v-if="getThemeComponent(THEME_COMPONENTS.WINTER_SCENE)" class="w-full overflow-hidden pointer-events-none">
         <component :is="getThemeComponent(THEME_COMPONENTS.WINTER_SCENE)?.component" />
+      </div>
+      <div v-if="getThemeComponent(THEME_COMPONENTS.DIWALI_FOOTER)" class="w-full overflow-hidden pointer-events-none">
+        <component :is="getThemeComponent(THEME_COMPONENTS.DIWALI_FOOTER)?.component" />
       </div>
     </footer>
   </section>

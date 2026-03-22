@@ -34,6 +34,15 @@ class ThemeFactory {
                 colors: ['#5bc8af', '#F05A54', '#54F09B', '#F59616', '#F0E456', '#ACA1F5']
             },
         },
+        [ThemeId.DIWALI]: {
+            id: ThemeId.DIWALI,
+            name: 'Diwali',
+            components: [
+                createThemeComponent('diwali', THEME_COMPONENTS.DIWALI_FOOTER, false),
+                createThemeComponent('diwali', THEME_COMPONENTS.DIWALI_LANTERNS, true),
+                createThemeComponent('happy-new-year', THEME_COMPONENTS.FIREWORKS, true),
+            ],
+        },
     };
 
     public static getTheme(id: ThemeId): Theme {

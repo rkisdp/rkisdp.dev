@@ -1,21 +1,17 @@
 <template>
-  <canvas ref="canvas" class="fireworks-canvas" v-show="isVisible"></canvas>
+  <canvas ref="canvas" class="fireworks-canvas"></canvas>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { gsap } from 'gsap';
-import { useTheme } from '../../../composables/useTheme';
 
-const { currentThemePhase } = useTheme();
 const canvas = ref<HTMLCanvasElement | null>(null);
-const isVisible = ref(false);
 let ctx: CanvasRenderingContext2D | null = null;
 let animationFrame: number;
 let fireworks: Firework[] = [];
 let particles: FwParticle[] = [];
 let spawnInterval: any = null;
-let isSpawning = false;
 
 class Firework {
   x: number;
@@ -119,8 +115,6 @@ function explode(x: number, y: number, hue: number) {
 
 const startFireworks = () => {
   if (!canvas.value) return;
-  isVisible.value = true;
-  isSpawning = true;
   
   const resize = () => {
     if (!canvas.value) return;
@@ -136,7 +130,6 @@ const startFireworks = () => {
   const animate = () => {
     if (!ctx || !canvas.value) return;
     
-    // Clear canvas with trail effect using destination-out to maintain transparency
     ctx.globalCompositeOperation = 'destination-out';
     ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
     ctx.fillRect(0, 0, canvas.value.width, canvas.value.height);
@@ -145,40 +138,23 @@ const startFireworks = () => {
     fireworks.forEach(f => f.draw(ctx!));
     particles.forEach(p => p.draw(ctx!));
     
-    if (fireworks.length === 0 && particles.length === 0 && !isSpawning) {
-      isVisible.value = false;
-      cancelAnimationFrame(animationFrame);
-      return;
-    }
-    
     animationFrame = requestAnimationFrame(animate);
   };
   
   animate();
   
   spawnInterval = setInterval(() => {
-    if (isSpawning && canvas.value) {
+    if (canvas.value) {
       fireworks.push(new Firework(canvas.value.width, canvas.value.height));
     }
   }, 600);
-  
-  // Fireworks now continue indefinitely until unmounted
 };
 
-watch(currentThemePhase, (newPhase) => {
-  if (newPhase === 'fireworks-active') {
-    startFireworks();
-  }
-}, { immediate: true });
-
 onMounted(() => {
-  if (currentThemePhase.value === 'fireworks-active') {
-    startFireworks();
-  }
+  startFireworks();
 });
 
 onUnmounted(() => {
-  isSpawning = false;
   clearInterval(spawnInterval);
   cancelAnimationFrame(animationFrame);
   gsap.killTweensOf("*");
@@ -193,6 +169,6 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 5;
+  z-index: 50; /* Ensuring high z-index so it's always visible */
 }
 </style>

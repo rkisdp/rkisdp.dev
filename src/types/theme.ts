@@ -5,6 +5,7 @@ export enum ThemeId {
     CHRISTMAS = 'christmas',
     HAPPY_NEW_YEAR = 'happy-new-year',
     HOLI = 'holi',
+    DIWALI = 'diwali',
 }
 
 export const THEME_COMPONENTS = {
@@ -17,6 +18,9 @@ export const THEME_COMPONENTS = {
     FIREWORKS: 'Fireworks',
     // Holi
     PAINT_SPLASH_TEXT: 'PaintSplashText',
+    // Diwali
+    DIWALI_FOOTER: 'DiwaliFooter',
+    DIWALI_LANTERNS: 'DiwaliLanterns',
 } as const;
 
 export type ThemePhase = 'initial' | 'confetti-spawning' | 'confetti-clearing' | 'fireworks-active' | 'completed';
