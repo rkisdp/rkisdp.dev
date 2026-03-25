@@ -160,11 +160,10 @@ onMounted(() => {
 }
 
 .terminal-title {
-  font-family: "Courier New", monospace;
+  font-family: "Outfit", sans-serif;
   font-size: 1rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: -0.5px;
+  font-weight: 400;
+  color: rgba(209, 213, 219, 0.9);
   margin-bottom: 0.5rem;
 }
 
