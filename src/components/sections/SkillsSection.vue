@@ -11,11 +11,11 @@
 
     <div class="container-custom relative z-10">
       <div
-        class="text-center mb-16"
+        class="text-center mb-12 md:mb-20"
         :class="{'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
         style="transition: all 0.8s ease-out;"
       >
-        <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-4">
+        <h2 class="section-title mb-4">
           Skills
         </h2>
         <p class="text-muted-foreground max-w-2xl mx-auto">

@@ -32,7 +32,7 @@
 
         <h1
           v-else
-          class="text-5xl sm:text-7xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-white tracking-tighter uppercase mb-6 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"
+          class="text-5xl sm:text-7xl md:text-9xl font-bold text-white tracking-tighter uppercase mb-6 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"
           :style="{
             opacity,
             transform: `scale(${0.9 + opacity * 0.1})`,

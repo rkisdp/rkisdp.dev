@@ -2,7 +2,7 @@
   <section
     ref="sectionRef"
     id="testimonials"
-    class="section relative overflow-hidden flex items-center md:pt-0"
+    class="section relative overflow-hidden flex items-center"
   >
     <!-- Background particles -->
     <div class="absolute inset-0 overflow-hidden">
@@ -28,16 +28,16 @@
       ></div>
     </div>
 
-    <div class="container-custom max-w-6xl mx-auto px-4 w-full pb-4 md:pb-0">
+    <div class="container-custom max-w-6xl mx-auto px-4 w-full">
       <div
-        class="text-center mb-4 md:mb-12"
+        class="text-center mb-12 md:mb-20"
         :style="{
           opacity: isVisible ? 1 : 0,
           transform: `translateY(${isVisible ? 0 : 30}px)`,
           transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
         }"
       >
-        <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-4">
+        <h2 class="section-title mb-4">
           Testimonials
         </h2>
         <p class="text-sm md:text-lg text-gray-300/90 max-w-xl mx-auto">

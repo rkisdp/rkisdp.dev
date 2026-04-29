@@ -6,17 +6,18 @@
   >
     <!-- Background Elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-      <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+      <div
+        class="absolute top-[-100px] right-[10%] w-[90%] h-[600px] rounded-full opacity-5 bg-[rgba(100,200,255,0.1)] blur-3xl z-0"
+      ></div>
     </div>
 
     <div class="container-custom relative z-10">
       <div
-        class="text-center mb-12"
+        class="text-center mb-12 md:mb-20"
         :class="{'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
         style="transition: all 0.8s ease-out;"
       >
-        <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-4 tracking-tight">
+        <h2 class="section-title mb-4">
           Experience
         </h2>
         <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
@@ -47,7 +48,7 @@
 
               <!-- Card -->
               <div 
-                class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,212,255,0.1)] cursor-pointer relative overflow-hidden"
+                class="w-full bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-xl p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,212,255,0.1)] cursor-pointer relative overflow-hidden"
                 @click="openModal(job)"
               >
                 <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -94,7 +95,7 @@
 
               <!-- Card -->
               <div 
-                class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-6 hover:border-cyan-400/50 transition-all duration-300 hover:translate-y-1 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] cursor-pointer relative overflow-hidden"
+                class="w-full bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-xl p-6 hover:border-cyan-400/50 transition-all duration-300 hover:translate-y-1 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] cursor-pointer relative overflow-hidden"
                 @click="openModal(job)"
               >
                 <div class="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -149,7 +150,7 @@
 
             <!-- Card -->
             <div 
-              class="w-full bg-[#111827]/80 backdrop-blur-sm border border-white/5 rounded-xl p-6 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden"
+              class="w-full bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-xl p-6 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden"
               @click="openModal(job)"
             >
               <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>

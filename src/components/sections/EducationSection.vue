@@ -2,7 +2,7 @@
   <section
     ref="sectionRef"
     id="education"
-    class="section relative overflow-hidden md:pt-0"
+    class="section relative overflow-hidden"
   >
     <!-- Decorative background element -->
     <div
@@ -10,7 +10,7 @@
     ></div>
 
     <div
-      class="h-full w-full flex flex-col items-center justify-center py-4 md:py-0"
+      class="h-full w-full flex flex-col items-center justify-center"
     >
       <div class="w-[95%] md:w-[90%] max-w-[1200px] z-10 px-4 md:px-0">
         <div
@@ -21,7 +21,7 @@
           }"
         >
           <h2
-            class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-8 text-center"
+            class="section-title mb-12 md:mb-20 text-center"
           >
             Education
           </h2>

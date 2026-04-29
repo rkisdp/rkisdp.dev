@@ -89,8 +89,10 @@ onMounted(() => {
         const targetId = href.includes('#') ? '#' + href.split('#')[1] : null;
         
         if (targetId && targetId !== '#') {
+          const isMobile = window.innerWidth < 768;
           lenis?.scrollTo(targetId, {
             duration: 1.5,
+            offset: isMobile ? -50 : -10,
           });
         }
       }
