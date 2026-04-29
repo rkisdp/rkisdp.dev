@@ -11,8 +11,8 @@
       <ImpactSection />
       <SkillsSection />
       <ExperienceSection />
-      <ArticlesSection />
       <EducationSection />
+      <ArticlesSection />
       <TestimonialsSection />
       <ContactSection />
     </div>
