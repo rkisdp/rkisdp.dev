@@ -14,6 +14,10 @@ let W: number, H: number;
 let particles: Particle[] = [];
 let animationId: number;
 
+/**
+ * Particle class represents a single moving point on the background canvas.
+ * Handles its own movement and boundary collision logic.
+ */
 class Particle {
   x: number;
   y: number;
@@ -33,6 +37,10 @@ class Particle {
     this.color = Math.random() > 0.7 ? 'green' : 'cyan';
   }
 
+  /**
+   * Updates the particle's position based on its velocity.
+   * Reverses velocity if the particle hits a boundary.
+   */
   update() {
     this.x += this.vx;
     this.y += this.vy;
@@ -41,21 +49,33 @@ class Particle {
   }
 }
 
+/**
+ * Resizes the canvas to occupy the full window width and height.
+ */
 function resize() {
   if (!canvasRef.value) return;
   W = canvasRef.value.width = window.innerWidth;
   H = canvasRef.value.height = window.innerHeight;
 }
 
+/**
+ * populates the particles array with a specific number of Particle instances.
+ * @param n - The number of particles to create.
+ */
 function initParticles(n: number) {
   particles = [];
   for (let i = 0; i < n; i++) particles.push(new Particle());
 }
 
+/**
+ * The main animation loop. Clears the canvas, draws connections between close particles,
+ * and renders each particle.
+ */
 function draw() {
   if (!ctx) return;
   ctx.clearRect(0, 0, W, H);
 
+  // Draw lines between particles that are close to each other
   for (let i = 0; i < particles.length; i++) {
     for (let j = i + 1; j < particles.length; j++) {
       const dx = particles[i].x - particles[j].x;
@@ -72,6 +92,7 @@ function draw() {
     }
   }
 
+  // Update and draw each particle
   particles.forEach(p => {
     p.update();
     if (!ctx) return;
@@ -86,10 +107,14 @@ function draw() {
   animationId = requestAnimationFrame(draw);
 }
 
+/**
+ * Event handler for window resize.
+ */
 const handleResize = () => {
   resize();
   initParticles(160);
 };
+
 
 onMounted(() => {
   if (!canvasRef.value) return;

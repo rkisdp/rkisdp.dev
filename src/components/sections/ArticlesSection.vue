@@ -147,44 +147,16 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
+import { articles } from "../../data/articles";
+import { useIntersectionObserver } from "../../composables/useIntersectionObserver";
 
-interface Article {
-  title: string;
-  url: string;
-  date: string;
-  image: string;
-}
-
-const articles: Article[] = [
-  {
-    title: "Why Type Checking is a Game-Changer for Python Projects",
-    url: "https://rkisdp.medium.com/why-type-checking-is-a-game-changer-for-python-projects-and-how-it-will-save-your-lots-of-time-a10d656d2257",
-    date: "Mar 14, 2025",
-    image:
-      "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ma0Ee8bOoLhyuBDLua0tYQ.jpeg",
-  },
-  {
-    title: "A Guide To Understanding Django REST Framework Views",
-    url: "https://rkisdp.medium.com/guide-of-understanding-django-rest-framework-views-940853a5964f",
-    date: "April 5, 2025",
-    image:
-        "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*70lDa3cF_vQDWuVY8eAZBQ.png",
-  },
-  {
-    title: "Async Programming In Python: Boost Performance and Efficiency of Your Code",
-    url: "https://rkisdp.medium.com/async-programming-in-python-boost-performance-and-efficiency-of-your-code-98f1bd29c237",
-    date: "August 13, 2025",
-    image:
-        "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*wZijDlLHoigao77smKm9Hw.png",
-  },
-];
-
-const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
 const articlesContainer = ref<HTMLDivElement | null>(null);
 const currentIndex = ref(0);
 const slideWidth = ref(0);
 const slidesPerView = ref(3);
+
+const { isVisible } = useIntersectionObserver(sectionRef);
 
 const maxIndex = computed(() =>
   Math.max(0, Math.ceil(articles.length / slidesPerView.value) - 1)
@@ -192,21 +164,40 @@ const maxIndex = computed(() =>
 
 let resizeObserver: ResizeObserver | null = null;
 
+/**
+ * Determines how many articles to show at once based on window width.
+ */
 const updateSlidesPerView = () => {
   const width = window.innerWidth;
   slidesPerView.value = width < 768 ? 1 : width < 1024 ? 2 : 3;
 };
 
+/**
+ * Calculates the width of a single slide based on the container width and visible slides.
+ */
 const updateSlideWidth = () => {
   if (!articlesContainer.value) return;
   slideWidth.value = articlesContainer.value.offsetWidth / slidesPerView.value;
 };
 
+/**
+ * Navigates to the previous set of articles.
+ */
 const prevSlide = () =>
   (currentIndex.value = Math.max(0, currentIndex.value - 1));
+
+/**
+ * Navigates to the next set of articles.
+ */
 const nextSlide = () =>
   (currentIndex.value = Math.min(maxIndex.value, currentIndex.value + 1));
+
+/**
+ * Navigates directly to a specific slide index.
+ * @param index - The index of the slide to navigate to.
+ */
 const goToSlide = (index: number) => (currentIndex.value = index);
+
 
 onMounted(() => {
   updateSlidesPerView();
@@ -215,21 +206,12 @@ onMounted(() => {
   resizeObserver = new ResizeObserver(updateSlideWidth);
   articlesContainer.value && resizeObserver.observe(articlesContainer.value);
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      isVisible.value = entries[0].isIntersecting;
-    },
-    { threshold: 0.1 }
-  );
-
-  sectionRef.value && observer.observe(sectionRef.value);
-
   onUnmounted(() => {
     resizeObserver?.disconnect();
-    observer.disconnect();
   });
 });
 </script>
+
 
 <style scoped>
 .article-card:hover {

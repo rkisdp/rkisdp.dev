@@ -154,9 +154,18 @@ const historyFetched = ref(false);
 const messages = ref<ChatMessage[]>([]);
 const messagesContainer = ref<HTMLElement | null>(null);
 
+const greetingParts = [
+  "Hi! I'm Divya's AI assistant. 🤖",
+  "I've been trained on his resume, projects, and professional background.",
+  "How can I help you today?"
+];
+
 const isTyping = computed(() => message.value.trim().length > 0);
 const isExpanded = computed(() => isFocused.value || isTyping.value || messages.value.length > 0);
 
+/**
+ * Scrolls the message container to the bottom to show the latest message.
+ */
 const scrollToBottom = async () => {
   await nextTick();
   if (messagesContainer.value) {
@@ -164,7 +173,10 @@ const scrollToBottom = async () => {
   }
 };
 
-// ── Visitor History API ─────────────────────────────────────────────────────
+/**
+ * Fetches the visitor's chat history from the API.
+ * If no history exists, it initiates a multi-part greeting.
+ */
 const fetchHistory = async () => {
   if (isLoadingHistory.value) return;
   isLoadingHistory.value = true;
@@ -189,12 +201,9 @@ const fetchHistory = async () => {
       await scrollToBottom();
     }
 
-    // If still no messages, show the 3-part greeting
     if (messages.value.length === 0) {
-      
       for (let i = 0; i < greetingParts.length; i++) {
         setTimeout(async () => {
-          // Double check if any messages were added in the meantime (user typing)
           const hasUserMessaged = messages.value.some(m => m.role === 'human');
           if (!hasUserMessaged) {
              messages.value.push({
@@ -214,12 +223,14 @@ const fetchHistory = async () => {
   }
 };
 
-// ── Chat API ────────────────────────────────────────────────────────────────
+/**
+ * Sends the user's message to the chat API and handles the AI's response.
+ * Optimistically adds the user's message and processes potential multi-part responses.
+ */
 const sendMessage = async () => {
   const query = message.value.trim();
   if (!query || isSending.value) return;
 
-  // Optimistically append the human message
   messages.value.push({ role: 'human', content: query, timestamp: new Date().toISOString() });
   message.value = '';
   isSending.value = true;
@@ -238,11 +249,9 @@ const sendMessage = async () => {
     const data = await res.json();
     const rawResponse = data.response ?? 'Sorry, I could not process that.';
     
-    // Handle both single string and array of strings
     const responseArray = Array.isArray(rawResponse) ? rawResponse : [rawResponse];
 
     for (let i = 0; i < responseArray.length; i++) {
-      // Add a slight delay between multiple messages for a more natural feel
       setTimeout(async () => {
         messages.value.push({ 
           role: 'ai', 
@@ -251,7 +260,6 @@ const sendMessage = async () => {
         });
         await scrollToBottom();
         
-        // Only set isSending to false after the last message
         if (i === responseArray.length - 1) {
           isSending.value = false;
         }
@@ -269,13 +277,11 @@ const sendMessage = async () => {
   }
 }
 
-// ── Lifecycle ───────────────────────────────────────────────────────────────
 watch(isOpen, (opened) => {
   if (opened) fetchHistory();
 });
 
 onMounted(() => {
-  // Only auto-open if NOT on mobile (width >= 640px)
   if (window.innerWidth >= 640) {
     setTimeout(() => {
       isOpen.value = true;
@@ -283,6 +289,9 @@ onMounted(() => {
   }
 });
 
+/**
+ * Toggles the visibility of the chat window.
+ */
 const toggleChat = () => {
   isOpen.value = !isOpen.value;
   if (!isOpen.value) {
@@ -291,9 +300,13 @@ const toggleChat = () => {
   }
 };
 
+/**
+ * Closes the chat window and resets the input state.
+ */
 const closeChat = () => {
   isOpen.value = false;
   message.value = '';
   isFocused.value = false;
 };
+
 </script>

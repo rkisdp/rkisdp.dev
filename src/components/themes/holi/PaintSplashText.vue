@@ -11,10 +11,9 @@ import { ref, onMounted, onUnmounted, watch } from 'vue';
 const props = defineProps<{
   text: string;
   colors?: string[];
-  letterGap?: number;
 }>();
 
-const COLORS = props.colors
+const COLORS = props.colors || [];
 // LETTER_GAP is now read from CSS letter-spacing
 
 const measureRef = ref<HTMLDivElement | null>(null);

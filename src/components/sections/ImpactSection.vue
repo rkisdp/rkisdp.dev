@@ -148,10 +148,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import { highlightItems } from "../../data/highlightItems";
+import { useIntersectionObserver } from "../../composables/useIntersectionObserver";
 
-const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
 const glowRef = ref<HTMLDivElement | null>(null);
 const carouselContainer = ref<HTMLElement | null>(null);
@@ -159,37 +159,50 @@ const currentIndex = ref(0);
 const autoplayInterval = ref<number | null>(null);
 const isPaused = ref(false);
 
+const { isVisible } = useIntersectionObserver(sectionRef, { threshold: 0.1 });
+
+/**
+ * Advances the mobile carousel to the next slide.
+ */
 const nextSlide = () => {
   if (currentIndex.value < highlightItems.length - 1) {
     currentIndex.value++;
   } else {
-    // Loop back to the first slide for continuous scrolling
     currentIndex.value = 0;
   }
 };
 
+/**
+ * Moves the mobile carousel to the previous slide.
+ */
 const prevSlide = () => {
   if (currentIndex.value > 0) {
     currentIndex.value--;
   }
 };
 
+/**
+ * Navigates to a specific slide in the mobile carousel.
+ * @param index - The index of the slide to navigate to.
+ */
 const goToSlide = (index: number) => {
   currentIndex.value = index;
-  // Reset the autoplay timer when manually navigating
   resetAutoplayTimer();
 };
 
+/**
+ * Starts the automatic rotation of the mobile carousel.
+ */
 const startAutoplay = () => {
   if (autoplayInterval.value) return;
-
   autoplayInterval.value = window.setInterval(() => {
-    if (!isPaused.value) {
-      nextSlide();
-    }
-  }, 5000); // 5 seconds
+    if (!isPaused.value) nextSlide();
+  }, 5000);
 };
 
+/**
+ * Stops the automatic rotation of the mobile carousel.
+ */
 const stopAutoplay = () => {
   if (autoplayInterval.value) {
     clearInterval(autoplayInterval.value);
@@ -197,44 +210,49 @@ const stopAutoplay = () => {
   }
 };
 
+/**
+ * Resets the autoplay timer.
+ */
 const resetAutoplayTimer = () => {
   stopAutoplay();
   startAutoplay();
 };
 
-// Pause autoplay when user interacts with the carousel
-const pauseAutoplay = () => {
-  isPaused.value = true;
-};
-
-const resumeAutoplay = () => {
-  isPaused.value = false;
-};
+const pauseAutoplay = () => { isPaused.value = true; };
+const resumeAutoplay = () => { isPaused.value = false; };
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            isVisible.value = true;
-            startAutoplay(); // Start autoplay when section becomes visible
-          } else {
-            stopAutoplay(); // Stop autoplay when section is not visible
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-      }
-  );
+  // Glow effect animation logic
+  let animationId: number;
+  let intervalId: number;
 
-  if (sectionRef.value) {
-    observer.observe(sectionRef.value);
-  }
+  const animateGlow = () => {
+    if (!glowRef.value) return;
 
-  // Set up carousel interaction events
+    const glow = glowRef.value;
+    const position = { x: 0, y: 0 };
+    const target = { x: 0, y: 0 };
+
+    const animate = () => {
+      position.x += (target.x - position.x) * 0.05;
+      position.y += (target.y - position.y) * 0.05;
+
+      glow.style.opacity = isVisible.value ? "1" : "0";
+      glow.style.transform = `translate(${position.x}px, ${position.y}px)`;
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    intervalId = window.setInterval(() => {
+      target.x = Math.random() * 100 - 50;
+      target.y = Math.random() * 100 - 50;
+    }, 3000);
+  };
+
+  animateGlow();
+
   if (carouselContainer.value) {
     carouselContainer.value.addEventListener('mouseenter', pauseAutoplay);
     carouselContainer.value.addEventListener('mouseleave', resumeAutoplay);
@@ -242,62 +260,27 @@ onMounted(() => {
     carouselContainer.value.addEventListener('touchend', resumeAutoplay);
   }
 
-  // Glow effect animation
-  const animateGlow = () => {
-    if (!isVisible.value || !glowRef.value) return;
-
-    const glow = glowRef.value;
-    const position = { x: 0, y: 0 };
-    const target = { x: 0, y: 0 };
-    let animationId: number;
-
-    const animate = () => {
-      // Smoothly follow the target position
-      position.x += (target.x - position.x) * 0.05;
-      position.y += (target.y - position.y) * 0.05;
-
-      // Update the translateX and translateY
-      glow.style.opacity = "1";
-      glow.style.transform = `translate(${position.x}px, ${position.y}px)`;
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    // Start animation
-    animate();
-
-    // Periodically change the target position
-    const interval = setInterval(() => {
-      // Random target position within a range
-      target.x = Math.random() * 100 - 50;
-      target.y = Math.random() * 100 - 50;
-    }, 3000);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      clearInterval(interval);
-      if (glow) glow.style.opacity = "0";
-    };
-  };
-
-  const cleanup = animateGlow();
-
-  // Cleanup
   onUnmounted(() => {
-    observer.disconnect();
     stopAutoplay();
-
-    // Remove event listeners
+    cancelAnimationFrame(animationId);
+    clearInterval(intervalId);
     if (carouselContainer.value) {
       carouselContainer.value.removeEventListener('mouseenter', pauseAutoplay);
       carouselContainer.value.removeEventListener('mouseleave', resumeAutoplay);
       carouselContainer.value.removeEventListener('touchstart', pauseAutoplay);
       carouselContainer.value.removeEventListener('touchend', resumeAutoplay);
     }
-
-    if (cleanup) cleanup();
   });
 });
+
+watch(isVisible, (visible) => {
+  if (visible) {
+    startAutoplay();
+  } else {
+    stopAutoplay();
+  }
+});
+
 </script>
 
 <style scoped>

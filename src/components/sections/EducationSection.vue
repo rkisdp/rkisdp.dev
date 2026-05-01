@@ -77,7 +77,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref } from "vue";
+import { useIntersectionObserver } from "../../composables/useIntersectionObserver";
 import uosImage from "../../assets/images/education/uos.jpeg";
 import bhuImage from "../../assets/images/education/bhu.jpeg";
 import davImage from "../../assets/images/education/dav.jpeg";
@@ -117,34 +118,9 @@ const educationItems: EducationItem[] = [
   },
 ];
 
-const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
+const { isVisible } = useIntersectionObserver(sectionRef, { threshold: 0.1 });
 
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          isVisible.value = true;
-        }
-      });
-    },
-    {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.1,
-    }
-  );
-
-  if (sectionRef.value) {
-    observer.observe(sectionRef.value);
-  }
-
-  // Cleanup
-  onUnmounted(() => {
-    observer.disconnect();
-  });
-});
 </script>
 
 <style scoped>

@@ -73,8 +73,6 @@ import { ThemeId } from "../../types/theme";
 
 const { currentTheme, currentThemeId } = useTheme();
 const opacity = ref(0);
-const zoomLevel = ref(1.2);
-const scrollY = ref(0);
 
 const texts = [
   "Building secure APIs...",
@@ -88,6 +86,10 @@ let textIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
 
+/**
+ * Executes a typing animation effect for the terminal section.
+ * Recursively calls itself to cycle through the strings defined in the `texts` array.
+ */
 function typeEffect() {
   const currentText = texts[textIndex];
   if (!isDeleting) {
@@ -107,25 +109,20 @@ function typeEffect() {
 }
 
 onMounted(() => {
-  // Start typing effect
   typeEffect();
 
-  // Animate in
   setTimeout(() => {
     opacity.value = 1;
-    zoomLevel.value = 1;
   }, 300);
 
-  // Handle scroll effect
+  /**
+   * Updates reactive scroll position and applies parallax/fade transformations.
+   */
   const handleScroll = () => {
-    scrollY.value = window.scrollY;
+    const scroll = window.scrollY;
     
-    if (scrollY.value < window.innerHeight) {
-      // Parallax effect for hero section
-      const newZoom = 1 + scrollY.value * 0.0003;
-      const newOpacity = 1 - (scrollY.value / window.innerHeight) * 1.2;
-
-      zoomLevel.value = newZoom;
+    if (scroll < window.innerHeight) {
+      const newOpacity = 1 - (scroll / window.innerHeight) * 1.2;
       opacity.value = Math.max(0, newOpacity);
     }
   };
@@ -136,6 +133,7 @@ onMounted(() => {
     window.removeEventListener("scroll", handleScroll);
   });
 });
+
 </script>
 
 <style scoped>

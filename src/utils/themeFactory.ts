@@ -1,6 +1,14 @@
 import { ThemeId, type Theme, THEME_COMPONENTS, createThemeComponent } from '../types/theme';
 
+/**
+ * A static factory class that manages and provides theme configurations for the application.
+ * Each theme defines a set of components and visual configurations associated with a specific event or style.
+ */
 class ThemeFactory {
+    /**
+     * A registry of available themes. 
+     * Themes can include global background components or section-specific decorative elements.
+     */
     private static themes: Record<ThemeId, Theme> = {
         [ThemeId.DEFAULT]: {
             id: ThemeId.DEFAULT,
@@ -13,7 +21,7 @@ class ThemeFactory {
             components: [
                 createThemeComponent('christmas', THEME_COMPONENTS.SNOWFALL),
                 createThemeComponent('christmas', THEME_COMPONENTS.SANTA_SLEIGH),
-                createThemeComponent('christmas', THEME_COMPONENTS.WINTER_SCENE, false), // Not global, used in ContactSection
+                createThemeComponent('christmas', THEME_COMPONENTS.WINTER_SCENE, false), // Section-specific component
             ],
         },
         [ThemeId.HAPPY_NEW_YEAR]: {
@@ -45,6 +53,12 @@ class ThemeFactory {
         },
     };
 
+    /**
+     * Retrieves the theme configuration for a given theme ID.
+     * 
+     * @param id - The identifier of the theme to retrieve.
+     * @returns The theme configuration object, defaulting to the base theme if the ID is unrecognized.
+     */
     public static getTheme(id: ThemeId): Theme {
         return this.themes[id] || this.themes[ThemeId.DEFAULT];
     }

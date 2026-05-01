@@ -72,6 +72,10 @@ onMounted(() => {
     touchMultiplier: 2,
   });
 
+  /**
+   * Recursive function to update the Lenis scroll instance on each animation frame.
+   * @param time - The current timestamp.
+   */
   function raf(time: number) {
     lenis?.raf(time);
     requestAnimationFrame(raf);
@@ -79,30 +83,39 @@ onMounted(() => {
 
   requestAnimationFrame(raf);
 
-  // Handle anchor links
-  document.querySelectorAll('a[href^="#"], a[href^="/#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
+  /**
+   * Intercepts anchor link clicks to provide smooth scrolling using Lenis.
+   * Handles both pure anchors (#) and relative anchors (/#).
+   * @param e - The click event.
+   */
+  const handleAnchorClick = (e: Event) => {
+    const anchor = e.currentTarget as HTMLAnchorElement;
+    const href = anchor.getAttribute('href');
+    if (href && href.includes('#')) {
       e.preventDefault();
-      const href = (e.currentTarget as HTMLElement).getAttribute('href');
-      if (href) {
-        // Extract the target ID (handle both #target and /#target)
-        const targetId = href.includes('#') ? '#' + href.split('#')[1] : null;
-        
-        if (targetId && targetId !== '#') {
-          const isMobile = window.innerWidth < 768;
-          lenis?.scrollTo(targetId, {
-            duration: 1.5,
-            offset: isMobile ? -50 : -10,
-          });
-        }
+      const targetId = '#' + href.split('#')[1];
+      if (targetId !== '#') {
+        const isMobile = window.innerWidth < 768;
+        lenis?.scrollTo(targetId, {
+          duration: 1.5,
+          offset: isMobile ? -50 : -10,
+        });
       }
+    }
+  };
+
+  document.querySelectorAll('a[href^="#"], a[href^="/#"]').forEach(anchor => {
+    anchor.addEventListener('click', handleAnchorClick);
+  });
+
+  onUnmounted(() => {
+    lenis?.destroy();
+    document.querySelectorAll('a[href^="#"], a[href^="/#"]').forEach(anchor => {
+      anchor.removeEventListener('click', handleAnchorClick);
     });
   });
 });
 
-onUnmounted(() => {
-  lenis?.destroy();
-});
 </script>
 
 <style scoped>

@@ -137,11 +137,13 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { useTheme } from "../../composables/useTheme";
 import { THEME_COMPONENTS } from "../../types/theme";
+import { socials } from "../../data/socials";
+import { useIntersectionObserver } from "../../composables/useIntersectionObserver";
 
 const { getThemeComponent } = useTheme();
 
-const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
+const { isVisible } = useIntersectionObserver(sectionRef, { threshold: 0.2 });
 
 const emojis = ["😍", "🤯", "😳", "😎", "🤔", "😩", "🥹", "😭", "😱"];
 const currentEmojiIndex = ref(0);
@@ -149,34 +151,7 @@ const currentEmoji = ref(emojis[0]);
 const isEmojiFading = ref(false);
 let emojiInterval: ReturnType<typeof setInterval> | null = null;
 
-const socials = [
-  { name: "Email", url: "mailto:connect@rkisdp.dev", icon: ['fas', 'envelope'], color: "#EA4335" },
-  { name: "GitHub", url: "https://github.com/rkisdp", icon: ['fab', 'github'], color: "#ffffff", hoverIconColor: "#000000" },
-  { name: "LinkedIn", url: "https://www.linkedin.com/in/rkisdp/", icon: ['fab', 'linkedin'], color: "#0077b5" },
-  { name: "Medium", url: "https://medium.com/@rkisdp", icon: ['fab', 'medium'], color: "#ffffff", hoverIconColor: "#000000" },
-  { name: "Stack Overflow", url: "https://stackoverflow.com/users/11983208/divya-prakash", icon: ['fab', 'stack-overflow'], color: "#f48024" },
-];
-
 onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          isVisible.value = true;
-        }
-      });
-    },
-    {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.2,
-    }
-  );
-
-  if (sectionRef.value) {
-    observer.observe(sectionRef.value);
-  }
-
   emojiInterval = setInterval(() => {
     isEmojiFading.value = true;
     setTimeout(() => {
@@ -185,13 +160,13 @@ onMounted(() => {
       isEmojiFading.value = false;
     }, 250);
   }, 1600);
+});
 
-  onUnmounted(() => {
-    observer.disconnect();
-    if (emojiInterval) clearInterval(emojiInterval);
-  });
+onUnmounted(() => {
+  if (emojiInterval) clearInterval(emojiInterval);
 });
 </script>
+
 <style scoped>
 .wrapper .button {
   display: inline-flex;
