@@ -91,6 +91,7 @@ const skills: Skill[] = [
   {
     name: "MySQL",
     image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg",
+    invert: true,
   },
   {
     name: "PostgreSQL",

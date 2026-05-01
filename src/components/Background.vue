@@ -26,8 +26,8 @@ class Particle {
   constructor() {
     this.x = Math.random() * W;
     this.y = Math.random() * H;
-    this.vx = (Math.random() - 0.5) * 0.4;
-    this.vy = (Math.random() - 0.5) * 0.4;
+    this.vx = (Math.random() - 0.5);
+    this.vy = (Math.random() - 0.5);
     this.r = Math.random() * 1.5 + 0.5;
     this.alpha = Math.random() * 0.3 + 0.7;
     this.color = Math.random() > 0.7 ? 'green' : 'cyan';
@@ -88,14 +88,14 @@ function draw() {
 
 const handleResize = () => {
   resize();
-  initParticles(80);
+  initParticles(160);
 };
 
 onMounted(() => {
   if (!canvasRef.value) return;
   ctx = canvasRef.value.getContext('2d');
   resize();
-  initParticles(80);
+  initParticles(160);
   draw();
   window.addEventListener('resize', handleResize);
 });
