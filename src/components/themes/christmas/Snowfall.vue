@@ -30,7 +30,7 @@ interface Snowflake {
 }
 
 const flakes = ref<Snowflake[]>([]);
-const flakeCount = 50; // Number of snowflakes
+const flakeCount = window.innerWidth < 768 ? 20 : 50;
 
 function createSnowflake(id: number): Snowflake {
   return {

@@ -62,9 +62,24 @@ function resize() {
  * populates the particles array with a specific number of Particle instances.
  * @param n - The number of particles to create.
  */
-function initParticles(n: number) {
+function getParticleCount() {
+  const width = window.innerWidth;
+  if (width < 768) return 40;
+  if (width < 1024) return 80;
+  return 150;
+}
+
+function getConnectionDistance() {
+  const width = window.innerWidth;
+  if (width < 768) return 85;
+  if (width < 1024) return 110;
+  return 140;
+}
+
+function initParticles() {
+  const count = getParticleCount();
   particles = [];
-  for (let i = 0; i < n; i++) particles.push(new Particle());
+  for (let i = 0; i < count; i++) particles.push(new Particle());
 }
 
 /**
@@ -76,14 +91,15 @@ function draw() {
   ctx.clearRect(0, 0, W, H);
 
   // Draw lines between particles that are close to each other
+  const connectionDist = getConnectionDistance();
   for (let i = 0; i < particles.length; i++) {
     for (let j = i + 1; j < particles.length; j++) {
       const dx = particles[i].x - particles[j].x;
       const dy = particles[i].y - particles[j].y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 140) {
+      if (dist < connectionDist) {
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(0,245,255,${(1 - dist / 140) * 0.55})`;
+        ctx.strokeStyle = `rgba(0,245,255,${(1 - dist / connectionDist) * 0.55})`;
         ctx.lineWidth = 0.5;
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
@@ -112,7 +128,7 @@ function draw() {
  */
 const handleResize = () => {
   resize();
-  initParticles(160);
+  initParticles();
 };
 
 
@@ -120,7 +136,7 @@ onMounted(() => {
   if (!canvasRef.value) return;
   ctx = canvasRef.value.getContext('2d');
   resize();
-  initParticles(160);
+  initParticles();
   draw();
   window.addEventListener('resize', handleResize);
 });

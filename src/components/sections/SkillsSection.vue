@@ -23,7 +23,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-6">
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-6">
         <div
           v-for="(skill, index) in skills"
           :key="index"

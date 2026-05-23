@@ -245,4 +245,37 @@ onUnmounted(() => {
   opacity: 0;
   transform: translateY(-2px);
 }
+
+@media (max-width: 640px) {
+  .wrapper {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .wrapper .button {
+    height: 45px;
+    width: 45px;
+  }
+  .wrapper .button:hover {
+    width: 45px; /* Disable hover expansion on mobile */
+  }
+  .wrapper .button span {
+    display: none; /* Make sure label is hidden on mobile */
+  }
+  .wrapper .button .icon {
+    height: 45px;
+    width: 45px;
+  }
+  .wrapper .button .icon svg {
+    font-size: 16px;
+    line-height: 45px;
+  }
+  .emoji-footer {
+    flex-wrap: wrap;
+    font-size: 14px;
+    padding: 0 16px;
+    line-height: 1.6;
+    display: flex;
+  }
+}
 </style>

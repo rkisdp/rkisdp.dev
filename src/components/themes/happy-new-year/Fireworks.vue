@@ -108,7 +108,8 @@ class FwParticle {
 }
 
 function explode(x: number, y: number, hue: number) {
-  for (let i = 0; i < 40; i++) {
+  const count = window.innerWidth < 768 ? 15 : 40;
+  for (let i = 0; i < count; i++) {
     particles.push(new FwParticle(x, y, hue));
   }
 }
@@ -143,11 +144,12 @@ const startFireworks = () => {
   
   animate();
   
+  const spawnRate = window.innerWidth < 768 ? 1200 : 600;
   spawnInterval = setInterval(() => {
     if (canvas.value) {
       fireworks.push(new Firework(canvas.value.width, canvas.value.height));
     }
-  }, 600);
+  }, spawnRate);
 };
 
 onMounted(() => {

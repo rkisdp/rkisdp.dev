@@ -93,7 +93,8 @@ const init = () => {
   window.addEventListener('resize', resize);
   resize();
 
-  particles = Array.from({ length: 150 }, () => new Particle(canvas.value!.width, canvas.value!.height, true));
+  const count = window.innerWidth < 768 ? 50 : 150;
+  particles = Array.from({ length: count }, () => new Particle(canvas.value!.width, canvas.value!.height, true));
 
   const animate = () => {
     if (particles.length === 0 && !isSpawning.value) {

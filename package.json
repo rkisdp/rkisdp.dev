@@ -26,6 +26,7 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.60.4",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/tsconfig": "^0.7.0",

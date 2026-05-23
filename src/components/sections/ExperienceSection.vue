@@ -133,41 +133,41 @@
       </div>
       
       <!-- Mobile View (Vertical Timeline) -->
-      <div class="md:hidden relative px-4 pb-8">
+      <div class="md:hidden relative px-3 pb-8">
         <!-- Vertical Line -->
-        <div class="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-cyan-400/50 to-transparent"></div>
+        <div class="absolute left-[25px] top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-cyan-400/50 to-transparent"></div>
 
         <div class="flex flex-col gap-8">
           <div 
             v-for="(job, index) in jobs" 
             :key="`mobile-${index}`"
-            class="relative pl-12"
+            class="relative pl-8"
             :class="{'opacity-0 translate-x-8': !isVisible, 'opacity-100 translate-x-0': isVisible}"
             :style="{ transitionDelay: `${index * 100}ms`, transitionDuration: '0.6s' }"
           >
             <!-- Timeline Dot -->
-            <div class="absolute left-[11px] top-6 w-3 h-3 rounded-full bg-background border-2 border-primary z-10 shadow-[0_0_10px_rgba(0,212,255,0.5)]"></div>
+            <div class="absolute left-[8px] top-6 w-2.5 h-2.5 rounded-full bg-background border-2 border-primary z-10 shadow-[0_0_10px_rgba(0,212,255,0.5)]"></div>
 
             <!-- Card -->
             <div 
-              class="w-full bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-xl p-6 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden"
+              class="w-full bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-xl p-4 sm:p-6 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden"
               @click="openModal(job)"
             >
               <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
 
               <div class="relative z-10">
-                <div class="flex items-center gap-4 mb-4">
-                  <div class="w-20 h-20 rounded-lg bg-white/5 p-2.5 border border-white/10 flex items-center justify-center shrink-0">
+                <div class="flex items-center gap-3 sm:gap-4 mb-4">
+                  <div class="w-12 h-12 sm:w-20 sm:h-20 rounded-lg bg-white/5 p-1.5 sm:p-2.5 border border-white/10 flex items-center justify-center shrink-0">
                     <img v-if="job.logo" :src="job.logo" :alt="job.company" class="w-full h-full object-contain rounded" />
-                    <font-awesome-icon v-else :icon="['fas', 'briefcase']" class="text-primary text-2xl" />
+                    <font-awesome-icon v-else :icon="['fas', 'briefcase']" class="text-primary text-lg sm:text-2xl" />
                   </div>
                   <div class="min-w-0">
-                    <h3 class="text-xl font-bold text-white mb-1">{{ job.position }}</h3>
-                    <h4 class="text-base text-gray-400">{{ job.company }}</h4>
+                    <h3 class="text-base sm:text-xl font-bold text-white mb-1 leading-snug">{{ job.position }}</h3>
+                    <h4 class="text-xs sm:text-base text-gray-400 leading-snug truncate">{{ job.company }}</h4>
                   </div>
                 </div>
 
-                <div class="inline-block px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-mono text-primary/80 mb-4">
+                <div class="inline-block px-3 py-1 sm:py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm font-mono text-primary/80 mb-4">
                   {{ job.shortPeriod }}
                 </div>
 
