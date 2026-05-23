@@ -24,15 +24,15 @@
     </div>
 
     <div
-        class="h-full w-full flex flex-col items-center justify-start pt-24 pb-4 md:py-0 md:justify-center"
+        class="h-full w-full flex flex-col items-center justify-start md:justify-center"
     >
       <div class="w-[95%] md:w-[90%] max-w-[1200px] z-10 px-4 md:px-0">
         <!-- Impact Areas Section -->
         <div
-            class="max-w-3xl mx-auto text-center mt-8 mb-2 md:mb-16 transition-all duration-800 ease-out"
+            class="max-w-3xl mx-auto text-center mb-12 md:mb-20 transition-all duration-800 ease-out"
             :class="{'opacity-0 translate-y-5': !isVisible, 'opacity-100 translate-y-0': isVisible}"
         >
-          <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-8">
+          <h2 class="section-title mb-4">
             Creating Meaningful Impact
           </h2>
           <p class="text-base sm:text-lg mb-4 md:mb-6 text-gray-300/90">
@@ -54,7 +54,8 @@
         >
           <!-- Mobile Version -->
           <div class="md:hidden">
-            <h2 class="text-xl mb-4 text-gray-200 text-center">Impact Highlights</h2>
+            <h3 class="text-xl mb-4 text-gray-200 text-center">Impact Highlights</h3>
+            <p class="text-sm text-gray-400/90 mb-4">These are the patterns, technologies, and practices I use to build reliable systems that scale. Each capability is tied to production outcomes, not just familiarity, but demonstrated impact.</p>
 
             <!-- Mobile Carousel -->
             <div class="relative overflow-hidden">
@@ -113,9 +114,10 @@
 
           <!-- Desktop Version -->
           <div class="hidden md:block">
-            <h2 class="text-xl md:text-3xl mb-8 text-gray-200">
+            <h3 class="text-xl md:text-3xl mb-4 text-gray-200">
               Impact Highlights
-            </h2>
+            </h3>
+            <p class="text-sm md:text-base text-gray-400/90 mb-8">These are the patterns, technologies, and practices I use to build reliable systems that scale. Each capability is tied to production outcomes, not just familiarity, but demonstrated impact.</p>
             <!-- Grid container -->
             <div
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
@@ -146,10 +148,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import { highlightItems } from "../../data/highlightItems";
+import { useIntersectionObserver } from "../../composables/useIntersectionObserver";
 
-const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
 const glowRef = ref<HTMLDivElement | null>(null);
 const carouselContainer = ref<HTMLElement | null>(null);
@@ -157,37 +159,50 @@ const currentIndex = ref(0);
 const autoplayInterval = ref<number | null>(null);
 const isPaused = ref(false);
 
+const { isVisible } = useIntersectionObserver(sectionRef, { threshold: 0.1 });
+
+/**
+ * Advances the mobile carousel to the next slide.
+ */
 const nextSlide = () => {
   if (currentIndex.value < highlightItems.length - 1) {
     currentIndex.value++;
   } else {
-    // Loop back to the first slide for continuous scrolling
     currentIndex.value = 0;
   }
 };
 
+/**
+ * Moves the mobile carousel to the previous slide.
+ */
 const prevSlide = () => {
   if (currentIndex.value > 0) {
     currentIndex.value--;
   }
 };
 
+/**
+ * Navigates to a specific slide in the mobile carousel.
+ * @param index - The index of the slide to navigate to.
+ */
 const goToSlide = (index: number) => {
   currentIndex.value = index;
-  // Reset the autoplay timer when manually navigating
   resetAutoplayTimer();
 };
 
+/**
+ * Starts the automatic rotation of the mobile carousel.
+ */
 const startAutoplay = () => {
   if (autoplayInterval.value) return;
-
   autoplayInterval.value = window.setInterval(() => {
-    if (!isPaused.value) {
-      nextSlide();
-    }
-  }, 5000); // 5 seconds
+    if (!isPaused.value) nextSlide();
+  }, 5000);
 };
 
+/**
+ * Stops the automatic rotation of the mobile carousel.
+ */
 const stopAutoplay = () => {
   if (autoplayInterval.value) {
     clearInterval(autoplayInterval.value);
@@ -195,44 +210,49 @@ const stopAutoplay = () => {
   }
 };
 
+/**
+ * Resets the autoplay timer.
+ */
 const resetAutoplayTimer = () => {
   stopAutoplay();
   startAutoplay();
 };
 
-// Pause autoplay when user interacts with the carousel
-const pauseAutoplay = () => {
-  isPaused.value = true;
-};
-
-const resumeAutoplay = () => {
-  isPaused.value = false;
-};
+const pauseAutoplay = () => { isPaused.value = true; };
+const resumeAutoplay = () => { isPaused.value = false; };
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            isVisible.value = true;
-            startAutoplay(); // Start autoplay when section becomes visible
-          } else {
-            stopAutoplay(); // Stop autoplay when section is not visible
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-      }
-  );
+  // Glow effect animation logic
+  let animationId: number;
+  let intervalId: number;
 
-  if (sectionRef.value) {
-    observer.observe(sectionRef.value);
-  }
+  const animateGlow = () => {
+    if (!glowRef.value) return;
 
-  // Set up carousel interaction events
+    const glow = glowRef.value;
+    const position = { x: 0, y: 0 };
+    const target = { x: 0, y: 0 };
+
+    const animate = () => {
+      position.x += (target.x - position.x) * 0.05;
+      position.y += (target.y - position.y) * 0.05;
+
+      glow.style.opacity = isVisible.value ? "1" : "0";
+      glow.style.transform = `translate(${position.x}px, ${position.y}px)`;
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    intervalId = window.setInterval(() => {
+      target.x = Math.random() * 100 - 50;
+      target.y = Math.random() * 100 - 50;
+    }, 3000);
+  };
+
+  animateGlow();
+
   if (carouselContainer.value) {
     carouselContainer.value.addEventListener('mouseenter', pauseAutoplay);
     carouselContainer.value.addEventListener('mouseleave', resumeAutoplay);
@@ -240,62 +260,27 @@ onMounted(() => {
     carouselContainer.value.addEventListener('touchend', resumeAutoplay);
   }
 
-  // Glow effect animation
-  const animateGlow = () => {
-    if (!isVisible.value || !glowRef.value) return;
-
-    const glow = glowRef.value;
-    const position = { x: 0, y: 0 };
-    const target = { x: 0, y: 0 };
-    let animationId: number;
-
-    const animate = () => {
-      // Smoothly follow the target position
-      position.x += (target.x - position.x) * 0.05;
-      position.y += (target.y - position.y) * 0.05;
-
-      // Update the translateX and translateY
-      glow.style.opacity = "1";
-      glow.style.transform = `translate(${position.x}px, ${position.y}px)`;
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    // Start animation
-    animate();
-
-    // Periodically change the target position
-    const interval = setInterval(() => {
-      // Random target position within a range
-      target.x = Math.random() * 100 - 50;
-      target.y = Math.random() * 100 - 50;
-    }, 3000);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      clearInterval(interval);
-      if (glow) glow.style.opacity = "0";
-    };
-  };
-
-  const cleanup = animateGlow();
-
-  // Cleanup
   onUnmounted(() => {
-    observer.disconnect();
     stopAutoplay();
-
-    // Remove event listeners
+    cancelAnimationFrame(animationId);
+    clearInterval(intervalId);
     if (carouselContainer.value) {
       carouselContainer.value.removeEventListener('mouseenter', pauseAutoplay);
       carouselContainer.value.removeEventListener('mouseleave', resumeAutoplay);
       carouselContainer.value.removeEventListener('touchstart', pauseAutoplay);
       carouselContainer.value.removeEventListener('touchend', resumeAutoplay);
     }
-
-    if (cleanup) cleanup();
   });
 });
+
+watch(isVisible, (visible) => {
+  if (visible) {
+    startAutoplay();
+  } else {
+    stopAutoplay();
+  }
+});
+
 </script>
 
 <style scoped>

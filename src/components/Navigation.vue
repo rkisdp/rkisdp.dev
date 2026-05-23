@@ -5,7 +5,7 @@
   >
     <div class="flex items-center justify-between px-6">
       <div class="flex-shrink-0">
-        <a href="/" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-mono tracking-tighter hover:opacity-80 transition-opacity">
+        <a href="/" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary font-mono hover:opacity-80 transition-opacity">
           DP
         </a>
       </div>
@@ -114,19 +114,22 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: "Highlights", href: "/#impact" },
-  { name: "Skills", href: "/#skills" },
-  { name: "Experience", href: "/#experience" },
-  { name: "Education", href: "/#education" },
-  { name: "Articles", href: "/#articles" },
-  { name: "Testimonials", href: "/#testimonials" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Highlights", href: "#impact" },
+  { name: "Skills", href: "#skills" },
+  { name: "Experience", href: "#experience" },
+  { name: "Education", href: "#education" },
+  { name: "Articles", href: "#articles" },
+  { name: "Testimonials", href: "#testimonials" },
+  { name: "Contact", href: "#contact" },
 ];
 
 const activeSection = ref("");
 const mobileMenuOpen = ref(false);
 const isScrolled = ref(false);
 
+/**
+ * Handles the scroll event to update the active section and navigation styling.
+ */
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 50;
   
@@ -147,10 +150,16 @@ const handleScroll = () => {
   });
 };
 
+/**
+ * Toggles the mobile menu visibility.
+ */
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value;
 };
 
+/**
+ * Closes the mobile menu.
+ */
 const closeMobileMenu = () => {
   mobileMenuOpen.value = false;
 };
@@ -162,4 +171,5 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
+
 </script>

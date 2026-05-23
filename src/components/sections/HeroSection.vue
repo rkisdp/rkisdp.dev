@@ -2,7 +2,7 @@
   <section
     class="section relative flex flex-col items-center justify-center overflow-hidden min-h-screen"
   >
-    <NebulaBackground :opacity="opacity" :zoomLevel="zoomLevel" />
+
 
     <div class="h-full w-full flex flex-col items-center justify-center z-10">
       <div
@@ -16,27 +16,47 @@
         </h2>
         
         <h1
-          class="text-5xl sm:text-7xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-white tracking-tighter uppercase mb-6 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"
+          v-if="currentThemeId === ThemeId.HOLI"
+          :style="{
+            opacity,
+            transform: `scale(${0.9 + opacity * 0.1})`,
+            transition: 'opacity 1.5s ease-out, transform 1.5s ease-out',
+          }"
+          class="text-5xl sm:text-7xl md:text-9xl mb-6"
+        >
+          <PaintSplashText 
+            text="DIVYA PRAKASH"
+            :colors="currentTheme.config?.colors"
+          />
+        </h1>
+
+        <h1
+          v-else
+          class="text-5xl sm:text-7xl md:text-9xl font-bold text-white tracking-tighter uppercase mb-6 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"
           :style="{
             opacity,
             transform: `scale(${0.9 + opacity * 0.1})`,
             transition: 'opacity 1.5s ease-out, transform 1.5s ease-out',
           }"
         >
-          divya prakash
+          DIVYA PRAKASH
         </h1>
 
-        <p
-          class="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl font-light tracking-wide mb-10 relative"
+        <div
+          class="terminal-container"
           :style="{
             opacity: Math.max(0, opacity - 0.2),
             transform: `translateY(${(1 - opacity) * 40}px)`,
             transition: 'opacity 1.5s ease-out 0.3s, transform 1.5s ease-out 0.3s',
           }"
         >
-          Engineering reliable and scalable systems that handle real-world chaos.
-<!--          Engineering <span class="text-green-400 font-medium">secure</span>, <span class="text-accent font-medium">scalable</span>, and <span class="text-primary font-medium">intelligent</span> digital solutions.-->
-        </p>
+          <h2 class="terminal-title">I build scalable backends systems.</h2>
+          <div class="terminal-line">
+            <span class="prompt">></span>
+            <span class="typed-text">{{ currentTypedText }}</span>
+            <span class="cursor"></span>
+          </div>
+        </div>
       </div>
     </div>
     
@@ -46,28 +66,63 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import NebulaBackground from "../NebulaBackground.vue";
+
+import PaintSplashText from "../themes/holi/PaintSplashText.vue";
+import { useTheme } from "../../composables/useTheme";
+import { ThemeId } from "../../types/theme";
+
+const { currentTheme, currentThemeId } = useTheme();
 const opacity = ref(0);
-const zoomLevel = ref(1.2);
-const scrollY = ref(0);
+
+const texts = [
+  "Building secure APIs...",
+  "Developing AI/ML models...",
+  "Optimizing databases...",
+  "Automating workflows..."
+];
+
+const currentTypedText = ref("");
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+/**
+ * Executes a typing animation effect for the terminal section.
+ * Recursively calls itself to cycle through the strings defined in the `texts` array.
+ */
+function typeEffect() {
+  const currentText = texts[textIndex];
+  if (!isDeleting) {
+    currentTypedText.value = currentText.slice(0, charIndex++);
+    if (charIndex > currentText.length) {
+      setTimeout(() => isDeleting = true, 1200);
+    }
+  } else {
+    currentTypedText.value = currentText.slice(0, charIndex--);
+    if (charIndex < 0) {
+      isDeleting = false;
+      charIndex = 0;
+      textIndex = (textIndex + 1) % texts.length;
+    }
+  }
+  setTimeout(typeEffect, isDeleting ? 40 : 80);
+}
 
 onMounted(() => {
-  // Animate in
+  typeEffect();
+
   setTimeout(() => {
     opacity.value = 1;
-    zoomLevel.value = 1;
   }, 300);
 
-  // Handle scroll effect
+  /**
+   * Updates reactive scroll position and applies parallax/fade transformations.
+   */
   const handleScroll = () => {
-    scrollY.value = window.scrollY;
+    const scroll = window.scrollY;
     
-    if (scrollY.value < window.innerHeight) {
-      // Parallax effect for hero section
-      const newZoom = 1 + scrollY.value * 0.0003;
-      const newOpacity = 1 - (scrollY.value / window.innerHeight) * 1.2;
-
-      zoomLevel.value = newZoom;
+    if (scroll < window.innerHeight) {
+      const newOpacity = 1 - (scroll / window.innerHeight) * 1.2;
       opacity.value = Math.max(0, newOpacity);
     }
   };
@@ -78,6 +133,7 @@ onMounted(() => {
     window.removeEventListener("scroll", handleScroll);
   });
 });
+
 </script>
 
 <style scoped>
@@ -94,6 +150,58 @@ onMounted(() => {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.terminal-container {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.terminal-title {
+  font-family: "Outfit", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(209, 213, 219, 0.9);
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .terminal-title {
+    font-size: 2rem;
+  }
+}
+
+.terminal-line {
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  color: #00ff88;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .terminal-line {
+    font-size: 1.25rem;
+  }
+}
+
+.prompt {
+  margin-right: 8px;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  background-color: #00ff88;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+  height: 1.2em;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
 }
 
 </style>

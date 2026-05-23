@@ -17,7 +17,8 @@ import {
   faArrowRight,
   faArrowLeft,
   faBriefcase,
-  faSleigh
+  faSleigh,
+  faCommentDots
 } from '@fortawesome/free-solid-svg-icons';
 
 // Add all icons to the library
@@ -36,7 +37,8 @@ library.add(
   faArrowRight,
   faArrowLeft,
   faBriefcase,
-  faSleigh
+  faSleigh,
+  faCommentDots
 );
 
 export { FontAwesomeIcon };

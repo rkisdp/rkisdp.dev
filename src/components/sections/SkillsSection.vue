@@ -11,12 +11,12 @@
 
     <div class="container-custom relative z-10">
       <div
-        class="text-center mb-16"
+        class="text-center mb-12 md:mb-20"
         :class="{'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
         style="transition: all 0.8s ease-out;"
       >
-        <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-4">
-          Technical Arsenal
+        <h2 class="section-title mb-4">
+          Skills
         </h2>
         <p class="text-muted-foreground max-w-2xl mx-auto">
           Technologies and tools I use to bring ideas to life.
@@ -55,94 +55,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
-import awsImage from "../../assets/images/skills/aws.png";
-import kafkaImage from "../../assets/images/skills/kafka.png";
+import { ref } from "vue";
+import { skills } from "../../data/skills";
+import { useIntersectionObserver } from "../../composables/useIntersectionObserver";
 
-interface Skill {
-  name: string;
-  image: string;
-  invert?: boolean;
-}
-
-const skills: Skill[] = [
-  {
-    name: "Python",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-  },
-  {
-    name: "Golang",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg",
-  },
-  {
-    name: "Django",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
-    invert: true,
-  },
-  {
-    name: "Flask",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg",
-    invert: true,
-  },
-  {
-    name: "FastAPI",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
-  },
-  {
-    name: "MySQL",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg",
-  },
-  {
-    name: "PostgreSQL",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-  },
-  {
-    name: "Elasticsearch",
-    image: "https://www.vectorlogo.zone/logos/elastic/elastic-icon.svg",
-  },
-  {
-    name: "Redis",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
-  },
-  {
-    name: "Docker",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-  },
-  {
-    name: "AWS",
-    image: awsImage,
-  },
-  {
-    name: "Kafka",
-    image: kafkaImage,
-  },
-];
-
-const isVisible = ref(false);
 const sectionRef = ref<HTMLElement | null>(null);
-
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          isVisible.value = true;
-        }
-      });
-    },
-    {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.1,
-    }
-  );
-
-  if (sectionRef.value) {
-    observer.observe(sectionRef.value);
-  }
-
-  onUnmounted(() => {
-    observer.disconnect();
-  });
-});
+const { isVisible } = useIntersectionObserver(sectionRef);
 </script>
+

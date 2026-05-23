@@ -2,11 +2,8 @@
   <section
     ref="sectionRef"
     id="contact"
-    class="section relative overflow-hidden flex flex-col !pb-0"
+    class="section relative overflow-hidden flex flex-col !pb-0 !px-0"
   >
-    <!-- Background hills and winter scene removed from here -->
-
-    <!-- Background particles -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div
         class="absolute w-96 h-96 rounded-full blur-[120px] animate-pulse-glow"
@@ -22,11 +19,11 @@
     <div class="flex-grow flex items-center justify-center w-full z-10">
       <div class="container-custom max-w-5xl">
         <div
-          class="text-center mb-16"
+          class="text-center mb-12 md:mb-20"
           :class="{'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible}"
           style="transition: all 0.8s ease-out;"
         >
-          <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary mb-4">
+          <h2 class="section-title mb-4">
             Get In Touch
           </h2>
           <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -98,7 +95,7 @@
 
     <!-- Footer -->
     <footer
-      class="w-full text-center pt-8 border-t border-white/5 bg-background/50 backdrop-blur-sm"
+      class="w-full text-center pt-8 border-t border-white/5 bg-background/50 backdrop-blur-sm relative z-20"
       :style="{
         opacity: isVisible ? 1 : 0,
         transition: 'opacity 0.8s ease-out 0.4s',
@@ -120,12 +117,17 @@
           <span>{{ social.name }}</span>
         </a>
       </div>
-      <p class="text-muted-foreground text-sm font-mono mt-10 mb-1">
-        {{ new Date().getFullYear() }} Divya Prakash. No rights reserved. Feel free to copy.
-      </p>
+      <div class="emoji-footer text-muted-foreground text-sm font-mono mt-10 mb-8">
+        <span>Made with</span>
+        <span class="emoji" :class="{ 'fade': isEmojiFading }">{{ currentEmoji }}</span>
+        <span>facial expressions. 2026 Divya Prakash.</span>
+      </div>
       
-      <div class="w-full overflow-hidden pointer-events-none">
-        <WinterScene />
+      <div v-if="getThemeComponent(THEME_COMPONENTS.WINTER_SCENE)" class="w-full overflow-hidden pointer-events-none">
+        <component :is="getThemeComponent(THEME_COMPONENTS.WINTER_SCENE)?.component" />
+      </div>
+      <div v-if="getThemeComponent(THEME_COMPONENTS.DIWALI_FOOTER)" class="w-full overflow-hidden pointer-events-none">
+        <component :is="getThemeComponent(THEME_COMPONENTS.DIWALI_FOOTER)?.component" />
       </div>
     </footer>
   </section>
@@ -133,44 +135,38 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import WinterScene from "../WinterScene.vue";
+import { useTheme } from "../../composables/useTheme";
+import { THEME_COMPONENTS } from "../../types/theme";
+import { socials } from "../../data/socials";
+import { useIntersectionObserver } from "../../composables/useIntersectionObserver";
 
-const isVisible = ref(false);
+const { getThemeComponent } = useTheme();
+
 const sectionRef = ref<HTMLElement | null>(null);
+const { isVisible } = useIntersectionObserver(sectionRef, { threshold: 0.2 });
 
-const socials = [
-  { name: "Email", url: "mailto:connect@rkisdp.dev", icon: ['fas', 'envelope'], color: "#EA4335" },
-  { name: "GitHub", url: "https://github.com/rkisdp", icon: ['fab', 'github'], color: "#ffffff", hoverIconColor: "#000000" },
-  { name: "LinkedIn", url: "https://www.linkedin.com/in/rkisdp/", icon: ['fab', 'linkedin'], color: "#0077b5" },
-  { name: "Medium", url: "https://medium.com/@rkisdp", icon: ['fab', 'medium'], color: "#ffffff", hoverIconColor: "#000000" },
-  { name: "Stack Overflow", url: "https://stackoverflow.com/users/11983208/divya-prakash", icon: ['fab', 'stack-overflow'], color: "#f48024" },
-];
+const emojis = ["😍", "🤯", "😳", "😎", "🤔", "😩", "🥹", "😭", "😱"];
+const currentEmojiIndex = ref(0);
+const currentEmoji = ref(emojis[0]);
+const isEmojiFading = ref(false);
+let emojiInterval: ReturnType<typeof setInterval> | null = null;
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          isVisible.value = true;
-        }
-      });
-    },
-    {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.2,
-    }
-  );
+  emojiInterval = setInterval(() => {
+    isEmojiFading.value = true;
+    setTimeout(() => {
+      currentEmojiIndex.value = (currentEmojiIndex.value + 1) % emojis.length;
+      currentEmoji.value = emojis[currentEmojiIndex.value];
+      isEmojiFading.value = false;
+    }, 250);
+  }, 1600);
+});
 
-  if (sectionRef.value) {
-    observer.observe(sectionRef.value);
-  }
-
-  onUnmounted(() => {
-    observer.disconnect();
-  });
+onUnmounted(() => {
+  if (emojiInterval) clearInterval(emojiInterval);
 });
 </script>
+
 <style scoped>
 .wrapper .button {
   display: inline-flex;
@@ -227,5 +223,26 @@ onMounted(() => {
 .wrapper .button:hover span {
   opacity: 1;
   color: var(--hover-color);
+}
+
+.emoji-footer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 16px;
+}
+
+.emoji {
+  font-size: 1.25em;
+  width: 1.1em;
+  text-align: center;
+  display: inline-block;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.fade {
+  opacity: 0;
+  transform: translateY(-2px);
 }
 </style>
