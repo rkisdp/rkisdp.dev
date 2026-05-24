@@ -1,4 +1,5 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { defineNuxtPlugin } from '#app';
+import { library, config } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
   faGithub,
@@ -21,7 +22,8 @@ import {
   faCommentDots
 } from '@fortawesome/free-solid-svg-icons';
 
-// Add all icons to the library
+config.autoAddCss = false;
+
 library.add(
   faGithub,
   faLinkedin,
@@ -41,4 +43,6 @@ library.add(
   faCommentDots
 );
 
-export { FontAwesomeIcon };
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.component('font-awesome-icon', FontAwesomeIcon);
+});

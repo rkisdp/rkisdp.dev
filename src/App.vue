@@ -1,11 +1,12 @@
 <template>
-  <Analytics />
-  <SpeedInsights />
-  <ThemeGlobalComponents />
-  <Background />
+  <ClientOnly>
+    <Analytics />
+    <SpeedInsights />
+    <ThemeGlobalComponents />
+    <Background />
+  </ClientOnly>
   <main class="relative min-h-screen z-10">
     <Navigation />
-
     <div class="w-full">
       <HeroSection />
       <ImpactSection />
@@ -16,8 +17,6 @@
       <TestimonialsSection />
       <ContactSection />
     </div>
-
-    <!-- Floating Action Buttons -->
     <div class="fixed bottom-6 right-3 sm:right-6 z-50 flex flex-row items-center gap-[10px]">
       <a
         href="https://drive.google.com/file/d/1GAQD4yhAcxU8KQ29KPYeG_b-4C9zFYhR/view?usp=sharing"
@@ -38,25 +37,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
 import { Analytics } from '@vercel/analytics/vue';
 import { SpeedInsights } from '@vercel/speed-insights/vue';
 import Lenis from 'lenis';
-import Navigation from './components/Navigation.vue';
-import Background from './components/Background.vue';
-import HeroSection from './components/sections/HeroSection.vue';
-import SkillsSection from './components/sections/SkillsSection.vue';
-import ExperienceSection from './components/sections/ExperienceSection.vue';
-import ImpactSection from './components/sections/ImpactSection.vue';
-import EducationSection from './components/sections/EducationSection.vue';
-import ArticlesSection from './components/sections/ArticlesSection.vue';
-import TestimonialsSection from './components/sections/TestimonialsSection.vue';
-import ContactSection from './components/sections/ContactSection.vue';
-import ThemeGlobalComponents from './components/ThemeGlobalComponents.vue';
-import ChatButton from './components/ChatButton.vue';
-import { useTheme } from './composables/useTheme';
 
-useTheme(); // Initialize theme
+useTheme();
 
 const buttonAnimated = ref(false);
 let lenis: Lenis | null = null;
@@ -72,10 +57,6 @@ onMounted(() => {
     touchMultiplier: 2,
   });
 
-  /**
-   * Recursive function to update the Lenis scroll instance on each animation frame.
-   * @param time - The current timestamp.
-   */
   function raf(time: number) {
     lenis?.raf(time);
     requestAnimationFrame(raf);
@@ -83,11 +64,6 @@ onMounted(() => {
 
   requestAnimationFrame(raf);
 
-  /**
-   * Intercepts anchor link clicks to provide smooth scrolling using Lenis.
-   * Handles both pure anchors (#) and relative anchors (/#).
-   * @param e - The click event.
-   */
   const handleAnchorClick = (e: Event) => {
     const anchor = e.currentTarget as HTMLAnchorElement;
     const href = anchor.getAttribute('href');
@@ -115,7 +91,6 @@ onMounted(() => {
     });
   });
 });
-
 </script>
 
 <style scoped>
