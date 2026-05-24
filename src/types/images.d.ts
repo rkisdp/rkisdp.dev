@@ -16,8 +16,6 @@ declare module '*.svg' {
 interface ImportMetaEnv {
   readonly VITE_POSTHOG_KEY: string
   readonly VITE_POSTHOG_HOST: string
-  readonly VITE_G_MEASUREMENT_ID?: string
-  readonly VITE_CLARITY_PROJECT_ID?: string
 }
 
 interface ImportMeta {

@@ -45,9 +45,9 @@
         <div
           class="terminal-container"
           :style="{
-            opacity: Math.max(0, opacity - 0.2),
-            transform: `translateY(${(1 - opacity) * 40}px)`,
-            transition: 'opacity 1.5s ease-out 0.3s, transform 1.5s ease-out 0.3s',
+            opacity,
+            transform: `scale(${0.9 + opacity * 0.1})`,
+            transition: 'opacity 1.5s ease-out, transform 1.5s ease-out',
           }"
         >
           <h2 class="terminal-title">I build scalable backends systems.</h2>
@@ -172,7 +172,7 @@ onMounted(() => {
 }
 
 .terminal-line {
-  font-family: "Courier New", monospace;
+  font-family: "Outfit", sans-serif !important;
   font-size: 1rem;
   color: #00ff88;
   display: flex;
@@ -187,6 +187,7 @@ onMounted(() => {
 }
 
 .prompt {
+  font-family: "Outfit", sans-serif !important;
   margin-right: 8px;
 }
 

@@ -9,8 +9,7 @@ A modern, responsive portfolio website built with Vue 3, TypeScript, and Tailwin
 - ⚡ Fast and optimized performance
 - 🌙 Dark mode support
 - 🎭 Smooth animations and transitions
-- 📊 Vercel and Google Analytics integration
-- 🔍 Microsoft Clarity integration
+- 📊 Vercel integration
 - 🔗 Social media integration
 - 📄 Resume download functionality
 
@@ -44,8 +43,8 @@ bun install
 
 3. Create a `.env` file in the root directory with the following variables:
 ```env
-VITE_G_MEASUREMENT_ID=your_google_analytics_id
-VITE_CLARITY_PROJECT_ID=your_clarity_project_id
+VITE_POSTHOG_KEY=your_posthog_key
+VITE_POSTHOG_HOST=https://us.i.posthog.com
 ```
 
 4. Start the development server:
