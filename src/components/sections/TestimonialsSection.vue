@@ -122,8 +122,6 @@
           <button
             @click="prevSlide"
             class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-10 h-10 flex items-center justify-center focus:outline-none transition-all hover:scale-110 z-10"
-            :class="{ 'opacity-50 cursor-not-allowed': currentSlide === 0 }"
-            :disabled="currentSlide === 0"
           >
             <font-awesome-icon :icon="['fas', 'chevron-left']" />
           </button>
@@ -131,11 +129,6 @@
           <button
             @click="nextSlide"
             class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-10 h-10 flex items-center justify-center focus:outline-none transition-all hover:scale-110 z-10"
-            :class="{
-              'opacity-50 cursor-not-allowed':
-                currentSlide === testimonials.length - 1,
-            }"
-            :disabled="currentSlide === testimonials.length - 1"
           >
             <font-awesome-icon :icon="['fas', 'chevron-right']" />
           </button>
@@ -145,8 +138,6 @@
         <button
           @click="prevSlide"
           class="hidden sm:flex absolute left-0 top-1/2 transform -translate-y-1/2 translate-x-1 md:-translate-x-5 bg-blue-600 hover:bg-blue-700 text-white rounded-full w-10 h-10 items-center justify-center focus:outline-none transition-all hover:scale-110 z-10"
-          :class="{ 'opacity-50 cursor-not-allowed': currentSlide === 0 }"
-          :disabled="currentSlide === 0"
         >
           <font-awesome-icon :icon="['fas', 'chevron-left']" />
         </button>
@@ -154,11 +145,6 @@
         <button
           @click="nextSlide"
           class="hidden sm:flex absolute right-0 top-1/2 transform -translate-y-1/2 -translate-x-1 md:translate-x-5 bg-blue-600 hover:bg-blue-700 text-white rounded-full w-10 h-10 items-center justify-center focus:outline-none transition-all hover:scale-110 z-10"
-          :class="{
-            'opacity-50 cursor-not-allowed':
-              currentSlide === testimonials.length - 1,
-          }"
-          :disabled="currentSlide === testimonials.length - 1"
         >
           <font-awesome-icon :icon="['fas', 'chevron-right']" />
         </button>
