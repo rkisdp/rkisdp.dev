@@ -130,11 +130,10 @@ const { isVisible } = useIntersectionObserver(sectionRef, { threshold: 0.1 });
 }
 
 .logo-container {
-  @apply flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg overflow-hidden bg-white/10;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  @apply flex-shrink-0 w-12 h-12 sm:w-20 sm:h-20 rounded-lg overflow-hidden bg-white/5 p-1.5 sm:p-2.5 border border-white/10 flex items-center justify-center;
 }
 
 .institution-logo {
-  @apply w-full h-full object-contain p-1;
+  @apply w-full h-full object-contain rounded;
 }
 </style>
