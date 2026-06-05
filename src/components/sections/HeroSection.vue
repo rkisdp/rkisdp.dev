@@ -1,5 +1,6 @@
 <template>
   <section
+    id="hero"
     class="section relative flex flex-col items-center justify-center overflow-hidden min-h-screen"
   >
 

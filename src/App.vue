@@ -17,6 +17,8 @@
       <ContactSection />
     </div>
 
+    <ScrollProgressIndicator />
+
     <!-- Floating Action Buttons -->
     <div class="fixed bottom-6 right-3 sm:right-6 z-50 flex flex-row items-center gap-[10px]">
       <a
@@ -43,6 +45,7 @@ import { Analytics } from '@vercel/analytics/vue';
 import { SpeedInsights } from '@vercel/speed-insights/vue';
 import Lenis from 'lenis';
 import Navigation from './components/Navigation.vue';
+import ScrollProgressIndicator from './components/ScrollProgressIndicator.vue';
 import Background from './components/Background.vue';
 import HeroSection from './components/sections/HeroSection.vue';
 import SkillsSection from './components/sections/SkillsSection.vue';
@@ -55,14 +58,15 @@ import ContactSection from './components/sections/ContactSection.vue';
 import ThemeGlobalComponents from './components/ThemeGlobalComponents.vue';
 import ChatButton from './components/ChatButton.vue';
 import { useTheme } from './composables/useTheme';
+import { useLenis } from './composables/useLenis';
 
 useTheme(); // Initialize theme
 
 const buttonAnimated = ref(false);
-let lenis: Lenis | null = null;
+const { lenis: lenisRef } = useLenis();
 
 onMounted(() => {
-  lenis = new Lenis({
+  const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     orientation: 'vertical',
@@ -71,6 +75,7 @@ onMounted(() => {
     wheelMultiplier: 1,
     touchMultiplier: 2,
   });
+  lenisRef.value = lenis;
 
   /**
    * Recursive function to update the Lenis scroll instance on each animation frame.
