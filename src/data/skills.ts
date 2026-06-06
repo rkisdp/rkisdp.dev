@@ -68,7 +68,7 @@ export const skills: Skill[] = [
   {
     name: "Artificial Intelligence",
     image: aiImage,
-      invert: true,
+    invert: true,
   },
   {
     name: "Machine Learning",
