@@ -1,7 +1,7 @@
 import awsImage from "../assets/images/skills/aws.png";
 import kafkaImage from "../assets/images/skills/kafka.png";
 import langchainImage from "../assets/images/skills/langchain.svg";
-import langgraphImage from "../assets/images/skills/langgraph.svg";
+import grafanaImage from "../assets/images/skills/grafana.svg";
 import langfuseImage from "../assets/images/skills/langfuse.svg";
 import airflowImage from "../assets/images/skills/airflow.svg";
 import aiImage from "../assets/images/skills/ai.svg";
@@ -68,6 +68,7 @@ export const skills: Skill[] = [
   {
     name: "Artificial Intelligence",
     image: aiImage,
+      invert: true,
   },
   {
     name: "Machine Learning",
@@ -78,8 +79,8 @@ export const skills: Skill[] = [
     image: langchainImage,
   },
   {
-    name: "LangGraph",
-    image: langgraphImage,
+    name: "Grafana",
+    image: grafanaImage,
   },
   {
     name: "Langfuse",

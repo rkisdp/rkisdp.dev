@@ -58,22 +58,22 @@ const scrollToSection = (id: string) => {
 };
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          activeSection.value = entry.target.id;
-        }
-      });
-    },
-    { rootMargin: '-35% 0px -35% 0px', threshold: 0 }
-  );
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY + window.innerHeight * 0.35;
 
-  sections.forEach(({ id }) => {
-    const el = document.getElementById(id);
-    if (el) observer.observe(el);
-  });
+    let current = sections[0].id;
+    sections.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= scrollPosition) {
+        current = id;
+      }
+    });
+    activeSection.value = current;
+  };
 
-  onUnmounted(() => observer.disconnect());
+  handleScroll();
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  onUnmounted(() => window.removeEventListener('scroll', handleScroll));
 });
 </script>

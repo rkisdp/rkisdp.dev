@@ -67,11 +67,6 @@
                         ></div>
                         <div class="absolute bottom-0 left-0 w-full p-4">
                           <div class="flex items-center">
-                            <img
-                              src="https://cdn-images-1.medium.com/fit/c/64/64/1*W35QUSvGpcLuxPo3SRTH4w.png"
-                              alt="Medium"
-                              class="w-5 h-5 mr-2"
-                            />
                             <span class="text-xs text-white/90"
                               >Read on Medium</span
                             >

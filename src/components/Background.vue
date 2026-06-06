@@ -60,7 +60,6 @@ function resize() {
 
 /**
  * populates the particles array with a specific number of Particle instances.
- * @param n - The number of particles to create.
  */
 function getParticleCount() {
   const width = window.innerWidth;

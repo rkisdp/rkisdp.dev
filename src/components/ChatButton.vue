@@ -175,7 +175,7 @@ const scrollToBottom = async () => {
 
 /**
  * Fetches the visitor's chat history from the API.
- * If no history exists, it initiates a multi-part greeting.
+ * If no history exists, it initiates a multipart greeting.
  */
 const fetchHistory = async () => {
   if (isLoadingHistory.value) return;
@@ -225,7 +225,7 @@ const fetchHistory = async () => {
 
 /**
  * Sends the user's message to the chat API and handles the AI's response.
- * Optimistically adds the user's message and processes potential multi-part responses.
+ * Optimistically adds the user's message and processes potential multipart responses.
  */
 const sendMessage = async () => {
   const query = message.value.trim();
