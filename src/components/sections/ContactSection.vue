@@ -4,7 +4,7 @@
     id="contact"
     class="section relative overflow-hidden flex flex-col !pb-0 !px-0"
   >
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <!-- <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div
         class="absolute w-96 h-96 rounded-full blur-[120px] animate-pulse-glow"
         style="
@@ -14,7 +14,7 @@
           background-color: rgba(112, 0, 255, 0.1);
         "
       ></div>
-    </div>
+    </div> -->
 
     <div class="flex-grow flex items-center justify-center w-full z-10">
       <div class="container-custom max-w-5xl">

@@ -1,5 +1,11 @@
 import awsImage from "../assets/images/skills/aws.png";
 import kafkaImage from "../assets/images/skills/kafka.png";
+import langchainImage from "../assets/images/skills/langchain.svg";
+import langgraphImage from "../assets/images/skills/langgraph.svg";
+import langfuseImage from "../assets/images/skills/langfuse.svg";
+import airflowImage from "../assets/images/skills/airflow.svg";
+import aiImage from "../assets/images/skills/ai.svg";
+import mlImage from "../assets/images/skills/ml.svg";
 
 export interface Skill {
   name: string;
@@ -58,5 +64,29 @@ export const skills: Skill[] = [
   {
     name: "Kafka",
     image: kafkaImage,
+  },
+  {
+    name: "Artificial Intelligence",
+    image: aiImage,
+  },
+  {
+    name: "Machine Learning",
+    image: mlImage,
+  },
+  {
+    name: "LangChain",
+    image: langchainImage,
+  },
+  {
+    name: "LangGraph",
+    image: langgraphImage,
+  },
+  {
+    name: "Langfuse",
+    image: langfuseImage,
+  },
+  {
+    name: "Airflow",
+    image: airflowImage,
   },
 ];
