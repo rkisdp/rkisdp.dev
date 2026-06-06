@@ -24,7 +24,7 @@
 
           <!-- Articles Carousel -->
           <div class="relative">
-            <div class="overflow-hidden">
+            <div class="overflow-hidden py-4 -my-4">
               <div
                 ref="articlesContainer"
                 class="flex transition-transform duration-500 ease-in-out"
@@ -35,7 +35,7 @@
                 <div
                   v-for="(article, index) in articles"
                   :key="index"
-                  class="article-card flex-shrink-0 w-full md:w-1/3 px-2"
+                  class="article-card flex-shrink-0 w-full md:w-1/3 px-2 py-4"
                   :style="{
                     opacity: isVisible ? 1 : 0,
                     transform: `translateY(${isVisible ? 0 : 20}px)`,
@@ -45,7 +45,7 @@
                   }"
                 >
                   <div
-                    class="h-[320px] bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg shadow-lg overflow-hidden"
+                    class="article-card-inner h-[320px] bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg shadow-lg overflow-hidden"
                   >
                     <a
                       :href="article.url"
@@ -205,7 +205,27 @@ onMounted(() => {
 
 
 <style scoped>
-.article-card:hover {
-  transform: translateY(-5px);
+.article-card-inner {
+  @apply transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(0,212,255,0.15)] hover:-translate-y-2 relative;
+}
+
+.article-card-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.article-card-inner:hover::before {
+  opacity: 1;
+}
+
+.article-card-inner > * {
+  position: relative;
+  z-index: 10;
 }
 </style>

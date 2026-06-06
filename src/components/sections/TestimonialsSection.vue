@@ -55,7 +55,7 @@
         }"
       >
         <!-- Testimonial slider -->
-        <div class="overflow-hidden rounded-lg">
+        <div class="overflow-hidden rounded-lg py-4 -my-4">
           <div
             class="flex transition-transform duration-500 ease-in-out"
             :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
@@ -63,10 +63,10 @@
             <div
               v-for="(testimonial, index) in testimonials"
               :key="index"
-              class="w-full flex-shrink-0 px-1 sm:px-2 md:px-4"
+              class="w-full flex-shrink-0 px-1 sm:px-2 md:px-4 py-4"
             >
               <div
-                class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-3 md:p-8 shadow-xl"
+                class="testimonial-card bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-3 md:p-8 shadow-xl"
               >
                 <div
                   class="flex flex-col sm:flex-row sm:items-center mb-3 md:mb-6"
@@ -243,3 +243,29 @@ onUnmounted(() => {
   stopAutoplay();
 });
 </script>
+
+<style scoped>
+.testimonial-card {
+  @apply transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(0,212,255,0.15)] hover:-translate-y-1 relative overflow-hidden;
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.testimonial-card:hover::before {
+  opacity: 1;
+}
+
+.testimonial-card > * {
+  position: relative;
+  z-index: 10;
+}
+</style>

@@ -26,7 +26,7 @@
             <div
               v-for="(item, index) in educationItems"
               :key="index"
-              class="education-card"
+              class="h-full"
               :style="{
                 opacity: isVisible ? 1 : 0,
                 transform: `translateY(${isVisible ? 0 : 20}px)`,
@@ -35,33 +35,35 @@
                 }ms, transform 0.6s ease-out ${index * 150 + 100}ms`,
               }"
             >
-              <div class="flex items-start space-x-3 md:space-x-4">
-                <div class="logo-container">
-                  <img
-                    :src="item.logo"
-                    :alt="item.institution"
-                    class="institution-logo"
-                  />
-                </div>
-                <div class="flex-1">
-                  <h3 class="text-base md:text-xl text-blue-100 mb-1 md:mb-2">
-                    {{ item.degree }}
-                  </h3>
-                  <div
-                    class="flex flex-col md:flex-row md:items-center space-y-0.5 md:space-y-0 md:space-x-2 text-gray-300 mb-1 md:mb-2"
-                  >
-                    <span class="text-xs md:text-base">{{
-                      item.institution
-                    }}</span>
-                    <span class="hidden md:block text-gray-500">•</span>
-                    <span class="text-xs text-gray-400">{{ item.period }}</span>
+              <div class="education-card">
+                <div class="flex items-start space-x-3 md:space-x-4">
+                  <div class="logo-container">
+                    <img
+                      :src="item.logo"
+                      :alt="item.institution"
+                      class="institution-logo"
+                    />
                   </div>
-                  <p
-                    v-if="item.description"
-                    class="text-gray-300/90 text-xs md:text-sm mt-1 md:mt-2"
-                  >
-                    {{ item.description }}
-                  </p>
+                  <div class="flex-1">
+                    <h3 class="text-base md:text-xl text-blue-100 mb-1 md:mb-2">
+                      {{ item.degree }}
+                    </h3>
+                    <div
+                      class="flex flex-col md:flex-row md:items-center space-y-0.5 md:space-y-0 md:space-x-2 text-gray-300 mb-1 md:mb-2"
+                    >
+                      <span class="text-xs md:text-base">{{
+                        item.institution
+                      }}</span>
+                      <span class="hidden md:block text-gray-500">•</span>
+                      <span class="text-xs text-gray-400">{{ item.period }}</span>
+                    </div>
+                    <p
+                      v-if="item.description"
+                      class="text-gray-300/90 text-xs md:text-sm mt-1 md:mt-2"
+                    >
+                      {{ item.description }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -121,8 +123,28 @@ const { isVisible } = useIntersectionObserver(sectionRef, { threshold: 0.1 });
 
 <style scoped>
 .education-card {
-  @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-3 md:p-6 shadow-lg;
+  @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-3 md:p-6 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(0,212,255,0.15)] hover:-translate-y-2 relative overflow-hidden;
   height: 100%;
+}
+
+.education-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.education-card:hover::before {
+  opacity: 1;
+}
+
+.education-card > * {
+  position: relative;
+  z-index: 10;
 }
 
 .logo-container {

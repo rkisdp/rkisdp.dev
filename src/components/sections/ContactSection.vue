@@ -33,62 +33,74 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           <!-- Email Card -->
-          <a
-            href="mailto:connect@rkisdp.dev"
-            class="glass-card group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center text-center p-3 md:p-6"
+          <div
+            class="h-full"
             :style="{
               opacity: isVisible ? 1 : 0,
               transform: `translateY(${isVisible ? 0 : 30}px)`,
               transition: 'opacity 0.8s ease-out, transform 0.8s ease-out 0.1s',
             }"
           >
-            <div class="w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 flex items-center justify-center mb-3 md:mb-6 group-hover:bg-primary/20 transition-colors">
-              <font-awesome-icon :icon="['fas', 'envelope']" class="text-lg md:text-2xl text-primary" />
-            </div>
-            <h3 class="text-base md:text-xl font-bold text-foreground mb-1 md:mb-2">Email</h3>
-            <p class="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">Drop me a line anytime</p>
-            <span class="text-xs md:text-base text-primary font-medium group-hover:underline">connect@rkisdp.dev</span>
-          </a>
+            <a
+              href="mailto:connect@rkisdp.dev"
+              class="glass-card group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center text-center p-3 md:p-6 h-full"
+            >
+              <div class="w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 flex items-center justify-center mb-3 md:mb-6 group-hover:bg-primary/20 transition-colors">
+                <font-awesome-icon :icon="['fas', 'envelope']" class="text-lg md:text-2xl text-primary" />
+              </div>
+              <h3 class="text-base md:text-xl font-bold text-foreground mb-1 md:mb-2">Email</h3>
+              <p class="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">Drop me a line anytime</p>
+              <span class="text-xs md:text-base text-primary font-medium group-hover:underline">connect@rkisdp.dev</span>
+            </a>
+          </div>
 
           <!-- LinkedIn Card -->
-          <a
-            href="https://www.linkedin.com/in/rkisdp/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="glass-card group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center text-center p-3 md:p-6"
+          <div
+            class="h-full"
             :style="{
               opacity: isVisible ? 1 : 0,
               transform: `translateY(${isVisible ? 0 : 30}px)`,
               transition: 'opacity 0.8s ease-out, transform 0.8s ease-out 0.2s',
             }"
           >
-            <div class="w-10 h-10 md:w-16 md:h-16 rounded-full bg-blue-600/10 flex items-center justify-center mb-3 md:mb-6 group-hover:bg-blue-600/20 transition-colors">
-              <font-awesome-icon :icon="['fab', 'linkedin']" class="text-lg md:text-2xl text-blue-500" />
-            </div>
-            <h3 class="text-base md:text-xl font-bold text-foreground mb-1 md:mb-2">LinkedIn</h3>
-            <p class="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">Connect professionally</p>
-            <span class="text-xs md:text-base text-blue-500 font-medium group-hover:underline">rkisdp</span>
-          </a>
+            <a
+              href="https://www.linkedin.com/in/rkisdp/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="glass-card group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center text-center p-3 md:p-6 h-full"
+            >
+              <div class="w-10 h-10 md:w-16 md:h-16 rounded-full bg-blue-600/10 flex items-center justify-center mb-3 md:mb-6 group-hover:bg-blue-600/20 transition-colors">
+                <font-awesome-icon :icon="['fab', 'linkedin']" class="text-lg md:text-2xl text-blue-500" />
+              </div>
+              <h3 class="text-base md:text-xl font-bold text-foreground mb-1 md:mb-2">LinkedIn</h3>
+              <p class="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">Connect professionally</p>
+              <span class="text-xs md:text-base text-blue-500 font-medium group-hover:underline">rkisdp</span>
+            </a>
+          </div>
 
           <!-- GitHub Card -->
-          <a
-            href="https://github.com/rkisdp"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="glass-card group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center text-center p-3 md:p-6"
+          <div
+            class="h-full"
             :style="{
               opacity: isVisible ? 1 : 0,
               transform: `translateY(${isVisible ? 0 : 30}px)`,
               transition: 'opacity 0.8s ease-out, transform 0.8s ease-out 0.3s',
             }"
           >
-            <div class="w-10 h-10 md:w-16 md:h-16 rounded-full bg-gray-700/10 flex items-center justify-center mb-3 md:mb-6 group-hover:bg-gray-700/20 transition-colors">
-              <font-awesome-icon :icon="['fab', 'github']" class="text-lg md:text-2xl text-foreground" />
-            </div>
-            <h3 class="text-base md:text-xl font-bold text-foreground mb-1 md:mb-2">GitHub</h3>
-            <p class="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">Check out my code</p>
-            <span class="text-xs md:text-base text-foreground font-medium group-hover:underline">rkisdp</span>
-          </a>
+            <a
+              href="https://github.com/rkisdp"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="glass-card group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center text-center p-3 md:p-6 h-full"
+            >
+              <div class="w-10 h-10 md:w-16 md:h-16 rounded-full bg-gray-700/10 flex items-center justify-center mb-3 md:mb-6 group-hover:bg-gray-700/20 transition-colors">
+                <font-awesome-icon :icon="['fab', 'github']" class="text-lg md:text-2xl text-foreground" />
+              </div>
+              <h3 class="text-base md:text-xl font-bold text-foreground mb-1 md:mb-2">GitHub</h3>
+              <p class="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">Check out my code</p>
+              <span class="text-xs md:text-base text-foreground font-medium group-hover:underline">rkisdp</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

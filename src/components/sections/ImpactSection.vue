@@ -136,7 +136,6 @@ import { highlightItems } from "../../data/highlightItems";
 import { useIntersectionObserver } from "../../composables/useIntersectionObserver";
 
 const sectionRef = ref<HTMLElement | null>(null);
-const glowRef = ref<HTMLDivElement | null>(null);
 const carouselContainer = ref<HTMLElement | null>(null);
 const currentIndex = ref(0);
 const autoplayInterval = ref<number | null>(null);
@@ -205,36 +204,6 @@ const pauseAutoplay = () => { isPaused.value = true; };
 const resumeAutoplay = () => { isPaused.value = false; };
 
 onMounted(() => {
-  // Glow effect animation logic
-  let animationId: number;
-  let intervalId: number;
-
-  const animateGlow = () => {
-    if (!glowRef.value) return;
-
-    const glow = glowRef.value;
-    const position = { x: 0, y: 0 };
-    const target = { x: 0, y: 0 };
-
-    const animate = () => {
-      position.x += (target.x - position.x) * 0.05;
-      position.y += (target.y - position.y) * 0.05;
-
-      glow.style.opacity = isVisible.value ? "1" : "0";
-      glow.style.transform = `translate(${position.x}px, ${position.y}px)`;
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    intervalId = window.setInterval(() => {
-      target.x = Math.random() * 100 - 50;
-      target.y = Math.random() * 100 - 50;
-    }, 3000);
-  };
-
-  animateGlow();
 
   if (carouselContainer.value) {
     carouselContainer.value.addEventListener('mouseenter', pauseAutoplay);
@@ -245,8 +214,6 @@ onMounted(() => {
 
   onUnmounted(() => {
     stopAutoplay();
-    cancelAnimationFrame(animationId);
-    clearInterval(intervalId);
     if (carouselContainer.value) {
       carouselContainer.value.removeEventListener('mouseenter', pauseAutoplay);
       carouselContainer.value.removeEventListener('mouseleave', resumeAutoplay);
@@ -268,8 +235,28 @@ watch(isVisible, (visible) => {
 
 <style scoped>
 .highlight-card {
-  @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-5 sm:p-6 md:p-8 shadow-lg;
+  @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-lg p-5 sm:p-6 md:p-8 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(0,212,255,0.15)] hover:-translate-y-1 relative overflow-hidden;
   height: 100%;
+}
+
+.highlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.highlight-card:hover::before {
+  opacity: 1;
+}
+
+.highlight-card > * {
+  position: relative;
+  z-index: 10;
 }
 
 /* Add responsive styles for the section */
