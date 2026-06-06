@@ -4,10 +4,6 @@
     id="skills"
     class="section relative overflow-hidden"
   >
-    <!-- Decorative background element -->
-    <div
-      class="absolute bottom-[-100px] right-[10%] w-[600px] h-[600px] rounded-full opacity-10 bg-secondary blur-[100px] -z-10"
-    ></div>
 
     <div class="container-custom relative z-10">
       <div

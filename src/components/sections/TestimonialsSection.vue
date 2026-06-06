@@ -170,7 +170,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from "vue";
+import { ref, onUnmounted, watch } from "vue";
 import { testimonials } from "../../data/testimonials";
 import { useIntersectionObserver } from "../../composables/useIntersectionObserver";
 

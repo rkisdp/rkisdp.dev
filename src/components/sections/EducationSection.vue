@@ -4,10 +4,6 @@
     id="education"
     class="section relative overflow-hidden"
   >
-    <!-- Decorative background element -->
-    <div
-      class="absolute top-[-100px] right-[10%] w-[90%] h-[600px] rounded-full opacity-5 bg-[rgba(100,200,255,0.1)] blur-3xl z-0"
-    ></div>
 
     <div
       class="h-full w-full flex flex-col items-center justify-center"

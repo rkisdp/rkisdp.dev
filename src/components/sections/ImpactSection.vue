@@ -5,23 +5,6 @@
       id="impact"
       class="section relative overflow-hidden"
   >
-    <!-- Decorative background element -->
-    <div
-        class="absolute top-[-100px] left-[10%] w-[90%] h-[600px] rounded-full opacity-5 bg-[rgba(100,200,255,0.1)] blur-3xl z-0"
-    ></div>
-
-    <!-- Glow effect -->
-    <div class="absolute w-full h-full overflow-hidden">
-      <div
-          ref="glowRef"
-          class="absolute top-[70%] left-[80%] w-64 h-64 bg-blue-500/5 rounded-full filter blur-3xl"
-          :style="{
-          boxShadow: '0 0 15px rgba(0, 153, 255, 0.3)',
-          opacity: 0,
-          transition: 'opacity 0.5s ease-in-out',
-        }"
-      ></div>
-    </div>
 
     <div
         class="h-full w-full flex flex-col items-center justify-start md:justify-center"
