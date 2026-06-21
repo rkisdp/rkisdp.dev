@@ -138,12 +138,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, onMounted } from 'vue';
-
-interface ChatMessage {
-  role: 'human' | 'ai';
-  content: string;
-  timestamp: string;
-}
+import { chatService, type ChatMessage } from '../services/api';
 
 const isOpen = ref(false);
 const message = ref('');
@@ -154,9 +149,20 @@ const historyFetched = ref(false);
 const messages = ref<ChatMessage[]>([]);
 const messagesContainer = ref<HTMLElement | null>(null);
 
+const getGreetingTime = () => {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) {
+    return 'good morning';
+  } else if (hour >= 12 && hour < 17) {
+    return 'good afternoon';
+  } else {
+    return 'good evening';
+  }
+};
+
 const greetingParts = [
-  "Hi! I'm Divya's AI assistant. 🤖",
-  "I've been trained on his resume, projects, and professional background.",
+  `Hey, ${getGreetingTime()}! I'm Divya's AI Persona. 🤖`,
+  "I can give you answers on my resume, projects, and professional background.",
   "How can I help you today?"
 ];
 
@@ -182,14 +188,7 @@ const fetchHistory = async () => {
   isLoadingHistory.value = true;
 
   try {
-    const res = await fetch('https://api.rkisdp.dev/api/visitor-history/', {
-      method: 'GET',
-      credentials: 'include',
-    });
-
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-    const data = await res.json();
+    const data = await chatService.getVisitorHistory();
     historyFetched.value = true;
 
     if (!data.is_new && data.history?.length) {
@@ -237,16 +236,7 @@ const sendMessage = async () => {
   await scrollToBottom();
 
   try {
-    const res = await fetch('https://api.rkisdp.dev/api/chat/', {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query }),
-    });
-
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-    const data = await res.json();
+    const data = await chatService.sendChatMessage(query);
     const rawResponse = data.response ?? 'Sorry, I could not process that.';
     
     const responseArray = Array.isArray(rawResponse) ? rawResponse : [rawResponse];
