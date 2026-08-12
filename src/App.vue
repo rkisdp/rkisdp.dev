@@ -1,42 +1,52 @@
 <template>
-  <Analytics />
-  <SpeedInsights />
-  <ThemeGlobalComponents />
-  <Background />
-  <main class="relative min-h-screen z-10">
-    <Navigation />
+  <div>
+    <ClientOnly>
+      <Analytics />
+      <SpeedInsights />
+    </ClientOnly>
+    <ThemeGlobalComponents />
+    <ClientOnly>
+      <Background />
+    </ClientOnly>
+    <main class="relative min-h-screen z-10">
+      <Navigation />
 
-    <div class="w-full">
-      <HeroSection />
-      <ImpactSection />
-      <SkillsSection />
-      <ExperienceSection />
-      <EducationSection />
-      <ArticlesSection />
-      <TestimonialsSection />
-      <ContactSection />
-    </div>
+      <div class="w-full">
+        <HeroSection />
+        <ImpactSection />
+        <SkillsSection />
+        <ExperienceSection />
+        <EducationSection />
+        <ArticlesSection />
+        <TestimonialsSection />
+        <ContactSection />
+      </div>
 
-    <ScrollProgressIndicator />
+      <ClientOnly>
+        <ScrollProgressIndicator />
+      </ClientOnly>
 
-    <!-- Floating Action Buttons -->
-    <div class="fixed bottom-6 right-3 sm:right-6 z-50 flex flex-row items-center gap-[10px]">
-      <a
-        href="https://drive.google.com/file/d/1GAQD4yhAcxU8KQ29KPYeG_b-4C9zFYhR/view?usp=sharing"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 h-12 rounded-full shadow-lg transition-all duration-300 hover:shadow-blue-500/30 hover:translate-y-[-1px]"
-        :class="{ 'animated': buttonAnimated }"
-        @mouseover="buttonAnimated = true"
-        @mouseleave="buttonAnimated = false"
-      >
-        <font-awesome-icon :icon="['fas', 'download']" size="sm" />
-        <span class="hidden sm:inline text-sm sm:text-base">Download My Resume</span>
-        <span class="sm:hidden text-sm">Resume</span>
-      </a>
-      <ChatButton />
-    </div>
-  </main>
+      <!-- Floating Action Buttons -->
+      <div class="fixed bottom-6 right-3 sm:right-6 z-50 flex flex-row items-center gap-[10px]">
+        <a
+          href="https://drive.google.com/file/d/1GAQD4yhAcxU8KQ29KPYeG_b-4C9zFYhR/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 h-12 rounded-full shadow-lg transition-all duration-300 hover:shadow-blue-500/30 hover:translate-y-[-1px]"
+          :class="{ 'animated': buttonAnimated }"
+          @mouseover="buttonAnimated = true"
+          @mouseleave="buttonAnimated = false"
+        >
+          <font-awesome-icon :icon="['fas', 'download']" size="sm" />
+          <span class="hidden sm:inline text-sm sm:text-base">Download My Resume</span>
+          <span class="sm:hidden text-sm">Resume</span>
+        </a>
+        <ClientOnly>
+          <ChatButton />
+        </ClientOnly>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -44,21 +54,9 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { Analytics } from '@vercel/analytics/vue';
 import { SpeedInsights } from '@vercel/speed-insights/vue';
 import Lenis from 'lenis';
-import Navigation from './components/Navigation.vue';
-import ScrollProgressIndicator from './components/ScrollProgressIndicator.vue';
-import Background from './components/Background.vue';
-import HeroSection from './components/sections/HeroSection.vue';
-import SkillsSection from './components/sections/SkillsSection.vue';
-import ExperienceSection from './components/sections/ExperienceSection.vue';
-import ImpactSection from './components/sections/ImpactSection.vue';
-import EducationSection from './components/sections/EducationSection.vue';
-import ArticlesSection from './components/sections/ArticlesSection.vue';
-import TestimonialsSection from './components/sections/TestimonialsSection.vue';
-import ContactSection from './components/sections/ContactSection.vue';
-import ThemeGlobalComponents from './components/ThemeGlobalComponents.vue';
-import ChatButton from './components/ChatButton.vue';
 import { useTheme } from './composables/useTheme';
 import { useLenis } from './composables/useLenis';
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 useTheme(); // Initialize theme
 
@@ -120,7 +118,6 @@ onMounted(() => {
     });
   });
 });
-
 </script>
 
 <style scoped>

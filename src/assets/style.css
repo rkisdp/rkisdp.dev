@@ -98,3 +98,11 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-muted rounded-full hover:bg-primary/50 transition-colors;
 }
+
+/* Ensure content visibility when JavaScript is not loaded or disabled for SEO */
+noscript .opacity-0,
+noscript [style*="opacity: 0"],
+noscript [style*="opacity:0"] {
+  opacity: 1 !important;
+  transform: none !important;
+}

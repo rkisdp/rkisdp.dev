@@ -24,7 +24,7 @@ export function useIntersectionObserver(
   options: IntersectionObserverOptions = {}
 ) {
   const { threshold = 0.1, rootMargin = '0px', freezeOnceVisible = true } = options;
-  const isVisible = ref(false);
+  const isVisible = ref(true);
   let observer: IntersectionObserver | null = null;
 
   onMounted(() => {
@@ -43,6 +43,11 @@ export function useIntersectionObserver(
       },
       { threshold, rootMargin }
     );
+
+    const rect = target.value.getBoundingClientRect();
+    if (rect.top > window.innerHeight) {
+      isVisible.value = false;
+    }
 
     observer.observe(target.value);
   });

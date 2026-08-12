@@ -69,11 +69,11 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
 import PaintSplashText from "../themes/holi/PaintSplashText.vue";
-import { useTheme } from "../../composables/useTheme";
-import { ThemeId } from "../../types/theme";
+import { useTheme } from "~/composables/useTheme";
+import { ThemeId } from "~/types/theme";
 
 const { currentTheme, currentThemeId } = useTheme();
-const opacity = ref(0);
+const opacity = ref(1);
 
 const texts = [
   "Building secure APIs...",
@@ -82,9 +82,9 @@ const texts = [
   "Automating workflows..."
 ];
 
-const currentTypedText = ref("");
+const currentTypedText = ref(texts[0]);
 let textIndex = 0;
-let charIndex = 0;
+let charIndex = texts[0].length;
 let isDeleting = false;
 
 /**
