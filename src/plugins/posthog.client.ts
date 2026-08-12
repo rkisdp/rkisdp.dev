@@ -23,7 +23,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   })
 
   nuxtApp.provide('posthog', posthog)
-  nuxtApp.vueApp.config.globalProperties.$posthog = posthog
 })
 
 export { posthog }

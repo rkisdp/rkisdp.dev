@@ -21,25 +21,27 @@ import {
   faCommentDots
 } from '@fortawesome/free-solid-svg-icons'
 
+config.autoAddCss = false
+
+library.add(
+  faGithub,
+  faLinkedin,
+  faMedium,
+  faStackOverflow,
+  faDownload,
+  faEnvelope,
+  faBars,
+  faQuoteLeft,
+  faChevronLeft,
+  faChevronRight,
+  faTimes,
+  faArrowRight,
+  faArrowLeft,
+  faBriefcase,
+  faSleigh,
+  faCommentDots
+)
+
 export default defineNuxtPlugin((nuxtApp) => {
-  config.autoAddCss = false
-  library.add(
-    faGithub,
-    faLinkedin,
-    faMedium,
-    faStackOverflow,
-    faDownload,
-    faEnvelope,
-    faBars,
-    faQuoteLeft,
-    faChevronLeft,
-    faChevronRight,
-    faTimes,
-    faArrowRight,
-    faArrowLeft,
-    faBriefcase,
-    faSleigh,
-    faCommentDots
-  )
   nuxtApp.vueApp.component('font-awesome-icon', FontAwesomeIcon)
 })
