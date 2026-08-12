@@ -1,6 +1,9 @@
 export default defineNuxtConfig({
   ssr: true,
   srcDir: 'src/',
+  nitro: {
+    preset: 'vercel'
+  },
   dir: {
     public: '../public'
   },

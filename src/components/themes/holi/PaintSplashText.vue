@@ -265,9 +265,9 @@ onUnmounted(() => {
 
 // Re-render when text prop changes
 watch(() => props.text, () => {
-  if (document.fonts) {
+  if (typeof document !== 'undefined' && document.fonts) {
     document.fonts.ready.then(render);
-  } else {
+  } else if (typeof document !== 'undefined') {
     render();
   }
 });

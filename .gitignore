@@ -87,8 +87,10 @@ web_modules/
 .next
 out
 
-# Nuxt.js build / generate output
+# Nuxt.js / Vercel build output
 .nuxt
+.output
+.vercel
 dist
 
 # Gatsby files
