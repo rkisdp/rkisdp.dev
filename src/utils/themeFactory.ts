@@ -62,6 +62,18 @@ class ThemeFactory {
     public static getTheme(id: ThemeId): Theme {
         return this.themes[id] || this.themes[ThemeId.DEFAULT];
     }
+
+    /**
+     * Retrieves all available theme configurations.
+     * 
+     * @returns Array of theme summary objects containing id and name.
+     */
+    public static getAllThemes(): { id: ThemeId; name: string }[] {
+        return Object.values(this.themes).map(theme => ({
+            id: theme.id,
+            name: theme.name,
+        }));
+    }
 }
 
 export default ThemeFactory;

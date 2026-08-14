@@ -1,29 +1,38 @@
-import { ref, computed, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { ThemeId, type Theme, type ThemeComponent, type ThemePhase } from '../types/theme';
 import ThemeFactory from '../utils/themeFactory';
 
 /**
- * Global reactive state for the application's current theme.
- */
-const currentThemeId = ref<ThemeId>(ThemeId.DEFAULT);
-const currentTheme = computed<Theme>(() => ThemeFactory.getTheme(currentThemeId.value));
-const currentThemePhase = ref<ThemePhase>('initial');
-
-// Initialize or reset the theme phase whenever the theme ID changes.
-watch(currentThemeId, (newId) => {
-    if (newId === ThemeId.HAPPY_NEW_YEAR) {
-        currentThemePhase.value = 'confetti-spawning';
-    } else {
-        currentThemePhase.value = 'initial';
-    }
-}, { immediate: true });
-
-/**
  * A composable that provides access to the theme state and management functions.
+ * Uses Nuxt's useState for SSR hydration to avoid client-side API requests or layout flashes.
  * 
  * @returns An object containing reactive theme state and helper methods.
  */
 export function useTheme() {
+    const config = useRuntimeConfig();
+    const initialTheme = (config.public.activeTheme as ThemeId) || ThemeId.DEFAULT;
+
+    // Use useState so theme is SSR-rendered into HTML and hydrated seamlessly on the client
+    const currentThemeId = useState<ThemeId>('currentThemeId', () => {
+        const validThemes = Object.values(ThemeId);
+        return validThemes.includes(initialTheme) ? initialTheme : ThemeId.DEFAULT;
+    });
+
+    const currentTheme = computed<Theme>(() => ThemeFactory.getTheme(currentThemeId.value));
+    
+    const currentThemePhase = useState<ThemePhase>('currentThemePhase', () => {
+        return currentThemeId.value === ThemeId.HAPPY_NEW_YEAR ? 'confetti-spawning' : 'initial';
+    });
+
+    // Sync theme phase whenever currentThemeId changes
+    watch(currentThemeId, (newId) => {
+        if (newId === ThemeId.HAPPY_NEW_YEAR) {
+            currentThemePhase.value = 'confetti-spawning';
+        } else {
+            currentThemePhase.value = 'initial';
+        }
+    });
+
     /**
      * Updates the application's current theme.
      * @param id - The ID of the theme to switch to.
@@ -58,3 +67,4 @@ export function useTheme() {
         getThemeComponent,
     };
 }
+

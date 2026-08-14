@@ -26,7 +26,9 @@ export default defineNuxtConfig({
     { path: '~/components', pathPrefix: false }
   ],
   runtimeConfig: {
+    themeApiSecret: process.env.THEME_API_SECRET || '',
     public: {
+      activeTheme: process.env.ACTIVE_THEME || 'default',
       posthogKey: process.env.VITE_POSTHOG_KEY || '',
       posthogHost: process.env.VITE_POSTHOG_HOST || '',
     }
