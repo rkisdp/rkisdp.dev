@@ -21,7 +21,7 @@ export interface ChatResponse {
 class ApiClient {
   private baseURL: string;
 
-  constructor(baseURL: string = 'https://api.rkisdp.dev') {
+  constructor(baseURL: string = 'https://rkisdp--rkisdp-web-django--g65vmnhlzzw4.code.run') {
     this.baseURL = baseURL;
   }
 
