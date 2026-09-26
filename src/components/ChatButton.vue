@@ -59,12 +59,15 @@
               class="flex"
               :class="msg.role === 'human' ? 'justify-end' : 'justify-start'"
             >
+              <!-- Visitor text is shown as plain text, never as HTML -->
               <div
-                class="max-w-[75%] px-3 py-2 rounded-2xl text-sm leading-relaxed"
-                :class="msg.role === 'human'
-                  ? 'bg-primary text-primary-foreground rounded-br-sm'
-                  : 'bg-muted/60 text-foreground rounded-bl-sm border border-white/10'"
-                v-html="msg.content"
+                v-if="msg.role === 'human'"
+                class="max-w-[75%] px-3 py-2 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap break-words bg-primary text-primary-foreground rounded-br-sm"
+              >{{ msg.content }}</div>
+              <div
+                v-else
+                class="chat-md max-w-[75%] px-3 py-2 rounded-2xl text-sm leading-relaxed break-words bg-muted/60 text-foreground rounded-bl-sm border border-white/10"
+                v-html="renderChatMarkdown(msg.content)"
               />
             </div>
           </template>
@@ -139,6 +142,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, onMounted } from 'vue';
 import { chatService, type ChatMessage } from '../services/api';
+import { renderChatMarkdown } from '../utils/chatMarkdown';
 
 const isOpen = ref(false);
 const message = ref('');
@@ -300,3 +304,22 @@ const closeChat = () => {
 };
 
 </script>
+
+<style scoped>
+/* Tailwind's preflight strips list and paragraph styles; restore them for rendered replies */
+.chat-md :deep(p) { margin: 0; }
+.chat-md :deep(p + p),
+.chat-md :deep(p + ul),
+.chat-md :deep(p + ol),
+.chat-md :deep(ul + p),
+.chat-md :deep(ol + p) { margin-top: 0.5rem; }
+.chat-md :deep(ul) { list-style: disc; padding-left: 1.25rem; }
+.chat-md :deep(ol) { list-style: decimal; padding-left: 1.25rem; }
+.chat-md :deep(li + li) { margin-top: 0.25rem; }
+.chat-md :deep(strong) { font-weight: 600; }
+.chat-md :deep(h1),
+.chat-md :deep(h2),
+.chat-md :deep(h3),
+.chat-md :deep(h4) { font-size: inherit; font-weight: 600; margin-top: 0.5rem; }
+.chat-md :deep(a) { text-decoration: underline; text-underline-offset: 2px; word-break: break-all; }
+</style>
