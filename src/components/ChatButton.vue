@@ -153,23 +153,6 @@ const historyFetched = ref(false);
 const messages = ref<ChatMessage[]>([]);
 const messagesContainer = ref<HTMLElement | null>(null);
 
-const getGreetingTime = () => {
-  const hour = new Date().getHours();
-  if (hour >= 5 && hour < 12) {
-    return 'good morning';
-  } else if (hour >= 12 && hour < 17) {
-    return 'good afternoon';
-  } else {
-    return 'good evening';
-  }
-};
-
-const greetingParts = [
-  `Hey, ${getGreetingTime()}! I'm Divya's AI Persona. 🤖`,
-  "I can give you answers on my resume, projects, and professional background.",
-  "How can I help you today?"
-];
-
 const isTyping = computed(() => message.value.trim().length > 0);
 const isExpanded = computed(() => isFocused.value || isTyping.value || messages.value.length > 0);
 
@@ -185,7 +168,7 @@ const scrollToBottom = async () => {
 
 /**
  * Fetches the visitor's chat history from the API.
- * If no history exists, it initiates a multipart greeting.
+ * For a new visitor the backend returns its saved greeting, which is revealed one part at a time.
  */
 const fetchHistory = async () => {
   if (isLoadingHistory.value) return;
@@ -195,25 +178,20 @@ const fetchHistory = async () => {
     const data = await chatService.getVisitorHistory();
     historyFetched.value = true;
 
-    if (!data.is_new && data.history?.length) {
-      const allMessages: ChatMessage[] = [];
-      for (const session of data.history) {
-        allMessages.push(...(session.messages ?? []));
-      }
-      messages.value = allMessages;
-      await scrollToBottom();
+    const allMessages: ChatMessage[] = [];
+    for (const session of data.history ?? []) {
+      allMessages.push(...(session.messages ?? []));
     }
 
-    if (messages.value.length === 0) {
-      for (let i = 0; i < greetingParts.length; i++) {
+    if (!data.is_new) {
+      messages.value = allMessages;
+      await scrollToBottom();
+    } else {
+      for (let i = 0; i < allMessages.length; i++) {
         setTimeout(async () => {
           const hasUserMessaged = messages.value.some(m => m.role === 'human');
           if (!hasUserMessaged) {
-             messages.value.push({
-              role: 'ai',
-              content: greetingParts[i],
-              timestamp: new Date().toISOString()
-            });
+            messages.value.push(allMessages[i]);
             await scrollToBottom();
           }
         }, i * 1000);

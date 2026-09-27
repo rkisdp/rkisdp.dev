@@ -80,7 +80,9 @@ export const apiClient = new ApiClient();
 
 export const chatService = {
   getVisitorHistory(): Promise<VisitorHistoryResponse> {
-    return apiClient.get<VisitorHistoryResponse>('/api/visitor-history/');
+    // The backend greets new visitors by their local time of day
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return apiClient.get<VisitorHistoryResponse>(`/api/visitor-history/?tz=${encodeURIComponent(tz)}`);
   },
 
   sendChatMessage(query: string): Promise<ChatResponse> {
